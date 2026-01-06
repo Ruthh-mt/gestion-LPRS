@@ -12,7 +12,7 @@ public class StartApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         mainStage = stage;
-        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("loginView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("accueil/loginView.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         mainStage.setTitle("Connexion");
         mainStage.setScene(scene);

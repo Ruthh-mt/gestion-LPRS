@@ -1,5 +1,6 @@
-package appli;
+package appli.accueil;
 
+import appli.StartApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
