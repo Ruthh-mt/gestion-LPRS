@@ -70,7 +70,7 @@ public class FicheEtudiant {
 
     @Override
     public String toString() {
-        return "Nom : "+this.nom +"\nPrenom : "+this.prenom+"\nAdresse : "+this.adresse+"\nTelephone : "+this.telephone+
-                "\nEmail : "+this.email+"\nDiplome : "+this.dernierDiplome+"\n";
+        return "Nom : "+this.nom + "\nPrenom : "+this.prenom + "\nAdresse : "+this.adresse+"\nTelephone : "+this.telephone
+                +"\nEmail : "+this.email+ "\nDernierDiplome : "+this.dernierDiplome;
     }
 }
