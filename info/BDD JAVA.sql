@@ -113,7 +113,8 @@ ref_fourniture int NOT NULL
 
 CREATE TABLE fourniture_fournisseur (
 ref_fourniture int NOT NULL,
-ref_fournisseur int NOT NULL
+ref_fournisseur int NOT NULL,
+prix double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 ALTER TABLE utilisateur
