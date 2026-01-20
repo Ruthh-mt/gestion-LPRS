@@ -76,6 +76,7 @@ CREATE TABLE rendez_vous(
 id_rendez_vous int(11) NOT NULL AUTO_INCREMENT,
 date_rendez_vous date NOT NULL,
 heure TIME NOT NULL,
+status enum('Prévus','Annulé','Passé') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Prévus',
 ref_professeur int NOT NULL,
 ref_dossier_inscription int NOT NULL,
 PRIMARY KEY(id_rendez_vous)

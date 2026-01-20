@@ -3,6 +3,7 @@ module appli{
     requires javafx.fxml;
     requires java.sql;
     requires java.base;
+    requires javafx.base;
 
     opens appli to javafx.fxml;
     exports appli;

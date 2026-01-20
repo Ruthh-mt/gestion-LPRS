@@ -1,31 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<VBox xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="appli.accueil.InscriptionController"
+      alignment="TOP_CENTER"
+      spacing="15"
+      prefWidth="500"
+      style="-fx-background-color: #f0f4f8;">
 
-<AnchorPane prefHeight="481.0" prefWidth="314.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.accueil.InscriptionController">
-   <children>
-      <Label layoutX="101.0" layoutY="14.0" text="Inscription">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="139.0" layoutY="85.0" text="Nom : " />
-      <TextField fx:id="nomField" layoutX="83.0" layoutY="102.0" />
-      <Label layoutX="131.0" layoutY="140.0" text="Prenom : " />
-      <TextField fx:id="prenomField" layoutX="83.0" layoutY="157.0" />
-      <Label layoutX="137.0" layoutY="193.0" text="Email : " />
-      <TextField fx:id="emailField" layoutX="82.0" layoutY="215.0" />
-      <Label layoutX="116.0" layoutY="253.0" text="Mot de passe : " />
-      <PasswordField fx:id="mdpField" layoutX="82.0" layoutY="270.0" />
-      <Label layoutX="117.0" layoutY="309.0" text="Confirmation : " />
-      <PasswordField fx:id="mdpConfirmationField" layoutX="82.0" layoutY="326.0" />
-      <Button layoutX="120.0" layoutY="365.0" mnemonicParsing="false" onAction="#onInscriptionClick" text="Inscription" />
-      <Button layoutX="120.0" layoutY="403.0" mnemonicParsing="false" onAction="#onConnexionClick" text="Connexion" />
-   </children>
-</AnchorPane>
+    <padding>
+        <Insets top="30" bottom="30" left="40" right="40"/>
+    </padding>
+
+    <!-- Titre -->
+    <Label text="Inscription">
+        <font>
+            <Font size="28" />
+        </font>
+        <style>
+            -fx-text-fill: #34495e;
+            -fx-font-weight: bold;
+        </style>
+    </Label>
+
+    <!-- Nom -->
+    <Label text="Nom :"
+           style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" />
+    <TextField fx:id="nomField"
+               promptText="Entrez votre nom"
+               style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;" />
+
+    <!-- Prénom -->
+    <Label text="Prénom :"
+           style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" />
+    <TextField fx:id="prenomField"
+               promptText="Entrez votre prénom"
+               style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;" />
+
+    <!-- Rôle -->
+    <Label text="Rôle :"
+           style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" />
+    <ChoiceBox fx:id="roleChoiceBox"
+               style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;"
+               prefWidth="500" />
+
+    <!-- Email -->
+    <Label text="Email :"
+           style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" />
+    <TextField fx:id="emailField"
+               promptText="exemple@domaine.com"
+               style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;" />
+
+    <!-- Mot de passe -->
+    <Label text="Mot de passe :"
+           style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" />
+    <PasswordField fx:id="mdpField"
+                   promptText="Entrez votre mot de passe"
+                   style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;" />
+
+    <!-- Confirmation -->
+    <Label text="Confirmation :"
+           style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" />
+    <PasswordField fx:id="mdpConfirmationField"
+                   promptText="Confirmez votre mot de passe"
+                   style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;" />
+
+    <!-- Boutons -->
+    <Button text="Inscription"
+            mnemonicParsing="false"
+            onAction="#onInscriptionClick"
+            prefWidth="150"
+            style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" />
+
+    <Button text="Connexion"
+            mnemonicParsing="false"
+            onAction="#onConnexionClick"
+            prefWidth="150"
+            style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" />
+
+</VBox>
