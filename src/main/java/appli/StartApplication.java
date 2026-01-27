@@ -12,8 +12,8 @@ public class StartApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         mainStage = stage;
-        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("accueil/loginView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("secretaire/ficheCreateView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 500, 500);
         mainStage.setTitle("Connexion");
         mainStage.setScene(scene);
         mainStage.show();

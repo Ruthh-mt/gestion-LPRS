@@ -6,40 +6,45 @@ import model.FicheEtudiant;
 import java.sql.*;
 import java.util.ArrayList;
 
+import static java.sql.Types.NULL;
+
 public class FicheEtudiantRepository {
-    private Connection connection;
+    private  Connection connection;
 
     public FicheEtudiantRepository() {
         this.connection = Database.getConnexion();
     }
 
-    public void AjouterFicheEtudiant(FicheEtudiant fe) throws SQLException {
-        String sql = "INSERT INTO ficheEtudiant (nom,prenom,dernierDiplome,email,telephone,adresse) VALUES (?,?,?,?,?,?)";
+    public boolean AjouterFicheEtudiant(FicheEtudiant fe) throws SQLException {
+        String sql = "INSERT INTO fiche_etudiante (nom_etudiant,ref_createur, prenom_etudiant,email_etudiant,telephone,adresse,dernierDiplome) VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, fe.getNom());
-            ps.setString(2, fe.getPrenom());
-            ps.setString(3, fe.getDernierDiplome());
+            ps.setInt(2,1);
+            ps.setString(3, fe.getPrenom());
             ps.setString(4, fe.getEmail());
             ps.setString(5, fe.getTelephone());
             ps.setString(6, fe.getAdresse());
+            ps.setString(7, fe.getDernierDiplome());
             ps.execute();
+            return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
 
 
     public Boolean deleteFicheEtudiant(int id) throws SQLException {
-        String sql = "DELETE FROM ficheEtudiant WHERE id=?";
+        String sql = "DELETE FROM fiche_etudiante WHERE id=?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, id);
         return ps.execute();
     }
 
     public Boolean getFicheEtudiant(int id) throws SQLException {
-        String sql = "SELECT * FROM ficheEtudiant WHERE id = ?";
+        String sql = "SELECT * FROM fiche_etudiante WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
@@ -50,7 +55,7 @@ public class FicheEtudiantRepository {
 }
 
     public ArrayList<FicheEtudiant> getToutesLesFiches() throws SQLException {
-        String sql = "SELECT * FROM ficheEtudiant";
+        String sql = "SELECT * FROM fiche_etudiante";
         ArrayList<FicheEtudiant> ficheEtudiants = new ArrayList<FicheEtudiant>();
         PreparedStatement ps = connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
