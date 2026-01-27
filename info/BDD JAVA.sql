@@ -46,6 +46,7 @@ id_commande int(11) NOT NULL AUTO_INCREMENT,
 raison varchar(1000) NOT NULL,
 ref_fournisseur int NOT NULL,
 ref_gestionnaire int NOT NULL,
+
 PRIMARY KEY(id_commande)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -66,6 +67,7 @@ ref_createur int NOT NULL,
 nom_etudiant varchar(50) NOT NULL,
 prenom_etudiant varchar(50) NOT NULL,
 email_etudiant varchar(50) NOT NULL,
+denier_diplome_etudiant varchar(50) NOT NULL,
 telephone varchar(50) NOT NULL,
 adresse varchar(50) NOT NULL,
 PRIMARY KEY(id_fiche_etudiante)
