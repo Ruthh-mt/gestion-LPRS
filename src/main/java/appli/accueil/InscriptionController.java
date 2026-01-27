@@ -3,31 +3,81 @@ package appli.accueil;
 import appli.StartApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
+import org.mindrot.jbcrypt.BCrypt;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
+import model.Utilisateur;
+import repository.UtilisateurRepository;
 import java.io.IOException;
 
 public class InscriptionController {
 
     @FXML
-    private TextField emailField;
+    private TextField nom;
+    @FXML
+    private TextField prenom;
+    @FXML
+    private TextField email;
+    @FXML
+    private PasswordField mdp;
+    @FXML
+    private PasswordField mdpConfirmation;
+    @FXML
+    private ChoiceBox<String> role;
+
+    private final UtilisateurRepository repo = new UtilisateurRepository();
 
     @FXML
-    private PasswordField mdpConfirmationField;
+    public void initialize() {
+        role.getItems().addAll("Professeur", "Secrétaire", "Gestionnaire");
+        role.getSelectionModel().selectFirst();
+    }
 
     @FXML
-    private PasswordField mdpField;
+    private void onInscriptionClick() {
 
-    @FXML
-    private TextField nomField;
+        String nomTxt = nom.getText().trim();
+        String prenomTxt = prenom.getText().trim();
+        String emailTxt = email.getText().trim();
+        String mdpTxt = mdp.getText();
+        String mdpConfirmTxt = mdpConfirmation.getText();
+        String roleTxt = role.getValue();
 
-    @FXML
-    private TextField prenomField;
+        if (nomTxt.isEmpty() || prenomTxt.isEmpty() || emailTxt.isEmpty()
+                || mdpTxt.isEmpty() || mdpConfirmTxt.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Tous les champs doivent être remplis.");
+            return;
+        }
 
-    @FXML
-    void onInscriptionClick(ActionEvent event) {
+        if (!mdpTxt.equals(mdpConfirmTxt)) {
+            showAlert(Alert.AlertType.ERROR, "Les mots de passe ne correspondent pas.");
+            return;
+        }
 
+        if (repo.emailExiste(emailTxt)) {
+            showAlert(Alert.AlertType.ERROR, "Cet email est déjà utilisé.");
+            return;
+        }
+
+        // Hash du mot de passe
+        String mdpHashe = BCrypt.hashpw(mdpTxt, BCrypt.gensalt(12));
+
+        Utilisateur user = new Utilisateur(
+                nomTxt,
+                prenomTxt,
+                emailTxt,
+                mdpHashe,
+                roleTxt
+        );
+
+        if (repo.inscrire(user)) {
+            showAlert(Alert.AlertType.INFORMATION, "Inscription réussie");
+            clearForm();
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Erreur lors de l'inscription");
+        }
     }
 
     @FXML
@@ -35,4 +85,20 @@ public class InscriptionController {
         StartApplication.changeScene("accueil/login");
     }
 
+    private void showAlert(Alert.AlertType type, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle("Inscription");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void clearForm() {
+        nom.clear();
+        prenom.clear();
+        email.clear();
+        mdp.clear();
+        mdpConfirmation.clear();
+        role.getSelectionModel().selectFirst();
+    }
 }
