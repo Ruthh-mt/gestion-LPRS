@@ -14,18 +14,6 @@ est_occupe tinyint(1) DEFAULT 0,
 PRIMARY KEY(id_salle)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE commande(
-id_commande int(11) NOT NULL AUTO_INCREMENT,
-raison varchar(1000) NOT NULL,
-PRIMARY KEY(id_commande)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-CREATE TABLE demande(
-id_demande int(11) NOT NULL AUTO_INCREMENT,
-est_valide tinyint(1) DEFAULT 0,
-PRIMARY KEY(id_demande)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 CREATE TABLE fournisseur(
 id_fournisseur int(11) NOT NULL AUTO_INCREMENT,
 nom varchar(50) NOT NULL,
@@ -37,6 +25,8 @@ CREATE TABLE fourniture(
 id_fourniture int(11) NOT NULL AUTO_INCREMENT,
 libelle varchar(50) NOT NULL,
 description varchar(1000) NOT NULL,
+stock_actuelle int(3),
+stock_minimum int(3),
 PRIMARY KEY(id_fourniture)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -50,6 +40,25 @@ role varchar(30) NOT NULL,
 ref_filiere int default NULL,
 PRIMARY KEY(id_utilisateur)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE commande(
+id_commande int(11) NOT NULL AUTO_INCREMENT,
+raison varchar(1000) NOT NULL,
+ref_fournisseur int NOT NULL,
+ref_gestionnaire int NOT NULL,
+PRIMARY KEY(id_commande)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE demande(
+id_demande int(11) NOT NULL AUTO_INCREMENT,
+est_valide tinyint(1) DEFAULT 0,
+ref_professeur int NOT NULL,
+ref_gestionnaire int NOT NULL,
+status varchar(30),
+urgence varchar(30),
+PRIMARY KEY(id_demande)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 CREATE TABLE fiche_etudiante(
 id_fiche_etudiante int(11) NOT NULL AUTO_INCREMENT,
@@ -79,27 +88,8 @@ heure TIME NOT NULL,
 status enum('Prévus','Annulé','Passé') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Prévus',
 ref_professeur int NOT NULL,
 ref_dossier_inscription int NOT NULL,
+ref_salle int NOT NULL,
 PRIMARY KEY(id_rendez_vous)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-CREATE TABLE rdv_salle(
-ref_rdv int NOT NULL,
-ref_salle int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-CREATE TABLE utilisateur_commande (
-ref_utilisateur int NOT NULL,
-ref_commande int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-CREATE TABLE utilisateur_demande (
-ref_utilisateur int NOT NULL,
-ref_demande int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-CREATE TABLE commande_fournisseur (
-ref_commande int NOT NULL,
-ref_fournisseur int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE commande_fourniture (
@@ -130,19 +120,8 @@ ADD CONSTRAINT FK_dossier_inscription_filiere FOREIGN KEY (ref_filiere) REFERENC
 
 ALTER TABLE rendez_vous
 ADD CONSTRAINT FK_rendez_vous_utilisateur FOREIGN KEY (ref_professeur) REFERENCES utilisateur (id_utilisateur) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT FK_rendez_vous_dossier_inscription FOREIGN KEY (ref_dossier_inscription) REFERENCES dossier_inscription (id_dossier_inscription) ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE rdv_salle
-ADD CONSTRAINT FK_rdv_salle_rdv FOREIGN KEY (ref_rdv) REFERENCES rendez_vous (id_rendez_vous) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT FK_rdv_salle_salle FOREIGN KEY (ref_salle) REFERENCES salle (id_salle) ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE utilisateur_commande
-ADD CONSTRAINT FK_utilisateur_commande_utilisateur FOREIGN KEY (ref_utilisateur) REFERENCES utilisateur (id_utilisateur) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT FK_utilisateur_commande_commande FOREIGN KEY (ref_commande) REFERENCES commande (id_commande) ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE utilisateur_demande
-ADD CONSTRAINT FK_utilisateur_demande_utilisateur FOREIGN KEY (ref_utilisateur) REFERENCES utilisateur (id_utilisateur) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT FK_utilisateur_demande_demande FOREIGN KEY (ref_demande) REFERENCES demande (id_demande) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT FK_rendez_vous_dossier_inscription FOREIGN KEY (ref_dossier_inscription) REFERENCES dossier_inscription (id_dossier_inscription) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT FK_rendez_vous_salle FOREIGN KEY (ref_salle) REFERENCES salle (id_salle) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE commande_fourniture
 ADD CONSTRAINT FK_commande_fourniture_commande FOREIGN KEY (ref_commande) REFERENCES commande (id_commande) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -152,11 +131,16 @@ ALTER TABLE demande_fourniture
 ADD CONSTRAINT FK_demande_fourniture_demande FOREIGN KEY (ref_demande) REFERENCES demande (id_demande) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT FK_demande_fourniture_fourniture FOREIGN KEY (ref_fourniture) REFERENCES fourniture (id_fourniture) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE commande_fournisseur
-ADD CONSTRAINT FK_commande_fournisseur_commande FOREIGN KEY (ref_commande) REFERENCES commande (id_commande) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT FK_commande_fournisseur_fournisseur FOREIGN KEY (ref_fournisseur) REFERENCES fournisseur (id_fournisseur) ON DELETE CASCADE ON UPDATE CASCADE;
-
 ALTER TABLE fourniture_fournisseur
 ADD CONSTRAINT FK_fourniture_fournisseur_fourniture FOREIGN KEY (ref_fourniture) REFERENCES fourniture (id_fourniture) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT FK_fourniture_fournisseur_fournisseur FOREIGN KEY (ref_fournisseur) REFERENCES fournisseur (id_fournisseur) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE commande
+ADD CONSTRAINT FK_commande_utilisateur FOREIGN KEY (ref_gestionnaire) REFERENCES utilisateur (id_utilisateur) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT FK_commande_fournisseur_ FOREIGN KEY (ref_fournisseur) REFERENCES fournisseur (id_fournisseur) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE demande
+ADD CONSTRAINT FK_demande_utilisateur FOREIGN KEY (ref_gestionnaire) REFERENCES commande (id_commande) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT FK_demande_utilisateur FOREIGN KEY (ref_professeur) REFERENCES fournisseur (id_fournisseur) ON DELETE CASCADE ON UPDATE CASCADE;
+
 
