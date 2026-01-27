@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
+import org.mindrot.jbcrypt.BCrypt;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.Utilisateur;
@@ -60,11 +61,14 @@ public class InscriptionController {
             return;
         }
 
+        // Hash du mot de passe
+        String mdpHashe = BCrypt.hashpw(mdpTxt, BCrypt.gensalt(12));
+
         Utilisateur user = new Utilisateur(
                 nomTxt,
                 prenomTxt,
                 emailTxt,
-                mdpTxt,
+                mdpHashe,
                 roleTxt
         );
 

@@ -5,6 +5,7 @@ module appli{
     requires java.base;
     requires javafx.base;
     requires java.desktop;
+    requires jbcrypt;
 
     opens appli to javafx.fxml;
     exports appli;

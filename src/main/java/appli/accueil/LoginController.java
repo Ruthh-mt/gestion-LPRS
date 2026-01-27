@@ -27,13 +27,9 @@ public class LoginController {
             showAlert(AlertType.WARNING, "Veuillez saisir votre email et votre mot de passe.");
             return;
         }
-
-        // TODO : Ajouter logique d'authentification (ex: vérifier en base de données)
-
         // Exemple simple : email et mot de passe hardcodés
         if (email.equalsIgnoreCase("admin@example.com") && mdp.equals("password")) {
             showAlert(AlertType.INFORMATION, "Connexion réussie !");
-            // TODO : Naviguer vers la page principale
         } else {
             showAlert(AlertType.ERROR, "Email ou mot de passe incorrect.");
         }
@@ -41,7 +37,6 @@ public class LoginController {
 
     @FXML
     private void onMdpOublieClick() {
-        // TODO : Afficher une fenêtre de récupération de mot de passe
         System.out.println("Mot de passe oublié cliqué");
     }
 
