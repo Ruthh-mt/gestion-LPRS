@@ -3,65 +3,77 @@ package appli.accueil;
 import appli.StartApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-
+import model.Utilisateur;
+import repository.UtilisateurRepository;
 import java.io.IOException;
 
 public class InscriptionController {
 
     @FXML
-    private TextField nomField;
-
+    private TextField nom;
     @FXML
-    private TextField prenomField;
-
+    private TextField prenom;
     @FXML
-    private TextField emailField;
-
+    private TextField email;
     @FXML
-    private PasswordField mdpField;
-
+    private PasswordField mdp;
     @FXML
-    private PasswordField mdpConfirmationField;
-
+    private PasswordField mdpConfirmation;
     @FXML
-    private ChoiceBox<String> roleChoiceBox;
+    private ChoiceBox<String> role;
+
+    private final UtilisateurRepository repo = new UtilisateurRepository();
 
     @FXML
     public void initialize() {
-        // Remplir le menu déroulant des rôles
-        roleChoiceBox.getItems().addAll("Professeur", "Secrétaire", "Gestionnaire");
-        roleChoiceBox.getSelectionModel().selectFirst();
+        role.getItems().addAll("Professeur", "Secrétaire", "Gestionnaire");
+        role.getSelectionModel().selectFirst();
     }
 
     @FXML
     private void onInscriptionClick() {
-        // Validation simple des champs
-        String nom = nomField.getText().trim();
-        String prenom = prenomField.getText().trim();
-        String email = emailField.getText().trim();
-        String mdp = mdpField.getText();
-        String mdpConfirm = mdpConfirmationField.getText();
-        String role = roleChoiceBox.getValue();
 
-        if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || mdp.isEmpty() || mdpConfirm.isEmpty()) {
-            showAlert(AlertType.WARNING, "Tous les champs doivent être remplis.");
+        String nomTxt = nom.getText().trim();
+        String prenomTxt = prenom.getText().trim();
+        String emailTxt = email.getText().trim();
+        String mdpTxt = mdp.getText();
+        String mdpConfirmTxt = mdpConfirmation.getText();
+        String roleTxt = role.getValue();
+
+        if (nomTxt.isEmpty() || prenomTxt.isEmpty() || emailTxt.isEmpty()
+                || mdpTxt.isEmpty() || mdpConfirmTxt.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Tous les champs doivent être remplis.");
             return;
         }
 
-        if (!mdp.equals(mdpConfirm)) {
-            showAlert(AlertType.ERROR, "Les mots de passe ne correspondent pas.");
+        if (!mdpTxt.equals(mdpConfirmTxt)) {
+            showAlert(Alert.AlertType.ERROR, "Les mots de passe ne correspondent pas.");
             return;
         }
 
-        // TODO: Ajouter logique d'inscription (ex: appel service, base de données)
+        if (repo.emailExiste(emailTxt)) {
+            showAlert(Alert.AlertType.ERROR, "Cet email est déjà utilisé.");
+            return;
+        }
 
-        showAlert(AlertType.INFORMATION, "Inscription réussie pour le rôle : " + role);
-        clearForm();
+        Utilisateur user = new Utilisateur(
+                nomTxt,
+                prenomTxt,
+                emailTxt,
+                mdpTxt,
+                roleTxt
+        );
+
+        if (repo.inscrire(user)) {
+            showAlert(Alert.AlertType.INFORMATION, "Inscription réussie");
+            clearForm();
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Erreur lors de l'inscription");
+        }
     }
 
     @FXML
@@ -69,7 +81,7 @@ public class InscriptionController {
         StartApplication.changeScene("accueil/login");
     }
 
-    private void showAlert(AlertType type, String message) {
+    private void showAlert(Alert.AlertType type, String message) {
         Alert alert = new Alert(type);
         alert.setTitle("Inscription");
         alert.setHeaderText(null);
@@ -78,11 +90,11 @@ public class InscriptionController {
     }
 
     private void clearForm() {
-        nomField.clear();
-        prenomField.clear();
-        emailField.clear();
-        mdpField.clear();
-        mdpConfirmationField.clear();
-        roleChoiceBox.getSelectionModel().selectFirst();
+        nom.clear();
+        prenom.clear();
+        email.clear();
+        mdp.clear();
+        mdpConfirmation.clear();
+        role.getSelectionModel().selectFirst();
     }
 }

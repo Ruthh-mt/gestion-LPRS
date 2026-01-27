@@ -9,16 +9,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/23.0.1"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="appli.accueil.InscriptionController"
-      alignment="TOP_CENTER"
-      spacing="15"
-      prefWidth="500"
-      style="-fx-background-color: #f0f4f8;">
+<VBox alignment="TOP_CENTER" prefWidth="500" spacing="15" style="-fx-background-color: #f0f4f8;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.accueil.InscriptionController">
 
     <padding>
-        <Insets top="30" bottom="30" left="40" right="40"/>
+        <Insets bottom="30" left="40" right="40" top="30" />
     </padding>
 
     <!-- Titre -->
@@ -33,58 +27,32 @@
     </Label>
 
     <!-- Nom -->
-    <Label text="Nom :"
-           style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" />
-    <TextField fx:id="nomField"
-               promptText="Entrez votre nom"
-               style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;" />
+    <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" text="Nom :" />
+    <TextField fx:id="nom" promptText="Entrez votre nom" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;" />
 
     <!-- Prénom -->
-    <Label text="Prénom :"
-           style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" />
-    <TextField fx:id="prenomField"
-               promptText="Entrez votre prénom"
-               style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;" />
+    <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" text="Prénom :" />
+    <TextField fx:id="prenom" promptText="Entrez votre prénom" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;" />
 
     <!-- Rôle -->
-    <Label text="Rôle :"
-           style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" />
-    <ChoiceBox fx:id="roleChoiceBox"
-               style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;"
-               prefWidth="500" />
+    <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" text="Rôle :" />
+    <ChoiceBox fx:id="role" prefWidth="500" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;" />
 
     <!-- Email -->
-    <Label text="Email :"
-           style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" />
-    <TextField fx:id="emailField"
-               promptText="exemple@domaine.com"
-               style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;" />
+    <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" text="Email :" />
+    <TextField fx:id="email" promptText="exemple@domaine.com" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;" />
 
     <!-- Mot de passe -->
-    <Label text="Mot de passe :"
-           style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" />
-    <PasswordField fx:id="mdpField"
-                   promptText="Entrez votre mot de passe"
-                   style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;" />
+    <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" text="Mot de passe :" />
+    <PasswordField fx:id="mdp" promptText="Entrez votre mot de passe" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;" />
 
     <!-- Confirmation -->
-    <Label text="Confirmation :"
-           style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" />
-    <PasswordField fx:id="mdpConfirmationField"
-                   promptText="Confirmez votre mot de passe"
-                   style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;" />
+    <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: 600; -fx-font-size: 14;" text="Confirmation :" />
+    <PasswordField fx:id="mdpConfirmation" promptText="Confirmez votre mot de passe" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;" />
 
     <!-- Boutons -->
-    <Button text="Inscription"
-            mnemonicParsing="false"
-            onAction="#onInscriptionClick"
-            prefWidth="150"
-            style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" />
+    <Button mnemonicParsing="false" onAction="#onInscriptionClick" prefWidth="150" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" text="Inscription" />
 
-    <Button text="Connexion"
-            mnemonicParsing="false"
-            onAction="#onConnexionClick"
-            prefWidth="150"
-            style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" />
+    <Button mnemonicParsing="false" onAction="#onConnexionClick" prefWidth="150" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" text="Connexion" />
 
 </VBox>

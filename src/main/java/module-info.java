@@ -4,6 +4,7 @@ module appli{
     requires java.sql;
     requires java.base;
     requires javafx.base;
+    requires java.desktop;
 
     opens appli to javafx.fxml;
     exports appli;
