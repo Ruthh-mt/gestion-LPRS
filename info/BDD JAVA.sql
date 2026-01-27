@@ -136,11 +136,11 @@ ADD CONSTRAINT FK_fourniture_fournisseur_fourniture FOREIGN KEY (ref_fourniture)
 ADD CONSTRAINT FK_fourniture_fournisseur_fournisseur FOREIGN KEY (ref_fournisseur) REFERENCES fournisseur (id_fournisseur) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE commande
-ADD CONSTRAINT FK_commande_utilisateur FOREIGN KEY (ref_gestionnaire) REFERENCES utilisateur (id_utilisateur) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT FK_commande_fournisseur_ FOREIGN KEY (ref_fournisseur) REFERENCES fournisseur (id_fournisseur) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT FK_commande_utilisateur_gestionnaire FOREIGN KEY (ref_gestionnaire) REFERENCES utilisateur (id_utilisateur) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT FK_commande_fournisseur FOREIGN KEY (ref_fournisseur) REFERENCES fournisseur (id_fournisseur) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE demande
-ADD CONSTRAINT FK_demande_utilisateur FOREIGN KEY (ref_gestionnaire) REFERENCES commande (id_commande) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT FK_demande_utilisateur FOREIGN KEY (ref_professeur) REFERENCES fournisseur (id_fournisseur) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT FK_demande_utilisateur_gestionnaire FOREIGN KEY (ref_gestionnaire) REFERENCES utilisateur (id_utilisateur) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT FK_demande_utilisateur_professeur FOREIGN KEY (ref_professeur) REFERENCES utilisateur (id_utilisateur) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
