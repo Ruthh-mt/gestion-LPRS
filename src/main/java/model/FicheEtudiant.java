@@ -66,6 +66,17 @@ public class FicheEtudiant {
         this.dernierDiplome = dernierDiplome;
     }
 
+    public FicheEtudiant(int id, int ref_createur,String nom, String prenom, String adresse, String telephone, String email
+            , String dernierDiplome) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.telephone = telephone;
+        this.email = email;
+        this.dernierDiplome = dernierDiplome;
+    }
+
+
 
 
     @Override

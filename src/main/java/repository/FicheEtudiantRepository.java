@@ -35,7 +35,6 @@ public class FicheEtudiantRepository {
     }
 
 
-
     public Boolean deleteFicheEtudiant(int id) throws SQLException {
         String sql = "DELETE FROM fiche_etudiante WHERE id=?";
         PreparedStatement ps = connection.prepareStatement(sql);
@@ -59,14 +58,19 @@ public class FicheEtudiantRepository {
         ArrayList<FicheEtudiant> ficheEtudiants = new ArrayList<FicheEtudiant>();
         PreparedStatement ps = connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
+        FicheEtudiant fe;
         while(rs.next()) {
-            int id = rs.getInt("id");
-            String nom = rs.getString("nom");
-            String prenom = rs.getString("prenom");
-            String dernierDiplome = rs.getString("dernierDiplome");
-            String email = rs.getString("email");
+            int id = rs.getInt("id_fiche_etudiante");
+            int ref_createur = rs.getInt("ref_createur");
+            String nom = rs.getString("nom_etudiant");
+            String prenom = rs.getString("prenom_etudiant");
+            String email = rs.getString("email_etudiant");
             String telephone = rs.getString("telephone");
             String adresse = rs.getString("adresse");
+            String dernierDiplome = rs.getString("dernierDiplome");
+            fe = new FicheEtudiant(id,ref_createur,nom,prenom,email,telephone,adresse,dernierDiplome);
+            ficheEtudiants.add(fe);
+
         }
         return  ficheEtudiants;
     }
