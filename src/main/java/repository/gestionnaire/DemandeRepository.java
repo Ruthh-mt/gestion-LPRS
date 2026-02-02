@@ -1,0 +1,12 @@
+package repository.gestionnaire;
+
+import database.Database;
+
+import java.sql.Connection;
+
+public class DemandeRepository {
+    private Connection cnx;
+    public DemandeRepository() {
+        this.cnx = Database.getConnexion();;
+    }
+}
