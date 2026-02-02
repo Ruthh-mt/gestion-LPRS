@@ -13,7 +13,7 @@ public class DossierRepository {
         this.connection = Database.getConnexion();
     }
     public void ajouterDossier(DossierInscription  dossier){
-        String sql = "INSERT INTO Dossier (date,heure,filiere, motivation) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO Dossier (date,heure, motivation , ref_filiere , ref_fiche_etudiante) VALUES (?,?,?,?)";
         try{
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setDate(1, (Date) dossier.getDate());
