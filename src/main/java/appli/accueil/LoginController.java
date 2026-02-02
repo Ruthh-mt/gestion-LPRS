@@ -4,11 +4,15 @@ import appli.StartApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import org.springframework.security.*;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 
 import java.io.IOException;
+import model.Utilisateur;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import repository.UtilisateurRepository;
 
 public class LoginController {
 
@@ -19,13 +23,30 @@ public class LoginController {
     private PasswordField mdpField;
 
     @FXML
-    private void onConnexionClick() {
+    private void onConnexionClick() throws IOException {
         String email = emailField.getText().trim();
         String mdp = mdpField.getText();
 
         if (email.isEmpty() || mdp.isEmpty()) {
             showAlert(AlertType.WARNING, "Veuillez saisir votre email et votre mot de passe.");
             return;
+        }
+        else{ // si les champs email et mdp ne sont pas vide
+            UtilisateurRepository userRepository = new UtilisateurRepository();
+            boolean userExiste=userRepository.emailExiste(email);
+            if(userExiste){
+                BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+                String mdpBdd= userRepository.getPasswordbyEmail(email);
+                if(encoder.matches(mdpBdd,mdp)){
+                    StartApplication.changeScene("accueil/homePage");
+                }
+
+            }else{
+                System.out.println("Vous n'existez pas chez nous, veuillez vous inscrire");
+                showAlert(AlertType.WARNING, "Vous n'existez pas chez nous, veuillez vous inscrire");
+                return;
+            }
+
         }
         // Exemple simple : email et mot de passe hardcodés
         if (email.equalsIgnoreCase("admin@example.com") && mdp.equals("password")) {
