@@ -24,7 +24,7 @@ public class AccueilGestionnaireController {
 
     @FXML
     void onNewCommand(ActionEvent event) throws IOException {
-        StartApplication.changeScene("gestionnaire/createCommande");
+        StartApplication.changeScene("gestionnaire/createCommande", "Commande");
 
     }
 

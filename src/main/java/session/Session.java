@@ -1,4 +1,4 @@
-package appli.session;
+package session;
 
 import model.Utilisateur;
 

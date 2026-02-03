@@ -87,7 +87,7 @@ public class FicheCreateController implements Initializable {
         boolean ok = ficheEtudiantRepository.AjouterFicheEtudiant(newFiche);
         if (ok) {
             System.out.println("insertion ok");
-            StartApplication.changeScene("secretaire/ficheList");
+            StartApplication.changeScene("secretaire/ficheList", "Fiches");
         }
         else {
             System.out.println("Erreur");

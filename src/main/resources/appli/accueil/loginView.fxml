@@ -59,18 +59,18 @@
             mnemonicParsing="false"
             onAction="#onConnexionClick"
             prefWidth="150"
-            style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" />
+            style="-fx-background-color: #0d6efd; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" />
 
     <Button text="Mot de passe oublié"
             mnemonicParsing="false"
             onAction="#onMdpOublieClick"
             prefWidth="150"
-            style="-fx-background-color: transparent; -fx-text-fill: #2980b9; -fx-underline: true; -fx-cursor: hand;" />
+            style="-fx-background-color: #ffc107; -fx-text-fill: white; -fx-underline: true; -fx-cursor: hand;" />
 
     <Button text="Inscription"
             mnemonicParsing="false"
             onAction="#onInscriptionClick"
             prefWidth="150"
-            style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" />
+            style="-fx-background-color: #198754; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" />
 
 </VBox>

@@ -44,6 +44,7 @@
                 <MenuItem mnemonicParsing="false" text="Deconnexion" />
               </items>
             </MenuButton>
+            <Button mnemonicParsing="false" onAction="#onRetourHomePage" text="Retour à l'accueil" />
         </items>
       </ToolBar>
    </bottom>
@@ -54,7 +55,7 @@
                <content>
                   <AnchorPane prefHeight="455.0" prefWidth="641.0">
                      <children>
-                        <TableView fx:id="commandeTableView" layoutX="6.0" layoutY="43.0" prefHeight="306.0" prefWidth="374.0" />
+                        <TableView fx:id="commandeTableView" layoutX="6.0" layoutY="43.0" prefHeight="339.0" prefWidth="398.0" />
                         <Label layoutX="289.0" layoutY="4.0" text="Commandes">
                            <font>
                               <Font name="System Bold" size="14.0" />
@@ -66,6 +67,38 @@
                   </AnchorPane>
                </content>
           </Tab>
+            <Tab text="Fourniture">
+               <content>
+                  <AnchorPane prefHeight="455.0" prefWidth="641.0">
+                     <children>
+                        <TableView fx:id="fournitureTableView" layoutX="6.0" layoutY="43.0" prefHeight="339.0" prefWidth="398.0" />
+                        <Label layoutX="289.0" layoutY="4.0" text="Fourniture">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="14.0" layoutY="418.0" mnemonicParsing="false" onAction="#onShowFinishedFourniture" text="Voir les fournitures bientot fini" />
+                        <Button layoutX="424.0" layoutY="43.0" mnemonicParsing="false" onAction="#onNewFourniture" text="Ajouter une fourniture" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Fournisseur">
+               <content>
+                  <AnchorPane prefHeight="455.0" prefWidth="641.0">
+                     <children>
+                        <TableView fx:id="fournisseurTableView" layoutX="6.0" layoutY="43.0" prefHeight="339.0" prefWidth="398.0" />
+                        <Label layoutX="289.0" layoutY="4.0" text="Fournisseur">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="14.0" layoutY="418.0" mnemonicParsing="false" onAction="#onShowFinishedFourniture" text="Voir tout les fournisseur" />
+                        <Button layoutX="424.0" layoutY="43.0" mnemonicParsing="false" onAction="#onNewFourniture" text="Ajouter un fournisseur" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
    </center>
