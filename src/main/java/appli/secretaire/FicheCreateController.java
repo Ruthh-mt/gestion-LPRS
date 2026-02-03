@@ -1,7 +1,7 @@
 package appli.secretaire;
 
 import appli.StartApplication;
-import appli.session.Session;
+import session.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -76,7 +76,6 @@ public class FicheCreateController implements Initializable {
     String telephone = telephoneTextField.getText();
     String adresse = adresseTextfield.getText();
     String dernierDiplome = dernierDiplomeComboBox.getValue();
-
 
 
     if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || telephone.isEmpty() || adresse.isEmpty() || dernierDiplome.isEmpty()) {
