@@ -4,15 +4,13 @@ import appli.StartApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import org.springframework.security.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-
-import java.io.IOException;
-import model.Utilisateur;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import repository.UtilisateurRepository;
+
+import java.io.IOException;
 
 public class LoginController {
 
@@ -37,8 +35,11 @@ public class LoginController {
             if(userExiste){
                 BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
                 String mdpBdd= userRepository.getPasswordbyEmail(email);
-                if(encoder.matches(mdpBdd,mdp)){
+                if(encoder.matches(mdp,mdpBdd)){
                     StartApplication.changeScene("accueil/homePage");
+                } else{
+                    showAlert(AlertType.ERROR, "Email ou mot de passe incorrect.");
+                    return;
                 }
 
             }else{
@@ -48,12 +49,7 @@ public class LoginController {
             }
 
         }
-        // Exemple simple : email et mot de passe hardcodés
-        if (email.equalsIgnoreCase("admin@example.com") && mdp.equals("password")) {
-            showAlert(AlertType.INFORMATION, "Connexion réussie !");
-        } else {
-            showAlert(AlertType.ERROR, "Email ou mot de passe incorrect.");
-        }
+
     }
 
     @FXML
