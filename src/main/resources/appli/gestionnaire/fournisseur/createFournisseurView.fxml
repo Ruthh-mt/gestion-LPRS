@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.gestionnaire.fournisseur.CreateFournisseurController">
+   <top>
+      <Label text="Ajouter un fournisseur" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </top>
+   <bottom>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <Button mnemonicParsing="false" onAction="#onReturnAccueilGestionnaire" text="Retour au control center" />
+        </items>
+      </ToolBar>
+   </bottom>
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Nom du fournisseur : " />
+            <TextField fx:id="nomFournisseurField" maxWidth="-Infinity" prefHeight="26.0" prefWidth="252.0" />
+            <Separator maxWidth="-Infinity" prefHeight="18.0" prefWidth="375.0" />
+            <Label prefWidth="133.0" text="Adresse du fournisseur : " />
+            <TextField fx:id="adresseFournisseurField" maxWidth="-Infinity" prefHeight="26.0" prefWidth="252.0" />
+            <Separator layoutX="172.0" layoutY="54.0" maxWidth="-Infinity" prefHeight="18.0" prefWidth="375.0" />
+            <Label layoutX="295.0" layoutY="72.0" text="Mail du fournisseur : " />
+            <TextField fx:id="mailFournisseurField" layoutX="234.0" layoutY="90.0" maxWidth="-Infinity" prefHeight="26.0" prefWidth="252.0" />
+            <Separator layoutX="172.0" layoutY="116.0" maxWidth="-Infinity" prefHeight="18.0" prefWidth="375.0" />
+            <Label layoutX="295.0" layoutY="135.0" text="Numero de telephone du fournisseur : " />
+            <TextField fx:id="telephoneFournisseurField" layoutX="234.0" layoutY="152.0" maxWidth="-Infinity" prefHeight="26.0" prefWidth="252.0" />
+            <Separator layoutX="172.0" layoutY="179.0" maxWidth="-Infinity" prefHeight="18.0" prefWidth="375.0" />
+            <Label layoutX="295.0" layoutY="197.0" text="Delais de livraison moyen du fournisseur : " />
+            <TextField fx:id="delaisLivraisonMoyenField" layoutX="234.0" layoutY="215.0" maxWidth="-Infinity" prefHeight="26.0" prefWidth="252.0" />
+            <Separator layoutX="172.0" layoutY="241.0" maxWidth="-Infinity" prefHeight="18.0" prefWidth="375.0" />
+            <Label layoutX="295.0" layoutY="260.0" text="Frais de livraison du fournisseur : " />
+            <TextField fx:id="fraisLivraisonField" layoutX="234.0" layoutY="277.0" maxWidth="-Infinity" prefHeight="26.0" prefWidth="252.0" />
+            <Separator layoutX="172.0" layoutY="304.0" maxWidth="-Infinity" prefHeight="18.0" prefWidth="375.0" />
+            <Button mnemonicParsing="false" onAction="#onAddFournisseur" text="Ajouter" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
