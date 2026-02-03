@@ -69,6 +69,7 @@ public class FicheCreateController implements Initializable {
 
     public void createFicheEtudiant() throws SQLException, IOException {
 
+    int ref_createur = 0 ;
     String nom = nomTextField.getText();
     String prenom = prenomTextField.getText();
     String email = emailTextField.getText();
@@ -82,7 +83,7 @@ public class FicheCreateController implements Initializable {
         System.out.println("Manque un champ");
     }
     else {
-        FicheEtudiant newFiche = new FicheEtudiant(nom,prenom,adresse,telephone,email,dernierDiplome);
+        FicheEtudiant newFiche = new FicheEtudiant(ref_createur , nom,prenom,adresse,telephone,email,dernierDiplome);
         boolean ok = ficheEtudiantRepository.AjouterFicheEtudiant(newFiche);
         if (ok) {
             System.out.println("insertion ok");

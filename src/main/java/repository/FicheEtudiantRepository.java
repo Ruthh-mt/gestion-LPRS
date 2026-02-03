@@ -19,12 +19,12 @@ public class FicheEtudiantRepository {
         String sql = "INSERT INTO fiche_etudiante (nom_etudiant,ref_createur, prenom_etudiant,email_etudiant,telephone,adresse,dernierDiplome) VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, fe.getNom());
+            ps.setString(1, fe.getNomEtudiant());
             ps.setInt(2,1);
-            ps.setString(3, fe.getPrenom());
-            ps.setString(4, fe.getEmail());
-            ps.setString(5, fe.getTelephone());
-            ps.setString(6, fe.getAdresse());
+            ps.setString(3, fe.getPrenomEtudiant());
+            ps.setString(4, fe.getEmailEtudiant());
+            ps.setString(5, fe.getTelephoneEtudiant());
+            ps.setString(6, fe.getAdresseEtudiant());
             ps.setString(7, fe.getDernierDiplome());
             ps.execute();
             return true;
@@ -54,24 +54,39 @@ public class FicheEtudiantRepository {
 }
 
     public ArrayList<FicheEtudiant> getToutesLesFiches() throws SQLException {
-        String sql = "SELECT * FROM fiche_etudiante";
-        ArrayList<FicheEtudiant> ficheEtudiants = new ArrayList<FicheEtudiant>();
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-        FicheEtudiant fe;
-        while(rs.next()) {
-            int id = rs.getInt("id_fiche_etudiante");
-            int ref_createur = rs.getInt("ref_createur");
-            String nom = rs.getString("nom_etudiant");
-            String prenom = rs.getString("prenom_etudiant");
-            String email = rs.getString("email_etudiant");
-            String telephone = rs.getString("telephone");
-            String adresse = rs.getString("adresse");
-            String dernierDiplome = rs.getString("dernierDiplome");
-            fe = new FicheEtudiant(id,ref_createur,nom,prenom,email,telephone,adresse,dernierDiplome);
-            ficheEtudiants.add(fe);
+        String sql = "SELECT * from fiche_etudiante";
+        ArrayList<FicheEtudiant> ficheEtudiants = new ArrayList<>();
+        int id = 0;
+        int ref_createur = 0 ;
+        String nom = "";
+        String prenom = "";
+        String email = "";
+        String telephone = "";
+        String adresse = "";
+        String dernierDiplome = "";
+        FicheEtudiant ficheEtudiant = null;
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet resultatRequete = stmt.executeQuery(sql);
+            while (resultatRequete.next()) {
+                id = resultatRequete.getInt("id_fiche_etudiante");
+                ref_createur = resultatRequete.getInt("ref_createur");
+                nom = resultatRequete.getString("nom_etudiant");
+                prenom = resultatRequete.getString("prenom_etudiant");
+                email = resultatRequete.getString("email_etudiant");
+                telephone = resultatRequete.getString("telephone");
+                adresse = resultatRequete.getString("adresse");
+                dernierDiplome = resultatRequete.getString("dernierDiplome");
 
+
+                ficheEtudiant= new FicheEtudiant(id,ref_createur,nom,prenom,adresse,telephone,email,dernierDiplome) ;
+                ficheEtudiants.add(ficheEtudiant);
+                System.out.println(ficheEtudiant.toString());
+                System.out.println("------------------------");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la requête  " + e.getMessage());
         }
-        return  ficheEtudiants;
+        return ficheEtudiants;
     }
 }
