@@ -3,14 +3,13 @@ package appli.secretaire;
 import appli.StartApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.FicheEtudiant;
 import repository.FicheEtudiantRepository;
 
-import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -58,8 +57,6 @@ public class FicheListController implements Initializable {
         for (FicheEtudiant f : fiches) {
             tableView.getItems().add(f);
         }
-        modiferFicheBtn.setDisable(true);
-        supprimerFicheBtn.setDisable(true);
     }
 
     @FXML
