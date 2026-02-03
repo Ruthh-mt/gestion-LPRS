@@ -44,7 +44,7 @@ public class CreateFournisseurController {
             boolean result=repoFournisseur.createFournisseur(fournisseur);
             if(result){
                 showAlert(AlertType.INFORMATION,"L'ajout du fournisseur a bien été reussie");
-                StartApplication.changeScene("../accueilGestionnaire");
+                StartApplication.changeScene("gestionnaire/accueilGestionnaire","Control Center");
             }else{
                 showAlert(AlertType.ERROR,"Erreur lors de l'ajout du fournisseur");
 
@@ -55,7 +55,7 @@ public class CreateFournisseurController {
 
     @FXML
     void onReturnAccueilGestionnaire(ActionEvent event) throws IOException {
-        StartApplication.changeScene("gestionnaire/accueilGestionnaire");
+        StartApplication.changeScene("gestionnaire/accueilGestionnaire","Control Center");
     }
 
     private void showAlert(AlertType type, String message) {
