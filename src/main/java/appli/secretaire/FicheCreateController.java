@@ -1,7 +1,7 @@
 package appli.secretaire;
 
 import appli.StartApplication;
-import appli.session.Session;
+import session.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

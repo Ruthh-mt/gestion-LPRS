@@ -18,7 +18,7 @@
     <!-- Titre -->
     <Label text="Inscription">
         <font>
-            <Font size="28" />
+            <Font name="Consolas" size="24.0" />
         </font>
         <style>
             -fx-text-fill: #34495e;
@@ -51,8 +51,8 @@
     <PasswordField fx:id="mdpConfirmation" promptText="Confirmez votre mot de passe" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;" />
 
     <!-- Boutons -->
-    <Button mnemonicParsing="false" onAction="#onInscriptionClick" prefWidth="150" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" text="Inscription" />
+    <Button mnemonicParsing="false" onAction="#onInscriptionClick" prefWidth="150" style="-fx-background-color: #198754; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" text="Inscription" />
 
-    <Button mnemonicParsing="false" onAction="#onConnexionClick" prefWidth="150" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" text="Connexion" />
+    <Button mnemonicParsing="false" onAction="#onConnexionClick" prefWidth="150" style="-fx-background-color: #0d6efd; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" text="Connexion" />
 
 </VBox>
