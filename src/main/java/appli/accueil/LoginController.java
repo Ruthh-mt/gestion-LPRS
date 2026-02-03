@@ -36,7 +36,7 @@ public class LoginController {
                 BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
                 String mdpBdd= userRepository.getPasswordbyEmail(email);
                 if(encoder.matches(mdp,mdpBdd)){
-                    StartApplication.changeScene("accueil/homePage");
+                    StartApplication.changeScene("accueil/homePage", "Accueil");
                 } else{
                     showAlert(AlertType.ERROR, "Email ou mot de passe incorrect.");
                     return;
@@ -59,7 +59,7 @@ public class LoginController {
 
     @FXML
     void onInscriptionClick(ActionEvent event) throws IOException {
-        StartApplication.changeScene("accueil/inscription");
+        StartApplication.changeScene("accueil/inscription", "Inscription");
     }
 
     private void showAlert(AlertType type, String message) {
