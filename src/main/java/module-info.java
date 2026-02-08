@@ -6,9 +6,12 @@ module appli{
     requires javafx.base;
     requires java.desktop;
     requires jbcrypt;
+    requires spring.security.crypto;
 
     opens appli to javafx.fxml;
     exports appli;
-    exports appli.accueil;
     opens appli.accueil to javafx.fxml;
+    exports appli.accueil;
+    exports appli.secretaire;
+    opens appli.secretaire to javafx.fxml;
 }

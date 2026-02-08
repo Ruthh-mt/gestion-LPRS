@@ -9,6 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UtilisateurRepository {
+    private Connection cnx;
+    public UtilisateurRepository(){
+        this.cnx = Database.getConnexion();
+    }
+
 
     public boolean inscrire(Utilisateur utilisateur) {
         String sql = "INSERT INTO utilisateur (nom, prenom, email, mdp, role) VALUES (?, ?, ?, ?, ?)";
@@ -46,33 +51,22 @@ public class UtilisateurRepository {
         }
     }
 
-    public Utilisateur authentifier(String email, String motDePasse) {
-        String sql = "SELECT * FROM utilisateur WHERE email = ? AND mdp = ?";
+    public String getPasswordbyEmail(String email) {
 
-        try (Connection cnx = Database.getConnexion();
-             PreparedStatement ps = cnx.prepareStatement(sql)) {
+        String sql="Select mdp from utilisateur where email = ?";
 
+        try{
+            PreparedStatement ps = this.cnx.prepareStatement(sql);
             ps.setString(1, email);
-            ps.setString(2, motDePasse);
-
             ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                Utilisateur u = new Utilisateur(
-                        rs.getString("nom"),
-                        rs.getString("prenom"),
-                        rs.getString("email"),
-                        rs.getString("mdp"),
-                        rs.getString("role")
-                );
-                u.setId(rs.getInt("id_utilisateur"));
-                return u;
+            if(rs.next()){
+                return rs.getString("mdp");
             }
-
-        } catch (SQLException e) {
-            System.out.println("Erreur authentification : " + e.getMessage());
+        }catch(SQLException e){
+            return "Erreur lors de la recuperation du mdp"+e.getMessage();
         }
-
         return null;
     }
+
+
 }

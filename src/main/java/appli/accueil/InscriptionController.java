@@ -82,7 +82,7 @@ public class InscriptionController {
 
     @FXML
     void onConnexionClick(ActionEvent event) throws IOException {
-        StartApplication.changeScene("accueil/login");
+        StartApplication.changeScene("accueil/login", "Connexion");
     }
 
     private void showAlert(Alert.AlertType type, String message) {

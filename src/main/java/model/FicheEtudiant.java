@@ -1,76 +1,90 @@
 package model;
 
 public class FicheEtudiant {
-    public String getNom() {
-        return nom;
+
+
+    public int idFicheEtudiante ;
+    public int refCreateur ;
+    public String nomEtudiant ;
+    public String prenomEtudiant;
+    public String adresseEtudiant;
+    public String telephoneEtudiant;
+    public String emailEtudiant;
+    public String dernierDiplome;
+
+    public FicheEtudiant(int idFicheEtudiante,int refCreateur,String nomEtudiant,String prenomEtudiant,String emailEtudiant,
+                         String telephoneEtudiant ,String adresseEtudiant , String dernierDiplome) {
+        this.idFicheEtudiante = idFicheEtudiante;
+        this.refCreateur = refCreateur;
+        this.nomEtudiant = nomEtudiant;
+        this.prenomEtudiant = prenomEtudiant;
+        this.emailEtudiant = emailEtudiant;
+        this.telephoneEtudiant = telephoneEtudiant;
+        this.adresseEtudiant = adresseEtudiant;
+        this.dernierDiplome = dernierDiplome;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public FicheEtudiant(int refCreateur,String nomEtudiant,String prenomEtudiant,String emailEtudiant,
+                         String telephoneEtudiant ,String adresseEtudiant , String dernierDiplome) {
+        this.refCreateur = refCreateur;
+        this.nomEtudiant = nomEtudiant;
+        this.prenomEtudiant = prenomEtudiant;
+        this.emailEtudiant = emailEtudiant;
+        this.telephoneEtudiant = telephoneEtudiant;
+        this.adresseEtudiant = adresseEtudiant;
+        this.dernierDiplome = dernierDiplome;
     }
 
-    public String getPrenom() {
-        return prenom;
+    public int getIdFicheEtudiante() {
+        return idFicheEtudiante;
     }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public int getRefCreateur() {
+        return refCreateur;
     }
-
-    public String getAdresse() {
-        return adresse;
+    public String getNomEtudiant() {
+        return nomEtudiant;
     }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public String getPrenomEtudiant() {
+        return prenomEtudiant;
     }
-
-    public String getTelephone() {
-        return telephone;
+    public String getAdresseEtudiant() {
+        return adresseEtudiant;
     }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public String getTelephoneEtudiant() {
+        return telephoneEtudiant;
     }
-
-    public String getEmail() {
-        return email;
+    public String getEmailEtudiant() {
+        return emailEtudiant;
     }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getDernierDiplome() {
         return dernierDiplome;
     }
 
+    public void setRefCreateur(int ref_createur) {
+        this.refCreateur = ref_createur;
+    }
+    public void setNomEtudiant(String nom_etudiant) {
+        this.nomEtudiant = nom_etudiant;
+    }
+    public void setPrenomEtudiant(String prenom_etudiant) {
+        this.prenomEtudiant = prenom_etudiant;
+    }
+    public void setAdresseEtudiant(String adresse_etudiant) {
+        this.adresseEtudiant = adresse_etudiant;
+    }
+    public void setTelephoneEtudiant(String telephone_etudiant) {
+        this.telephoneEtudiant = telephone_etudiant;
+    }
+    public void setEmailEtudiant(String email_etudiant) {
+        this.emailEtudiant = email_etudiant;
+    }
     public void setDernierDiplome(String dernierDiplome) {
         this.dernierDiplome = dernierDiplome;
     }
 
-    public String nom;
-    public String prenom;
-    public String adresse;
-    public String telephone;
-    public String email;
-    public String dernierDiplome;
-
-    public FicheEtudiant(String nom, String prenom, String adresse, String telephone, String email
-    , String dernierDiplome) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.adresse = adresse;
-        this.telephone = telephone;
-        this.email = email;
-        this.dernierDiplome = dernierDiplome;
-    }
-
-
-
     @Override
     public String toString() {
-        return "Nom : "+this.nom + "\nPrenom : "+this.prenom + "\nAdresse : "+this.adresse+"\nTelephone : "+this.telephone
-                +"\nEmail : "+this.email+ "\nDernierDiplome : "+this.dernierDiplome;
+        return "Id : "+idFicheEtudiante + "\nNom : "+nomEtudiant+"\nPrenom : "+prenomEtudiant+
+                "\nEmail : "+emailEtudiant + "\nDernierDiplome : "+dernierDiplome;
     }
 }
