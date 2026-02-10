@@ -54,6 +54,13 @@ public class FicheEtudiantRepository {
 }
 
     public ArrayList<FicheEtudiant> getToutesLesFiches() throws SQLException {
+        try (Statement st = connection.createStatement()) {
+            ResultSet rs = st.executeQuery("SELECT COUNT(*) AS nb FROM fiche_etudiante");
+            if (rs.next()) System.out.println("NB lignes fiche_etudiante = " + rs.getInt("nb"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         String sql = "SELECT * from fiche_etudiante";
         ArrayList<FicheEtudiant> ficheEtudiants = new ArrayList<>();
         int id = 0;
@@ -67,7 +74,7 @@ public class FicheEtudiantRepository {
         FicheEtudiant ficheEtudiant = null;
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            ResultSet resultatRequete = stmt.executeQuery(sql);
+            ResultSet resultatRequete = stmt.executeQuery();
             while (resultatRequete.next()) {
                 id = resultatRequete.getInt("id_fiche_etudiante");
                 ref_createur = resultatRequete.getInt("ref_createur");
@@ -76,13 +83,24 @@ public class FicheEtudiantRepository {
                 email = resultatRequete.getString("email_etudiant");
                 telephone = resultatRequete.getString("telephone");
                 adresse = resultatRequete.getString("adresse");
-                dernierDiplome = resultatRequete.getString("dernierDiplome");
+                dernierDiplome = resultatRequete.getString("denier_diplome_etudiant");
 
 
-                ficheEtudiant= new FicheEtudiant(id,ref_createur,nom,prenom,adresse,telephone,email,dernierDiplome) ;
+                ficheEtudiant = new FicheEtudiant(
+                        id,
+                        ref_createur,
+                        nom,
+                        prenom,
+                        email,
+                        telephone,
+                        adresse,
+                        dernierDiplome
+                );
                 ficheEtudiants.add(ficheEtudiant);
-                System.out.println(ficheEtudiant.toString());
-                System.out.println("------------------------");
+                ResultSet rsCount = connection.createStatement()
+                        .executeQuery("SELECT COUNT(*) AS nb FROM fiche_etudiante");
+                if (rsCount.next()) System.out.println("NB lignes = " + rsCount.getInt("nb"));
+
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la requête  " + e.getMessage());

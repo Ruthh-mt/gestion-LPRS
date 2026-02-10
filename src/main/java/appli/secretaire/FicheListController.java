@@ -20,7 +20,7 @@ public class FicheListController implements Initializable {
     public javafx.scene.control.Button modiferFicheBtn;
     public javafx.scene.control.Button supprimerFicheBtn;
     @FXML
-    private TableView<FicheEtudiant> tableView = new TableView<>();
+    private TableView<FicheEtudiant> tableView;
 
     @FXML
     private Button redirectionAccueilBtn ;
@@ -32,44 +32,31 @@ public class FicheListController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
         String[][] colonnes = {
-                {"Nom de l'étudiant", "nomEtudiant"},
+                {"Nom", "nomEtudiant"},
                 {"Prénom", "prenomEtudiant"},
                 {"Email", "emailEtudiant"},
                 {"Téléphone", "telephoneEtudiant"},
                 {"Adresse", "adresseEtudiant"},
-                {"Dernier diplome", "dernierDiplome"}
+                {"Dernier diplôme", "dernierDiplome"}
         };
 
-        for (int i = 0; i < colonnes.length; i++) {
-                TableColumn<FicheEtudiant, String> maCol = new TableColumn<>(colonnes[i][1]);
-                maCol.setCellValueFactory(new PropertyValueFactory<>(colonnes[i][1]));
-                tableView.getColumns().add(maCol);
-            }
+        for (String[] col : colonnes) {
+            TableColumn<FicheEtudiant, String> column =
+                    new TableColumn<>(col[0]);
+            column.setCellValueFactory(
+                    new PropertyValueFactory<>(col[1])
+            );
+            tableView.getColumns().add(column);
+        }
 
-        ArrayList<FicheEtudiant> fiches = null;
         try {
-            fiches = ficheEtudiantRepository.getToutesLesFiches();
+            tableView.getItems().setAll(
+                    ficheEtudiantRepository.getToutesLesFiches()
+            );
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-        for (FicheEtudiant f : fiches) {
-            tableView.getItems().add(f);
-        }
-    }
-
-    @FXML
-    public void gestionListe() throws IOException {
-        tableView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) {
-                FicheEtudiant ficheEtudiant = tableView.getSelectionModel().getSelectedItem();
-                modiferFicheBtn.setDisable(false);
-                supprimerFicheBtn.setDisable(false);
-
-
-            }
-        });
     }
 
 
