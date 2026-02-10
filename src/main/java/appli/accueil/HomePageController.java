@@ -2,15 +2,11 @@ package appli.accueil;
 import appli.StartApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import org.mindrot.jbcrypt.BCrypt;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import model.Utilisateur;
 import repository.UtilisateurRepository;
 import java.io.IOException;
-import javafx.event.ActionEvent;
 
 public class HomePageController {
 
