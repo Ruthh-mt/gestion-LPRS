@@ -10,7 +10,8 @@ import java.sql.SQLException;
 
 public class UtilisateurRepository {
     private Connection cnx;
-    public UtilisateurRepository(){
+
+    public UtilisateurRepository() {
         this.cnx = Database.getConnexion();
     }
 
@@ -53,20 +54,46 @@ public class UtilisateurRepository {
 
     public String getPasswordbyEmail(String email) {
 
-        String sql="Select mdp from utilisateur where email = ?";
+        String sql = "Select mdp from utilisateur where email = ?";
 
-        try{
+        try {
             PreparedStatement ps = this.cnx.prepareStatement(sql);
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return rs.getString("mdp");
             }
-        }catch(SQLException e){
-            return "Erreur lors de la recuperation du mdp"+e.getMessage();
+        } catch (SQLException e) {
+            return "Erreur lors de la recuperation du mdp" + e.getMessage();
         }
         return null;
     }
 
+    public Utilisateur getUser(String email, String mdp) {
+        String sql = "Select * from utilisateur where email = ?";
+        int id = 0;
+        String nom = null;
+        String prenom = null;
+        String role = null;
+        Utilisateur user = null;
 
+        try {
+            PreparedStatement ps = this.cnx.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt("id_utilisateur");
+                nom = rs.getString("nom");
+                prenom = rs.getString("prenom");
+                email = email;
+                user = new Utilisateur(id, nom, prenom);
+
+
+                return user;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
 }

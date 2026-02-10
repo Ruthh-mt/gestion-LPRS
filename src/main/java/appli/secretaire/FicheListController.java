@@ -9,6 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.FicheEtudiant;
 import repository.FicheEtudiantRepository;
+import session.Session;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,8 +18,10 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class FicheListController implements Initializable {
-    public javafx.scene.control.Button modiferFicheBtn;
-    public javafx.scene.control.Button supprimerFicheBtn;
+
+
+    public Button creerFicheBtn;
+    public Button modiferFicheBtn;
     @FXML
     private TableView<FicheEtudiant> tableView;
 
@@ -29,15 +32,39 @@ public class FicheListController implements Initializable {
     private javafx.scene.control.Button redirectionDossierBtn ;
     FicheEtudiantRepository ficheEtudiantRepository = new FicheEtudiantRepository();
 
+
+    public void redirectionCreateFiche() throws IOException {
+        StartApplication.changeScene("secretaire/ficheCreate","Créer une fiche");
+    }
+    public void redirectionUpdateFiche() throws IOException {
+        StartApplication.changeScene("secretaire/ficheUpdate","Modifier la fiche");
+    }
+    public void redirectionAccueil() throws IOException {
+        StartApplication.changeScene("accueil/homePage","Accueil");
+    }
+
+    @FXML
+    public void gestionListe() throws IOException {
+        tableView.setOnMouseClicked(event -> {
+            creerFicheBtn.setVisible(true);
+            modiferFicheBtn.setVisible(true);
+            if (event.getClickCount() == 2) {
+                System.out.println("Bouton cliqué");
+                FicheEtudiant fe = tableView.getSelectionModel().getSelectedItem();
+                System.out.println("\nNom étudiant : " + fe.getNomEtudiant());
+            }
+        });
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        System.out.println("Id session :"+ Session.getInstance().getUtilisateur().getId());
+        creerFicheBtn.setVisible(false);
+        modiferFicheBtn.setVisible(false);
         String[][] colonnes = {
                 {"Nom", "nomEtudiant"},
                 {"Prénom", "prenomEtudiant"},
                 {"Email", "emailEtudiant"},
-                {"Téléphone", "telephoneEtudiant"},
-                {"Adresse", "adresseEtudiant"},
                 {"Dernier diplôme", "dernierDiplome"}
         };
 
@@ -57,12 +84,6 @@ public class FicheListController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-    public void redirectionCreateFiche() throws IOException {
-        StartApplication.changeScene("secretaire/ficheCreate","Créer une fiche");
-    }
-    public void redirectionAccueil() throws IOException {
-        StartApplication.changeScene("accueil/homePage","Accueil");
     }
 
 

@@ -17,6 +17,12 @@ public class Utilisateur {
         this.role = role;
     }
 
+    public Utilisateur(int id ,String nom,String prenom) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+    }
+
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

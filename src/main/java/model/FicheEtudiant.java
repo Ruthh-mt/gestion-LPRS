@@ -12,8 +12,17 @@ public class FicheEtudiant {
     public String emailEtudiant;
     public String dernierDiplome;
 
-    public FicheEtudiant(int idFicheEtudiante,int refCreateur,String nomEtudiant,String prenomEtudiant,String emailEtudiant,
-                         String telephoneEtudiant ,String adresseEtudiant , String dernierDiplome) {
+    public FicheEtudiant(
+            int idFicheEtudiante,
+            int refCreateur ,
+            String nomEtudiant ,
+            String prenomEtudiant ,
+            String emailEtudiant ,
+            String dernierDiplome ,
+            String telephoneEtudiant ,
+            String adresseEtudiant
+
+    ) {
         this.idFicheEtudiante = idFicheEtudiante;
         this.refCreateur = refCreateur;
         this.nomEtudiant = nomEtudiant;

@@ -25,4 +25,8 @@ module appli{
 
     opens appli.secretaire to javafx.fxml;
     exports appli.secretaire;
+
+    opens model to javafx.base;
+
+
 }

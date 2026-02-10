@@ -7,8 +7,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import model.Utilisateur;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import repository.UtilisateurRepository;
+import session.Session;
 
 import java.io.IOException;
 
@@ -37,6 +39,8 @@ public class LoginController {
                 String mdpBdd= userRepository.getPasswordbyEmail(email);
                 if(encoder.matches(mdp,mdpBdd)){
                     StartApplication.changeScene("accueil/homePage", "Accueil");
+                    Utilisateur userTrouve = userRepository.getUser(email,mdp);
+                    Session.getInstance().sauvegardeSession(userTrouve);
                 } else{
                     showAlert(AlertType.ERROR, "Email ou mot de passe incorrect.");
                     return;

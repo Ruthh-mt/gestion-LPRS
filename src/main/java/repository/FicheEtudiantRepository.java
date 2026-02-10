@@ -16,7 +16,8 @@ public class FicheEtudiantRepository {
     }
 
     public boolean AjouterFicheEtudiant(FicheEtudiant fe) throws SQLException {
-        String sql = "INSERT INTO fiche_etudiante (nom_etudiant,ref_createur, prenom_etudiant,email_etudiant,telephone,adresse,dernierDiplome) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO fiche_etudiante (" +
+                "ref_createur,nom_etudiant,prenom_etudiant,email_etudiant,dernier_diplome_etudiant,telephone,adresse) VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, fe.getNomEtudiant());
@@ -87,14 +88,14 @@ public class FicheEtudiantRepository {
 
 
                 ficheEtudiant = new FicheEtudiant(
-                        id,
-                        ref_createur,
+                        id ,
+                        ref_createur ,
                         nom,
-                        prenom,
-                        email,
-                        telephone,
-                        adresse,
-                        dernierDiplome
+                prenom,
+                email ,
+                dernierDiplome ,
+                telephone ,
+                adresse
                 );
                 ficheEtudiants.add(ficheEtudiant);
                 ResultSet rsCount = connection.createStatement()
