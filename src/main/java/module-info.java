@@ -10,10 +10,19 @@ module appli{
 
     opens appli to javafx.fxml;
     exports appli;
+
     opens appli.accueil to javafx.fxml;
     exports appli.accueil;
-    exports appli.secretaire;
-    opens appli.secretaire to javafx.fxml;
+
+    opens appli.gestionnaire to javafx.fxml;
+    exports appli.gestionnaire;
+
+    opens appli.professeur to javafx.fxml;
+    exports appli.professeur;
+
     opens appli.profil to javafx.fxml;
     exports appli.profil;
+
+    opens appli.secretaire to javafx.fxml;
+    exports appli.secretaire;
 }

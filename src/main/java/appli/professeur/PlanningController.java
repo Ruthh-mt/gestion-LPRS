@@ -116,9 +116,6 @@ public class PlanningController {
     private List<Rendezvous> getExampleRendezvous(LocalDate startOfWeek) {
         List<Rendezvous> list = new ArrayList<>();
 
-        // Exemples sur lundi et mercredi
-        list.add(new Rendezvous("Jean Dupont", startOfWeek.plusDays(0), LocalTime.of(9, 0), "Salle A101"));
-        list.add(new Rendezvous("Marie Curie", startOfWeek.plusDays(2), LocalTime.of(14, 0), "Salle B202"));
 
         return list;
     }
