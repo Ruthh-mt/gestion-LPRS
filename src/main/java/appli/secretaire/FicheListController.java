@@ -58,6 +58,12 @@ public class FicheListController implements Initializable {
             e.printStackTrace();
         }
     }
+    public void redirectionCreateFiche() throws IOException {
+        StartApplication.changeScene("secretaire/ficheCreate","Créer une fiche");
+    }
+    public void redirectionAccueil() throws IOException {
+        StartApplication.changeScene("accueil/homePage","Accueil");
+    }
 
 
 

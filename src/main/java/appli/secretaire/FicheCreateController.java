@@ -93,6 +93,9 @@ public class FicheCreateController implements Initializable {
     }
 
 }
+public void retourListe() throws IOException {
+        StartApplication.changeScene("secretaire/ficheList","Liste des fiches");
+}
 
     @Override
 
