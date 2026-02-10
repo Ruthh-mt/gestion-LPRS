@@ -10,4 +10,5 @@ public class FicheUpdateController {
     public void redirectionListeFiche(ActionEvent actionEvent) throws IOException {
         StartApplication.changeScene("secretaire/ficheList","Liste des fiches");
     }
+    public
 }

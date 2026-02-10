@@ -29,6 +29,8 @@ public class FicheCreateController implements Initializable {
 
     @FXML
     public Button cancelButton;
+    public javafx.scene.control.Label dernierDiplomeLabel;
+    public Button retourButton;
 
     @FXML
     private TextField adresseTextfield;
@@ -75,10 +77,9 @@ public class FicheCreateController implements Initializable {
     String nom = nomTextField.getText();
     String prenom = prenomTextField.getText();
     String email = emailTextField.getText();
+    String dernierDiplome = dernierDiplomeComboBox.getValue();
     String telephone = telephoneTextField.getText();
     String adresse = adresseTextfield.getText();
-    String dernierDiplome = dernierDiplomeComboBox.getValue();
-
 
     if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || telephone.isEmpty() || adresse.isEmpty() || dernierDiplome.isEmpty()) {
         System.out.println("Manque un champ");
@@ -88,6 +89,15 @@ public class FicheCreateController implements Initializable {
         boolean ok = ficheEtudiantRepository.AjouterFicheEtudiant(newFiche);
         if (ok) {
             System.out.println("insertion ok");
+            System.out.println("Ref createur: " + ref_createur);
+            System.out.println("nom: " + nom);
+            System.out.println("prenom: " + prenom);
+            System.out.println("email: " + email);
+            System.out.println("dernierDiplome: " + dernierDiplome);
+            System.out.println("telephone: " + telephone);
+            System.out.println("adresse: " + adresse);
+
+            StartApplication.changeScene("secretaire/ficheList","Liste des fiches");
         }
         else {
             System.out.println("Erreur");

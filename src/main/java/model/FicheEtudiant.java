@@ -28,45 +28,47 @@ public class FicheEtudiant {
         this.nomEtudiant = nomEtudiant;
         this.prenomEtudiant = prenomEtudiant;
         this.emailEtudiant = emailEtudiant;
+        this.dernierDiplome = dernierDiplome;
         this.telephoneEtudiant = telephoneEtudiant;
         this.adresseEtudiant = adresseEtudiant;
-        this.dernierDiplome = dernierDiplome;
+
     }
 
-    public FicheEtudiant(int refCreateur,String nomEtudiant,String prenomEtudiant,String emailEtudiant,
-                         String telephoneEtudiant ,String adresseEtudiant , String dernierDiplome) {
+    public FicheEtudiant(int refCreateur,String nomEtudiant,String prenomEtudiant,String emailEtudiant, String dernierDiplome,
+                         String telephoneEtudiant ,String adresseEtudiant ) {
         this.refCreateur = refCreateur;
         this.nomEtudiant = nomEtudiant;
         this.prenomEtudiant = prenomEtudiant;
         this.emailEtudiant = emailEtudiant;
+        this.dernierDiplome = dernierDiplome;
         this.telephoneEtudiant = telephoneEtudiant;
         this.adresseEtudiant = adresseEtudiant;
-        this.dernierDiplome = dernierDiplome;
+
     }
 
     public int getIdFicheEtudiante() {
         return idFicheEtudiante;
     }
     public int getRefCreateur() {
-        return refCreateur;
+        return this.refCreateur;
     }
     public String getNomEtudiant() {
-        return nomEtudiant;
+        return this.nomEtudiant;
     }
     public String getPrenomEtudiant() {
-        return prenomEtudiant;
+        return this.prenomEtudiant;
     }
     public String getAdresseEtudiant() {
-        return adresseEtudiant;
+        return this.adresseEtudiant;
     }
     public String getTelephoneEtudiant() {
-        return telephoneEtudiant;
+        return this.telephoneEtudiant;
     }
     public String getEmailEtudiant() {
-        return emailEtudiant;
+        return this.emailEtudiant;
     }
     public String getDernierDiplome() {
-        return dernierDiplome;
+        return this.dernierDiplome;
     }
 
     public void setRefCreateur(int ref_createur) {

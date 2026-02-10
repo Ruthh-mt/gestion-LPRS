@@ -16,17 +16,16 @@ public class FicheEtudiantRepository {
     }
 
     public boolean AjouterFicheEtudiant(FicheEtudiant fe) throws SQLException {
-        String sql = "INSERT INTO fiche_etudiante (" +
-                "ref_createur,nom_etudiant,prenom_etudiant,email_etudiant,dernier_diplome_etudiant,telephone,adresse) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO fiche_etudiante (ref_createur,nom_etudiant,prenom_etudiant,email_etudiant,dernier_diplome_etudiant,telephone,adresse) VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, fe.getNomEtudiant());
-            ps.setInt(2,1);
+            ps.setInt(1, fe.getRefCreateur());
+            ps.setString(2,fe.getNomEtudiant());
             ps.setString(3, fe.getPrenomEtudiant());
             ps.setString(4, fe.getEmailEtudiant());
-            ps.setString(5, fe.getTelephoneEtudiant());
-            ps.setString(6, fe.getAdresseEtudiant());
-            ps.setString(7, fe.getDernierDiplome());
+            ps.setString(5, fe.getDernierDiplome());
+            ps.setString(6, fe.getTelephoneEtudiant());
+            ps.setString(7, fe.getAdresseEtudiant());
             ps.execute();
             return true;
         } catch (SQLException e) {
