@@ -1,80 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<BorderPane xmlns="http://javafx.com/javafx/25"
-            xmlns:fx="http://javafx.com/fxml/1"
-            prefWidth="900"
-            prefHeight="600"
-            style="-fx-background-color: #f5f6fa;"
-            fx:controller="appli.professeur.PlanningController">
-
-    <!-- HEADER -->
-    <top>
-        <VBox spacing="10" alignment="CENTER">
-            <padding>
-                <Insets top="20" right="20" bottom="10" left="20"/>
-            </padding>
-
-            <Text text="Planning des rendez-vous">
-                <font>
-                    <Font name="Arial Bold" size="26"/>
-                </font>
-            </Text>
-
-            <HBox spacing="10" alignment="CENTER">
-                <Button text="◀"/>
-                <DatePicker fx:id="datePicker"/>
-                <Button text="▶"/>
-            </HBox>
-
-            <Separator prefWidth="500"/>
-        </VBox>
-    </top>
-
-    <!-- CALENDRIER -->
-    <center>
-        <VBox spacing="10">
-            <padding>
-                <Insets top="10" right="20" bottom="20" left="20"/>
-            </padding>
-
-            <!-- En-tête jours -->
-            <GridPane hgap="10" vgap="5">
-                <Label text="Heure" GridPane.columnIndex="0"/>
-                <Label text="Lundi" GridPane.columnIndex="1"/>
-                <Label text="Mardi" GridPane.columnIndex="2"/>
-                <Label text="Mercredi" GridPane.columnIndex="3"/>
-                <Label text="Jeudi" GridPane.columnIndex="4"/>
-                <Label text="Vendredi" GridPane.columnIndex="5"/>
-            </GridPane>
-
-            <!-- Grille planning -->
-            <GridPane fx:id="planningGrid"
-                      hgap="10"
-                      vgap="10"
-                      style="-fx-background-color: white;
-                             -fx-background-radius: 10;
-                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 10, 0, 0, 4);">
-
-                <padding>
-                    <Insets top="10" right="10" bottom="10" left="10"/>
-                </padding>
-
-                <!-- Les créneaux horaires seront ajoutés dynamiquement -->
-            </GridPane>
-
-        </VBox>
-    </center>
-
-</BorderPane>
+<SplitPane dividerPositions="0.15" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <Button layoutX="117.0" layoutY="143.0" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" prefHeight="25.0" text="Ajouter un rendez-vous" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+            <Button alignment="CENTER" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onProfilClick" prefHeight="25.0" text="Profil" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="650.0" />
+            <Button alignment="CENTER" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onRetourClick" prefHeight="25.0" text="Retour" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="680.0" />
+            <Separator layoutX="59.0" layoutY="632.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="540.0" />
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #DDDDDD;">
+         <children>
+            <Label alignment="CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" text="PLANNING" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Consolas Bold" size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+  </items>
+</SplitPane>
