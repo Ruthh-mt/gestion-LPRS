@@ -78,7 +78,6 @@ public class FicheCreateController implements Initializable {
     String dernierDiplome = dernierDiplomeComboBox.getValue();
 
 
-
     if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || telephone.isEmpty() || adresse.isEmpty() || dernierDiplome.isEmpty()) {
         System.out.println("Manque un champ");
     }
@@ -87,7 +86,6 @@ public class FicheCreateController implements Initializable {
         boolean ok = ficheEtudiantRepository.AjouterFicheEtudiant(newFiche);
         if (ok) {
             System.out.println("insertion ok");
-            StartApplication.changeScene("secretaire/ficheList", "Fiches");
         }
         else {
             System.out.println("Erreur");

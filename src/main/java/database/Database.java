@@ -1,7 +1,6 @@
 package database;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+
 public class Database {
     private static final String SERVEUR = "localhost";
     private static final String NOM_BDD = "gestion_lprs";
@@ -18,6 +17,7 @@ public class Database {
         } catch (SQLException e) {
             System.out.println("Erreur de connexion : " + e.getMessage());
         }
+
         return cnx;
     }
     public static void main(String[] args) {
