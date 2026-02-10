@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.FicheEtudiant;
 import repository.FicheEtudiantRepository;
 import session.Session;
+import session.SessionFiche;
 
 import java.io.IOException;
 import java.net.URL;
@@ -48,10 +49,12 @@ public class FicheListController implements Initializable {
         tableView.setOnMouseClicked(event -> {
             creerFicheBtn.setVisible(true);
             modiferFicheBtn.setVisible(true);
+
             if (event.getClickCount() == 2) {
                 System.out.println("Bouton cliqué");
                 FicheEtudiant fe = tableView.getSelectionModel().getSelectedItem();
                 System.out.println("\nNom étudiant : " + fe.getNomEtudiant());
+                SessionFiche.getInstance().sauvegardeSession(fe);
             }
         });
     }

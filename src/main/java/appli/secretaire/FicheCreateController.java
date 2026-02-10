@@ -28,9 +28,9 @@ import repository.UtilisateurRepository;
 public class FicheCreateController implements Initializable {
 
     @FXML
-    public Button cancelButton;
-    public javafx.scene.control.Label dernierDiplomeLabel;
-    public Button retourButton;
+    private Button cancelButton;
+    private javafx.scene.control.Label dernierDiplomeLabel;
+    private Button retourButton;
 
     @FXML
     private TextField adresseTextfield;
@@ -54,10 +54,6 @@ public class FicheCreateController implements Initializable {
     @FXML
     private ComboBox<String> dernierDiplomeComboBox;
 
-
-
-
-
 @FXML
     FicheEtudiantRepository ficheEtudiantRepository = new FicheEtudiantRepository();
 
@@ -65,11 +61,6 @@ public class FicheCreateController implements Initializable {
 
     @FXML
     private Label erreurLabel ;
-
-
-
-
-
 
     public void createFicheEtudiant() throws SQLException, IOException {
 
