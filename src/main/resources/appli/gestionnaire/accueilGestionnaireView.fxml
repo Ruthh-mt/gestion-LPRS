@@ -55,13 +55,13 @@
                <content>
                   <AnchorPane prefHeight="455.0" prefWidth="641.0">
                      <children>
-                        <TableView fx:id="commandeTableView" layoutX="6.0" layoutY="43.0" prefHeight="339.0" prefWidth="398.0" />
+                        <TableView fx:id="commandeTableView" layoutX="6.0" layoutY="43.0" prefHeight="346.0" prefWidth="445.0" />
                         <Label layoutX="289.0" layoutY="4.0" text="Commandes">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Button layoutX="424.0" layoutY="43.0" mnemonicParsing="false" onAction="#onNewCommand" text="Faire une nouvelle commande " />
+                        <Button layoutX="452.0" layoutY="43.0" mnemonicParsing="false" onAction="#onNewCommand" text="Faire une nouvelle commande " />
                         <ToolBar layoutX="6.0" layoutY="416.0" prefHeight="40.0" prefWidth="574.0">
                           <items>
                               <Button mnemonicParsing="false" onAction="#onShowPastCommand" text="Voir toutes les commandes passées" />
@@ -76,14 +76,18 @@
                <content>
                   <AnchorPane prefHeight="455.0" prefWidth="641.0">
                      <children>
-                        <TableView fx:id="fournitureTableView" layoutX="6.0" layoutY="43.0" prefHeight="339.0" prefWidth="398.0" />
+                        <TableView fx:id="fournitureTableView" layoutX="6.0" layoutY="43.0" prefHeight="346.0" prefWidth="445.0" />
                         <Label layoutX="289.0" layoutY="4.0" text="Fourniture">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Button layoutX="14.0" layoutY="418.0" mnemonicParsing="false" onAction="#onShowFinishedFourniture" text="Voir les fournitures bientot fini" />
-                        <Button layoutX="424.0" layoutY="43.0" mnemonicParsing="false" onAction="#onNewFourniture" text="Ajouter une fourniture" />
+                        <Button layoutX="466.0" layoutY="43.0" mnemonicParsing="false" onAction="#onNewFourniture" text="Ajouter une fourniture" />
+                        <ToolBar layoutX="2.0" layoutY="424.0" prefHeight="40.0" prefWidth="574.0">
+                           <items>
+                              <Button mnemonicParsing="false" onAction="#onShowFinishedFourniture" text="Voir les fournitures bientot fini" />
+                           </items>
+                        </ToolBar>
                      </children>
                   </AnchorPane>
                </content>
@@ -92,14 +96,18 @@
                <content>
                   <AnchorPane prefHeight="455.0" prefWidth="641.0">
                      <children>
-                        <TableView fx:id="fournisseurTableView" layoutX="6.0" layoutY="43.0" prefHeight="339.0" prefWidth="398.0" />
+                        <TableView fx:id="fournisseurTableView" layoutX="6.0" layoutY="43.0" prefHeight="346.0" prefWidth="445.0" />
                         <Label layoutX="289.0" layoutY="4.0" text="Fournisseur">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Button layoutX="14.0" layoutY="418.0" mnemonicParsing="false" onAction="#onShowAllFournisseur" text="Voir tout les fournisseur" />
-                        <Button layoutX="424.0" layoutY="43.0" mnemonicParsing="false" onAction="#onNewFournisseur" text="Ajouter un fournisseur" />
+                        <Button layoutX="462.0" layoutY="43.0" mnemonicParsing="false" onAction="#onNewFournisseur" text="Ajouter un fournisseur" />
+                        <ToolBar layoutX="6.0" layoutY="431.0" prefHeight="40.0" prefWidth="574.0">
+                          <items>
+                              <Button mnemonicParsing="false" onAction="#onShowAllFournisseur" text="Voir tout les fournisseur" />
+                          </items>
+                        </ToolBar>
                      </children>
                   </AnchorPane>
                </content>
@@ -108,7 +116,7 @@
       </TabPane>
    </center>
    <right>
-      <VBox alignment="TOP_CENTER" prefHeight="511.0" prefWidth="140.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="164.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="TOP_CENTER" text="URGENCE" textFill="RED">
                <font>

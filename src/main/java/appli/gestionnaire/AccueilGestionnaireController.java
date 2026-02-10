@@ -1,6 +1,8 @@
 package appli.gestionnaire;
 
 import appli.StartApplication;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +13,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.gestionnaire.Commande;
 import model.gestionnaire.Fournisseur;
 import model.gestionnaire.Fourniture;
+import repository.gestionnaire.CommandeRepository;
+import repository.gestionnaire.FournisseurRepository;
+import repository.gestionnaire.FournitureRepository;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,55 +45,84 @@ public class AccueilGestionnaireController  implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         String [][] colonnes = {
                 {"id Commande","idCommande"},
-                {"Nom Commande","nomCommande"},
-                {"Fait par","refFournisseur"},
-                {"Commandé chez",""},
-                {"Commande faite le ","dateCommande"}
+                {"Nom","nomCommande"},
+                {"Chez","refFournisseur"},
+                {"Faite le ","dateCommande"}
         };
 
-        for ( int i = 0 ; i < colonnes.length ; i ++ ){
+        for (String[] colonne : colonnes) {
             //Création de la colonne avec le titre
-            TableColumn<Commande,String> maCol = new TableColumn<>(colonnes[i][0]);
+            TableColumn<Commande, String> maCol = new TableColumn<>(colonne[0]);
 //Ligne permettant la liaison automatique de la cellule avec la propriété
             maCol.setCellValueFactory(
-                    new PropertyValueFactory<Commande,String>(colonnes[i][1]));
+                    new PropertyValueFactory<>(colonne[1]));
             //Ajout de la colonne dans notre tableau
             commandeTableView.getColumns().add(maCol);
         }
-    }
 
-    @FXML
-    void onCommandeChosed(ActionEvent event) {
-
-    }
-
-
-    @FXML
-    void onFournisseurChosed(ActionEvent event,URL location, ResourceBundle resources) {
-
-        String [][] colonnes = {
-                { "Id Forunisseur","idFournisseur" },
-                { "Nom","nomfournisseur" },
-                { "Mail","mailFournisseur" },
-                { "Telephone","telephoneFournisseur" },
-                { "Frais de livraison ","fraisLivraison" },
+        colonnes = new String[][]{
+                {"Id Fournisseur", "idFournisseur"},
+                {"Nom", "nomfournisseur"},
+                {"Mail", "mailFournisseur"},
+                {"Telephone", "telephoneFournisseur"},
+                {"Frais de livraison ", "fraisLivraison"},
         };
 
-        for ( int i = 0 ; i < colonnes.length ; i ++ ){
+
+        for (String[] colonne : colonnes) {
             //Création de la colonne avec le titre
-            TableColumn<Fournisseur,String> maCol = new TableColumn<>(colonnes[i][0]);
+            TableColumn<Fournisseur, String> maCol = new TableColumn<>(colonne[0]);
 //Ligne permettant la liaison automatique de la cellule avec la propriété
             maCol.setCellValueFactory(
-                    new PropertyValueFactory<Fournisseur,String>(colonnes[i][1]));
+                    new PropertyValueFactory<>(colonne[1]));
             //Ajout de la colonne dans notre tableau
             fournisseurTableView.getColumns().add(maCol);
         }
+        colonnes = new String[][]{
+                {"Id Fourniture", "idFourniture"},
+                {"Libelle", "libelle"},
+                {"Stock actuelle", "stockActuelle"},
+                {"Stock minimum", "stockMinimum"},
+        };
+
+        for (String[] colonne : colonnes) {
+            //Création de la colonne avec le titre
+            TableColumn<Fourniture, String> maCol = new TableColumn<>(colonne[0]);
+//Ligne permettant la liaison automatique de la cellule avec la propriété
+            maCol.setCellValueFactory(
+                    new PropertyValueFactory<>(colonne[1]));
+            //Ajout de la colonne dans notre tableau
+            fournitureTableView.getColumns().add(maCol);
+        }
+        commandeTableView.getItems().clear();
+        CommandeRepository commandeRepo = new CommandeRepository();
+        ObservableList <Commande>allCommandes= FXCollections.observableList(commandeRepo.getAllCommandes());
+        commandeTableView.getItems().setAll(allCommandes);
+    }
+
+    @FXML
+    void onCommandeChosed() {
+        System.out.println("Ben alors t'a enfin trouvé la solution");
     }
 
 
     @FXML
-    void onFournitureChosed(ActionEvent event) {
+    void onFournisseurChosed() {
 
+        fournisseurTableView.getItems().clear();
+        FournisseurRepository fournisseurRepo = new FournisseurRepository();
+        ObservableList <Fournisseur>allFournisseur= FXCollections.observableList(fournisseurRepo.getAllFournisseur());
+        fournisseurTableView.getItems().addAll(allFournisseur);
+
+    }
+
+    @FXML
+    void onFournitureChosed() {
+
+        fournitureTableView.getItems().clear();
+        FournitureRepository fournitureRepo = new FournitureRepository();
+        ObservableList <Fourniture>allFournitures= FXCollections.observableList(fournitureRepo.getAllFournitures());
+        fournitureTableView.getItems().setAll(allFournitures);
     }
 
     @FXML
