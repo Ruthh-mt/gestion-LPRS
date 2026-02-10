@@ -8,14 +8,16 @@
 
 <AnchorPane prefHeight="401.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.secretaire.FicheListController">
    <children>
-      <Label layoutX="185.0" layoutY="14.0" prefHeight="65.0" prefWidth="416.0" text="Liste des fiches">
+      <Label layoutX="126.0" layoutY="14.0" prefHeight="47.0" prefWidth="414.0" text="Mes fiches">
          <font>
-            <Font size="55.0" />
+            <Font size="28.0" />
          </font>
       </Label>
       <TableView fx:id="tableView" layoutX="35.0" layoutY="102.0" prefHeight="195.0" prefWidth="381.0" />
-      <Button fx:id="redirectionAccueilBtn" layoutX="52.0" layoutY="346.0" mnemonicParsing="false" text="Retour vers l'accueil" />
+      <Button fx:id="redirectionAccueilBtn" layoutX="52.0" layoutY="346.0" mnemonicParsing="false" onAction="#redirectionAccueil" text="Retour vers l'accueil" />
       <Button layoutX="511.0" layoutY="346.0" mnemonicParsing="false" text="Voir mes dossiers" />
       <Button fx:id="modiferFicheBtn" layoutX="530.0" layoutY="145.0" mnemonicParsing="false" text="Modifier la fiche" />
+      <Button fx:id="creerFiche" layoutX="533.0" layoutY="224.0" mnemonicParsing="false" onAction="#redirectionCreateFiche" text="Créer une fiche" />
+      <Label layoutX="540.0" layoutY="21.0" text="Session de " />
    </children>
 </AnchorPane>

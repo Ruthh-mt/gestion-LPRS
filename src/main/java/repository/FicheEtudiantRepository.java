@@ -83,7 +83,7 @@ public class FicheEtudiantRepository {
                 email = resultatRequete.getString("email_etudiant");
                 telephone = resultatRequete.getString("telephone");
                 adresse = resultatRequete.getString("adresse");
-                dernierDiplome = resultatRequete.getString("denier_diplome_etudiant");
+                dernierDiplome = resultatRequete.getString("dernier_diplome_etudiant");
 
 
                 ficheEtudiant = new FicheEtudiant(

@@ -23,7 +23,7 @@
       </Label>
       <Button fx:id="validerButton" layoutX="102.0" layoutY="390.0" mnemonicParsing="false" onAction="#createFicheEtudiant" text="Valider" />
       <Button fx:id="cancelButton" layoutX="256.0" layoutY="390.0" mnemonicParsing="false" text="Annuler" />
-      <Button fx:id="retourButton" layoutX="483.0" layoutY="390.0" mnemonicParsing="false" text="retour" />
+      <Button fx:id="retourButton" layoutX="483.0" layoutY="390.0" mnemonicParsing="false" onAction="#retourListe" text="retour" />
       <Label layoutX="80.0" layoutY="106.0" text="Prenom" />
       <Label layoutX="73.0" layoutY="255.0" text="Adresse" />
       <TextField fx:id="adresseTextfield" layoutX="195.0" layoutY="251.0" />

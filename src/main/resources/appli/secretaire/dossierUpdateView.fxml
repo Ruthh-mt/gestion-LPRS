@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.secretaire.DossierUpdateController">
    <children>
       <Label layoutX="132.0" layoutY="36.0" text="Modifier dossier n° ">
@@ -26,6 +25,6 @@
       <TextField layoutX="187.0" layoutY="264.0" />
       <Button fx:id="validerButton" layoutX="386.0" layoutY="127.0" mnemonicParsing="false" text="Enregistrer les modifications" />
       <Button fx:id="annulerButton" layoutX="394.0" layoutY="187.0" mnemonicParsing="false" text="Annuler les modifications" />
-      <Button fx:id="retourButton" layoutX="518.0" layoutY="348.0" mnemonicParsing="false" text="Retour" />
+      <Button fx:id="retourButton" layoutX="434.0" layoutY="347.0" mnemonicParsing="false" text="Retour vers mes dossiers" />
    </children>
 </AnchorPane>

@@ -23,13 +23,13 @@
         </Label>
         <Button fx:id="validerButton" layoutX="102.0" layoutY="390.0" mnemonicParsing="false" onAction="#createFicheEtudiant" text="Valider" />
         <Button fx:id="cancelButton" layoutX="256.0" layoutY="390.0" mnemonicParsing="false" text="Annuler" />
-        <Button fx:id="retourButton" layoutX="483.0" layoutY="390.0" mnemonicParsing="false" text="retour" />
+        <Button fx:id="retourButton" layoutX="459.0" layoutY="390.0" mnemonicParsing="false" text="Retour vers la liste des fiches" />
         <Label layoutX="80.0" layoutY="106.0" text="Prenom" />
         <Label layoutX="73.0" layoutY="255.0" text="Adresse" />
         <TextField fx:id="adresseTextfield" layoutX="195.0" layoutY="251.0" />
         <Label fx:id="dernierDiplomeLabel" layoutX="37.0" layoutY="312.0" text="Dernier diplome obtenu" />
         <ComboBox fx:id="dernierDiplomeComboBox" layoutX="195.0" layoutY="308.0" prefWidth="150.0" />
-      <Label layoutX="419.0" layoutY="14.0" text="(etudiant)">
+      <Label layoutX="419.0" layoutY="14.0" text="(nom etudiant)">
          <font>
             <Font size="27.0" />
          </font>
