@@ -13,7 +13,7 @@ public class    StartApplication extends Application {
     public void start(Stage stage) throws IOException {
         mainStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("accueil/loginView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 500, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
         mainStage.setTitle("Connexion");
         mainStage.setScene(scene);
         mainStage.show();

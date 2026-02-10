@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.accueil.HomePageController">
+<AnchorPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.accueil.HomePageController">
    <children>
       <SplitPane dividerPositions="0.25" prefHeight="720.0" prefWidth="1080.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="100.0">
+          <AnchorPane>
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Secrétariat" textAlignment="CENTER" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
                      <font>
@@ -39,8 +39,8 @@
                   </Label>
                   <Button layoutX="12.5" layoutY="325.0" mnemonicParsing="false" onAction="#onDashboardClick" prefHeight="25.0" prefWidth="125.0" text="Dashboard" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="450.0" />
                   <Separator layoutX="10.0" layoutY="300.0" prefWidth="150.0" />
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onDeconnexionClick" text="Déconnexion" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;"/>
-                  <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#onProfilClick" text="Profil" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" style="-fx-background-color: #0d6efd; -fx-text-fill: white;-fx-background-radius: 6; -fx-cursor: hand;"/>
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onDeconnexionClick" style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" text="Déconnexion" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                  <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#onProfilClick" style="-fx-background-color: #0d6efd; -fx-text-fill: white;-fx-background-radius: 6; -fx-cursor: hand;" text="Profil" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
                   <Separator layoutX="10.0" layoutY="300.0" prefWidth="150.0" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>
             </AnchorPane>

@@ -13,7 +13,6 @@
       fx:controller="appli.accueil.LoginController"
       alignment="TOP_CENTER"
       spacing="15"
-      prefWidth="500"
       style="-fx-background-color: #f0f4f8;"
 >
 
