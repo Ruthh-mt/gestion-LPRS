@@ -5,7 +5,9 @@ import model.gestionnaire.Fournisseur;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class FournisseurRepository {
     private Connection cnx;
@@ -29,6 +31,36 @@ public class FournisseurRepository {
         } catch (SQLException e) {
             System.out.println( "Erreur lors de l'ajout du Fournisseur : "+e.getMessage());
             return false;
+        }
+
+    }
+    public void getNameFournisseurById(int idFournisseur) {
+
+    }
+
+    public ArrayList<Fournisseur> getAllFournisseur() {
+        String getAll="SELECT * FROM fournisseur";
+        ArrayList<Fournisseur> allFournisseurs=new ArrayList<>();
+        try{
+            PreparedStatement ps= cnx.prepareStatement(getAll);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                Fournisseur fournisseur= new Fournisseur(
+                        rs.getInt("id_fournisseur"),
+                        rs.getString("nom_fournisseur"),
+                        rs.getString("adresse_fournisseur"),
+                        rs.getString("mail_fournisseur"),
+                        rs.getString("telephone_fournisseur"),
+                        rs.getInt("delai_livraison_moyen"),
+                        rs.getDouble("frais_livraison")
+                );
+                allFournisseurs.add(fournisseur);
+            }
+            return allFournisseurs;
+
+        }catch(SQLException e){
+            System.out.println( "Erreur lors de la recuperation des fournisseur : "+e.getMessage());
+            return null;
         }
 
     }

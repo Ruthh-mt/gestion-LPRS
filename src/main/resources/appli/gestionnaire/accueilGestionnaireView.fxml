@@ -51,7 +51,7 @@
    <center>
       <TabPane prefHeight="486.0" prefWidth="778.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab text="Commandes">
+          <Tab onSelectionChanged="#onCommandeChosed" text="Commandes">
                <content>
                   <AnchorPane prefHeight="455.0" prefWidth="641.0">
                      <children>
@@ -61,13 +61,18 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Button layoutX="14.0" layoutY="418.0" mnemonicParsing="false" onAction="#onShowPastCommand" text="Voir toutes les commandes passées" />
                         <Button layoutX="424.0" layoutY="43.0" mnemonicParsing="false" onAction="#onNewCommand" text="Faire une nouvelle commande " />
+                        <ToolBar layoutX="6.0" layoutY="416.0" prefHeight="40.0" prefWidth="574.0">
+                          <items>
+                              <Button mnemonicParsing="false" onAction="#onShowPastCommand" text="Voir toutes les commandes passées" />
+                            <Button mnemonicParsing="false" onAction="#onShowMyCommandes" text="Voir mes commandes" />
+                          </items>
+                        </ToolBar>
                      </children>
                   </AnchorPane>
                </content>
           </Tab>
-            <Tab text="Fourniture">
+            <Tab onSelectionChanged="#onFournitureChosed" text="Fourniture">
                <content>
                   <AnchorPane prefHeight="455.0" prefWidth="641.0">
                      <children>
@@ -83,7 +88,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Fournisseur">
+            <Tab onSelectionChanged="#onFournisseurChosed" text="Fournisseur">
                <content>
                   <AnchorPane prefHeight="455.0" prefWidth="641.0">
                      <children>
@@ -93,8 +98,8 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Button layoutX="14.0" layoutY="418.0" mnemonicParsing="false" onAction="#onShowFinishedFourniture" text="Voir tout les fournisseur" />
-                        <Button layoutX="424.0" layoutY="43.0" mnemonicParsing="false" onAction="#onNewFourniture" text="Ajouter un fournisseur" />
+                        <Button layoutX="14.0" layoutY="418.0" mnemonicParsing="false" onAction="#onShowAllFournisseur" text="Voir tout les fournisseur" />
+                        <Button layoutX="424.0" layoutY="43.0" mnemonicParsing="false" onAction="#onNewFournisseur" text="Ajouter un fournisseur" />
                      </children>
                   </AnchorPane>
                </content>
