@@ -20,33 +20,48 @@ import java.util.ResourceBundle;
 
 public class FicheUpdateController {
 
+    @FXML
     private TextField nomTextField;
+    @FXML
     private TextField prenomTextField;
+    @FXML
     private TextField emailTextField;
+    @FXML
     private TextField telephoneTextField;
+    @FXML
     private TextField adresseTextfield;
     @FXML
     private ComboBox<String> dernierDiplomeComboBox;
 
-    Utilisateur sessionUtilisateur = Session.getInstance().getUtilisateur();
-    FicheEtudiantRepository fer = new FicheEtudiantRepository();
-    int idSession = sessionUtilisateur.getId();
-    FicheEtudiant ficheActuel = SessionFiche.getInstance().getFiche();
+    private Utilisateur sessionActuel = Session.getInstance().getUtilisateur();
+    private FicheEtudiantRepository fer = new FicheEtudiantRepository();
+    private FicheEtudiant ficheActuel ;
 
     public void redirectionListeFiche(ActionEvent actionEvent) throws IOException {
         StartApplication.changeScene("secretaire/ficheList","Liste des fiches");
     }
 
     public void initialize() throws SQLException {
-        System.out.println("Id session :"+ Session.getInstance().getUtilisateur().getId());
-        System.out.println("Id fiche : "+SessionFiche.getInstance().getFiche().getIdFicheEtudiante());
-        FicheEtudiant fe = SessionFiche.getInstance().getFiche();
-
-
     }
+
     public void updateFiche(){
 
     }
 
+   public void initData(FicheEtudiant fiche) throws SQLException {
+       System.out.println("Id session :"+ sessionActuel.getId());
+       System.out.println("Id fiche : "+ficheActuel.getIdFicheEtudiante());
+       this.ficheActuel = fiche ;
+       //REQUETE RECUPERER FICHE
+       int idFiche = ficheActuel.getIdFicheEtudiante();
+       FicheEtudiant feTrouve = fer.getFicheEtudiant(idFiche);
+       nomTextField.setText(feTrouve.getNomEtudiant());
+       prenomTextField.setText(feTrouve.getPrenomEtudiant());
+       emailTextField.setText(feTrouve.getEmailEtudiant());
+       dernierDiplomeComboBox.setValue(feTrouve.getDernierDiplome());
+       adresseTextfield.setText(feTrouve.getAdresseEtudiant());
+       telephoneTextField.setText(feTrouve.getTelephoneEtudiant());
+
+   }
 
 }

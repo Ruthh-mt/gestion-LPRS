@@ -28,12 +28,10 @@ module appli{
 
     opens appli.gestionnaire.commande to javafx.fxml;
     exports appli.gestionnaire.commande;
-    opens appli.gestionnaire.demande to javafx.fxml;
-    exports appli.gestionnaire.demande;
+
     opens appli.gestionnaire.fournisseur to javafx.fxml;
     exports appli.gestionnaire.fournisseur;
-    opens appli.gestionnaire.fourniture to javafx.fxml;
-    exports appli.gestionnaire.fourniture ;
+
     opens model to javafx.fxml;
     exports model;
     opens model.gestionnaire to javafx.fxml;
