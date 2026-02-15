@@ -2,12 +2,16 @@ package appli.secretaire;
 
 import appli.StartApplication;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import model.FicheEtudiant;
 import repository.FicheEtudiantRepository;
 import session.Session;
@@ -46,12 +50,20 @@ public class FicheListController implements Initializable {
     public void redirectionCreateFiche() throws IOException {
         StartApplication.changeScene("secretaire/ficheCreate","Créer une fiche");
     }
+
     @FXML
     public void redirectionUpdateFiche() throws IOException, SQLException {
-        StartApplication.changeScene("secretaire/ficheUpdate","Modifier la fiche");
         FicheEtudiant fe = tableView.getSelectionModel().getSelectedItem();
-        FicheUpdateController ficheUpdateController = new FicheUpdateController();
+        FXMLLoader fxmlLoader = new
+                FXMLLoader(StartApplication.class.getResource("secretaire/ficheUpdate" + "View.fxml"));
+        Parent root = fxmlLoader.load();
+        FicheUpdateController ficheUpdateController = fxmlLoader.getController();
         ficheUpdateController.initData(fe);
+        Stage mainStage = (Stage) tableView.getScene().getWindow();
+
+        mainStage.setScene(new Scene(root));
+        mainStage.show();
+
     }
     @FXML
     public void redirectionAccueil() throws IOException {

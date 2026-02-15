@@ -7,6 +7,7 @@ module appli{
     requires java.desktop;
     requires jbcrypt;
     requires spring.security.crypto;
+    requires javafx.graphics;
 
     opens appli to javafx.fxml;
     exports appli;

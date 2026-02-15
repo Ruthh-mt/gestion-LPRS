@@ -4,6 +4,7 @@ import appli.StartApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -21,6 +22,10 @@ import java.util.ResourceBundle;
 public class FicheUpdateController {
 
     @FXML
+    private Label sessionLabel ;
+    @FXML
+    private Label nomFicheLabel ;
+    @FXML
     private TextField nomTextField;
     @FXML
     private TextField prenomTextField;
@@ -37,21 +42,29 @@ public class FicheUpdateController {
     private FicheEtudiantRepository fer = new FicheEtudiantRepository();
     private FicheEtudiant ficheActuel ;
 
+
+    @FXML
+    public void initialize()
+    {
+        this.sessionLabel.setText("Session de "+sessionActuel.getNom());
+
+    }
+
+    @FXML
     public void redirectionListeFiche(ActionEvent actionEvent) throws IOException {
         StartApplication.changeScene("secretaire/ficheList","Liste des fiches");
     }
 
-    public void initialize() throws SQLException {
-    }
-
     public void updateFiche(){
-
+     
     }
 
+    @FXML
    public void initData(FicheEtudiant fiche) throws SQLException {
-       System.out.println("Id session :"+ sessionActuel.getId());
+        this.ficheActuel = fiche ;
+
+        System.out.println("Id session :"+ sessionActuel.getId());
        System.out.println("Id fiche : "+ficheActuel.getIdFicheEtudiante());
-       this.ficheActuel = fiche ;
        //REQUETE RECUPERER FICHE
        int idFiche = ficheActuel.getIdFicheEtudiante();
        FicheEtudiant feTrouve = fer.getFicheEtudiant(idFiche);
@@ -61,7 +74,8 @@ public class FicheUpdateController {
        dernierDiplomeComboBox.setValue(feTrouve.getDernierDiplome());
        adresseTextfield.setText(feTrouve.getAdresseEtudiant());
        telephoneTextField.setText(feTrouve.getTelephoneEtudiant());
-
+       nomFicheLabel.setText(
+               ficheActuel.getPrenomEtudiant()+" "+ficheActuel.getNomEtudiant());
    }
 
 }

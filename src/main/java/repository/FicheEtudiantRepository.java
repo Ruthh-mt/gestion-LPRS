@@ -37,6 +37,31 @@ public class FicheEtudiantRepository {
         }
     }
 
+    public boolean updateFicheEtudiant(FicheEtudiant fe) throws SQLException {
+        String sql = "UPDATE fiche_entreprise SET" +
+                "nom_etudiant = ? ," +
+                "prenom_etudiant = ?," +
+                "email_etudiant = ?," +
+                "dernier_diplome_etudiant = ?," +
+                "telephone = ?," +
+                "adresse = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, fe.getNomEtudiant());
+            ps.setString(2, fe.getPrenomEtudiant());
+            ps.setString(3, fe.getEmailEtudiant());
+            ps.setString(4, fe.getDernierDiplome());
+            ps.setString(5, fe.getTelephoneEtudiant());
+            ps.setString(6, fe.getAdresseEtudiant());
+            ps.execute();
+            return true;
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
 
     public Boolean deleteFicheEtudiant(int id) throws SQLException {
         String sql = "DELETE FROM fiche_etudiante WHERE id=?";

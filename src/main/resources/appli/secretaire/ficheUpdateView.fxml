@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="528.0" prefWidth="658.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.secretaire.FicheUpdateController">
+<AnchorPane prefHeight="528.0" prefWidth="658.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.secretaire.FicheUpdateController">
     <children>
         <Label fx:id="nomLabel" layoutX="73.0" layoutY="194.0" text="Téléphone" />
         <Label fx:id="prenomLabel" layoutX="81.0" layoutY="64.0" text="Nom" />
@@ -16,23 +16,24 @@
         <TextField fx:id="prenomTextField" layoutX="202.0" layoutY="102.0" />
         <TextField fx:id="emailTextField" layoutX="202.0" layoutY="145.0" />
         <TextField fx:id="telephoneTextField" layoutX="202.0" layoutY="190.0" />
-        <Label layoutX="174.0" layoutY="14.0" text="Modifier la fiche de  ">
+        <Label layoutX="115.0" layoutY="14.0" text="Modifier la fiche de  ">
             <font>
                 <Font size="27.0" />
             </font>
         </Label>
-        <Button fx:id="validerButton" layoutX="102.0" layoutY="390.0" mnemonicParsing="false"  text="Valider" />
+        <Button fx:id="validerButton" layoutX="102.0" layoutY="390.0" mnemonicParsing="false" onAction="#updateFiche" text="Valider" />
         <Button fx:id="cancelButton" layoutX="256.0" layoutY="390.0" mnemonicParsing="false" text="Annuler" />
-        <Button fx:id="retourButton" layoutX="459.0" layoutY="390.0" onAction="#redirectionListeFiche" mnemonicParsing="false" text="Retour vers la liste des fiches" />
+        <Button fx:id="retourButton" layoutX="459.0" layoutY="390.0" mnemonicParsing="false" onAction="#redirectionListeFiche" text="Retour vers la liste des fiches" />
         <Label layoutX="80.0" layoutY="106.0" text="Prenom" />
         <Label layoutX="73.0" layoutY="255.0" text="Adresse" />
         <TextField fx:id="adresseTextfield" layoutX="195.0" layoutY="251.0" />
         <Label fx:id="dernierDiplomeLabel" layoutX="37.0" layoutY="312.0" text="Dernier diplome obtenu" />
         <ComboBox fx:id="dernierDiplomeComboBox" layoutX="195.0" layoutY="308.0" prefWidth="150.0" />
-      <Label layoutX="419.0" layoutY="14.0" text="(nom etudiant)">
+      <Label fx:id="nomFicheLabel" layoutX="361.0" layoutY="14.0" text="(nom etudiant)">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
+      <Label fx:id="sessionLabel" layoutX="511.0" layoutY="64.0" text="Label" />
     </children>
 </AnchorPane>
