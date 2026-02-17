@@ -7,18 +7,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.15" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.15" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.professeur.DemandeCreateController">
     <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
             <children>
-                <Button layoutX="117.0" layoutY="143.0" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" prefHeight="25.0" text="Ajouter un rendez-vous" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
                 <Button alignment="CENTER" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onProfilClick" prefHeight="25.0" text="Profil" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="650.0" />
                 <Button alignment="CENTER" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onRetourClick" prefHeight="25.0" text="Retour" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="680.0" />
                 <Separator layoutX="59.0" layoutY="632.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="540.0" />
-            </children></AnchorPane>
+            </children>
+        </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #DDDDDD;">
             <children>
-                <Label alignment="CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" text="PLANNING" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                <Label alignment="CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" text="DEMANDES DE FOURNITURES" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
                     <font>
                         <Font name="Consolas Bold" size="36.0" />
                     </font>

@@ -7,45 +7,40 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.15" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.accueil.HomePageController">
-   <items>
-    <AnchorPane>
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" text="Secrétariat" textAlignment="CENTER" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onFicheClick" prefHeight="25.0" text="Fiches d'étudiants" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0" />
-            <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onDossierClick" prefHeight="25.0" text="Dossier d'inscription" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0" />
-            <Separator layoutY="135.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="180.0" />
-            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" text="Éducation" textAlignment="CENTER" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="180.0">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onPlanningClick" prefHeight="25.0" text="Planning" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="210.0" />
-            <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onFournitureClick" prefHeight="25.0" text="Fournitures" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="240.0" />
-            <Separator layoutY="290.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="360.0" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" text="Gestion" textAlignment="CENTER" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="360.0">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <Button layoutX="12.5" layoutY="325.0" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onDashboardClick" prefHeight="25.0" text="Dashboard" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="390.0" />
-            <Separator AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="540.0" />
-            <Button layoutX="20.0" layoutY="20.0" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onProfilClick" prefHeight="25.0" text="Profil" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="650.0" />
-            <Button layoutX="10.0" layoutY="10.0" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onDeconnexionClick" prefHeight="25.0" text="Déconnexion" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="680.0" />
-         </children>
-      </AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #DDDDDD;">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="176.0" layoutY="63.0" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" text="GESTION LPRS" textAlignment="CENTER" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-               <font>
-                  <Font name="Consolas Bold" size="36.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-   </items>
+<SplitPane dividerPositions="0.15" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.accueil.HomePageController">
+    <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+            <children>
+                <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onFicheClick" prefHeight="25.0" text="Fiches d'étudiants" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0" />
+                <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onDossierClick" prefHeight="25.0" text="Dossier d'inscription" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0" />
+                <Separator layoutY="135.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="180.0" />
+                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" text="Éducation" textAlignment="CENTER" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="180.0">
+                    <font>
+                        <Font name="Consolas Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onPlanningClick" prefHeight="25.0" text="Planning" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="210.0" />
+                <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onFournitureClick" prefHeight="25.0" text="Fournitures" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="240.0" />
+                <Separator layoutY="290.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="360.0" />
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" text="Gestion" textAlignment="CENTER" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="360.0">
+                    <font>
+                        <Font name="Consolas Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Button layoutX="12.5" layoutY="325.0" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onDashboardClick" prefHeight="25.0" text="Dashboard" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="390.0" />
+                <Separator AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="540.0" />
+                <Button layoutX="20.0" layoutY="20.0" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onProfilClick" prefHeight="25.0" text="Profil" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="650.0" />
+                <Button layoutX="10.0" layoutY="10.0" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onDeconnexionClick" prefHeight="25.0" text="Déconnexion" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="680.0" />
+            </children>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #DDDDDD;">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="176.0" layoutY="63.0" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" text="GESTION LPRS" textAlignment="CENTER" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                    <font>
+                        <Font name="Consolas Bold" size="36.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </items>
 </SplitPane>
