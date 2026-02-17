@@ -1,4 +1,15 @@
-package appli.professeur;
+import javafx.event.ActionEvent;
 
-public class DemandeCreateController {
+public class PleaseProvideControllerClassName {
+
+    @FXML
+    void onProfilClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onRetourClick(ActionEvent event) {
+
+    }
+
 }
