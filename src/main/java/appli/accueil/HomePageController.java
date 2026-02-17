@@ -2,10 +2,6 @@ package appli.accueil;
 import appli.StartApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Alert;
-import model.Utilisateur;
-import repository.UtilisateurRepository;
 import java.io.IOException;
 
 public class HomePageController {

@@ -1,14 +1,19 @@
 package database;
+
+import security.PasswordsHolder;
+
 import java.sql.*;
 
-public class Database {
-    private static final String SERVEUR = "localhost";
-    private static final String NOM_BDD = "gestion_lprs";
-    private static final String UTILISATEUR = "root";
-    private static final String MOT_DE_PASSE = "";
+public class DatabaseExemple {
+    private static final String SERVEUR = "YOUR_SERVEUR";
+    private static final String NOM_BDD = "YOUR_DATABASE_NAME";
+    private static final String UTILISATEUR = "YOUR_USERNAME";
+    private static final String MOT_DE_PASSE = "YOUR_PASSWORD";
+
     private static String getUrl() {
         return "jdbc:mysql://" + SERVEUR + "/" + NOM_BDD + "?serverTimezone=UTC";
     }
+
     public static Connection getConnexion() {
         Connection cnx = null;
         try {
@@ -20,6 +25,7 @@ public class Database {
 
         return cnx;
     }
+
     public static void main(String[] args) {
         Connection cnx = getConnexion();
         if (cnx != null) {

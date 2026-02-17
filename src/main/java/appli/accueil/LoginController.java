@@ -22,43 +22,36 @@ public class LoginController {
     @FXML
     private PasswordField mdpField;
 
+
     @FXML
-    private void onConnexionClick() throws IOException {
-        String email = emailField.getText().trim();
-        String mdp = mdpField.getText();
+    void onConnexionClick(ActionEvent event) throws IOException {
+        if(emailField.getText().isEmpty() || mdpField.getText().isEmpty()){
+            showAlert(Alert.AlertType.WARNING, "Veuillez saisir votre email et votre mot de passe.");
 
-        if (email.isEmpty() || mdp.isEmpty()) {
-            showAlert(AlertType.WARNING, "Veuillez saisir votre email et votre mot de passe.");
-            return;
-        }
-        else{ // si les champs email et mdp ne sont pas vide
-            UtilisateurRepository userRepository = new UtilisateurRepository();
-            boolean userExiste=userRepository.emailExiste(email);
-            if(userExiste){
+        }else{
+            UtilisateurRepository userRepo = new UtilisateurRepository();
+            Utilisateur possibleUser=userRepo.getUserByMail(new Utilisateur(emailField.getText(),mdpField.getText()));
+
+            if(possibleUser!=null){
                 BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-                String mdpBdd= userRepository.getPasswordbyEmail(email);
-                if(encoder.matches(mdp,mdpBdd)){
-                    StartApplication.changeScene("accueil/homePage", "Accueil");
-                    Utilisateur userTrouve = userRepository.getUser(email,mdp);
-                    Session.getInstance().sauvegardeSession(userTrouve);
-                } else{
-                    showAlert(AlertType.ERROR, "Email ou mot de passe incorrect.");
-                    return;
+                if(encoder.matches(mdpField.getText(), possibleUser.getMotDePasse())){
+                    System.out.println("Connexion réussie pour : " + possibleUser.getNom());
+                    Session.getInstance().sauvegardeSession(possibleUser);
+                    StartApplication.changeScene("accueil/homePage","Accueil");
+                }else{
+                    showAlert(Alert.AlertType.WARNING, "Mot de passe ou Email  incorrect");
                 }
-
             }else{
-                System.out.println("Vous n'existez pas chez nous, veuillez vous inscrire");
-                showAlert(AlertType.WARNING, "Vous n'existez pas chez nous, veuillez vous inscrire");
-                return;
+                showAlert(Alert.AlertType.ERROR, "Erreur lors de la connexion");
             }
 
         }
-
     }
 
     @FXML
-    private void onMdpOublieClick() {
+    private void onMdpOublieClick() throws IOException {
         System.out.println("Mot de passe oublié cliqué");
+        StartApplication.changeScene("motDePasse/saisieEmail","Mot de passe Oublié");
     }
 
     @FXML
