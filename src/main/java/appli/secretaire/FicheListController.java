@@ -2,14 +2,21 @@ package appli.secretaire;
 
 import appli.StartApplication;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import model.FicheEtudiant;
 import repository.FicheEtudiantRepository;
 import session.Session;
+import session.SessionFiche;
+import appli.secretaire.FicheUpdateController ;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,46 +27,73 @@ import java.util.ResourceBundle;
 public class FicheListController implements Initializable {
 
 
-    public Button creerFicheBtn;
-    public Button modiferFicheBtn;
+    @FXML
+    private Button creerFicheBtn;
+    @FXML
+    private Button modiferFicheBtn;
     @FXML
     private TableView<FicheEtudiant> tableView;
 
+    @FXML
+    private Label sessionLabel;
     @FXML
     private Button redirectionAccueilBtn ;
 
     @FXML
     private javafx.scene.control.Button redirectionDossierBtn ;
-    FicheEtudiantRepository ficheEtudiantRepository = new FicheEtudiantRepository();
+
+    @FXML
+    private FicheEtudiantRepository ficheEtudiantRepository = new FicheEtudiantRepository();
 
 
+@FXML
     public void redirectionCreateFiche() throws IOException {
         StartApplication.changeScene("secretaire/ficheCreate","Créer une fiche");
     }
-    public void redirectionUpdateFiche() throws IOException {
-        StartApplication.changeScene("secretaire/ficheUpdate","Modifier la fiche");
+
+    @FXML
+    public void redirectionUpdateFiche() throws IOException, SQLException {
+        FicheEtudiant fe = tableView.getSelectionModel().getSelectedItem();
+        FXMLLoader fxmlLoader = new
+                FXMLLoader(StartApplication.class.getResource("secretaire/ficheUpdate" + "View.fxml"));
+        Parent root = fxmlLoader.load();
+        FicheUpdateController ficheUpdateController = fxmlLoader.getController();
+        ficheUpdateController.initData(fe);
+        Stage mainStage = (Stage) tableView.getScene().getWindow();
+
+        mainStage.setScene(new Scene(root));
+        mainStage.show();
+
     }
+    @FXML
     public void redirectionAccueil() throws IOException {
         StartApplication.changeScene("accueil/homePage","Accueil");
     }
 
     @FXML
     public void gestionListe() throws IOException {
+
         tableView.setOnMouseClicked(event -> {
-            creerFicheBtn.setVisible(true);
-            modiferFicheBtn.setVisible(true);
+
             if (event.getClickCount() == 2) {
-                System.out.println("Bouton cliqué");
+
                 FicheEtudiant fe = tableView.getSelectionModel().getSelectedItem();
-                System.out.println("\nNom étudiant : " + fe.getNomEtudiant());
+
+                if (fe != null) {
+                    System.out.println("Double clic sur : " + fe.getNomEtudiant());
+
+                    SessionFiche.getInstance().sauvegardeSession(fe);
+                    modiferFicheBtn.setVisible(true);
+                }
             }
         });
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        this.sessionLabel.setText("Session de "+Session.getInstance().getUtilisateur().getPrenom()+" "+Session.getInstance().getUtilisateur().getNom());
         System.out.println("Id session :"+ Session.getInstance().getUtilisateur().getId());
-        creerFicheBtn.setVisible(false);
         modiferFicheBtn.setVisible(false);
         String[][] colonnes = {
                 {"Nom", "nomEtudiant"},

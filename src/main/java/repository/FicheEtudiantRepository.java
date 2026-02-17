@@ -2,6 +2,8 @@ package repository;
 
 import database.Database;
 import model.FicheEtudiant;
+import model.Utilisateur;
+import session.Session;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -26,9 +28,35 @@ public class FicheEtudiantRepository {
             ps.setString(5, fe.getDernierDiplome());
             ps.setString(6, fe.getTelephoneEtudiant());
             ps.setString(7, fe.getAdresseEtudiant());
+
             ps.execute();
             return true;
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean updateFicheEtudiant(FicheEtudiant fe) throws SQLException {
+        String sql = "UPDATE fiche_entreprise SET" +
+                "nom_etudiant = ? ," +
+                "prenom_etudiant = ?," +
+                "email_etudiant = ?," +
+                "dernier_diplome_etudiant = ?," +
+                "telephone = ?," +
+                "adresse = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, fe.getNomEtudiant());
+            ps.setString(2, fe.getPrenomEtudiant());
+            ps.setString(3, fe.getEmailEtudiant());
+            ps.setString(4, fe.getDernierDiplome());
+            ps.setString(5, fe.getTelephoneEtudiant());
+            ps.setString(6, fe.getAdresseEtudiant());
+            ps.execute();
+            return true;
+        }
+        catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -42,15 +70,33 @@ public class FicheEtudiantRepository {
         return ps.execute();
     }
 
-    public Boolean getFicheEtudiant(int id) throws SQLException {
-        String sql = "SELECT * FROM fiche_etudiante WHERE id = ?";
+    public FicheEtudiant getFicheEtudiant(int id) throws SQLException {
+
+        int ref_createur = 0 ;
+        String nom_etudiant = "";
+        String prenom_etudiant = "";
+        String email_etudiant = "";
+        String dernier_diplome_etudiant = "";
+        String telephone_etudiant = "";
+        String adresse_etudiant = "";
+        FicheEtudiant fe = null ;
+
+        String sql = "SELECT * FROM fiche_etudiante WHERE id_fiche_etudiante = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
-        if(rs.next()) {
-            return true;
-        }
-        return false;
+       while (rs.next()) {
+           ref_createur = rs.getInt("ref_createur");
+           nom_etudiant = rs.getString("nom_etudiant");
+           prenom_etudiant = rs.getString("prenom_etudiant");
+           email_etudiant = rs.getString("email_etudiant");
+           dernier_diplome_etudiant = rs.getString("dernier_diplome_etudiant");
+           telephone_etudiant = rs.getString("telephone");
+           adresse_etudiant = rs.getString("adresse");
+           fe = new FicheEtudiant(id,ref_createur,nom_etudiant,prenom_etudiant,email_etudiant,dernier_diplome_etudiant,telephone_etudiant,adresse_etudiant);
+       }
+       return fe;
+
 }
 
     public ArrayList<FicheEtudiant> getToutesLesFiches() throws SQLException {
@@ -81,11 +127,10 @@ public class FicheEtudiantRepository {
                 nom = resultatRequete.getString("nom_etudiant");
                 prenom = resultatRequete.getString("prenom_etudiant");
                 email = resultatRequete.getString("email_etudiant");
-                telephone = resultatRequete.getString("telephone");
-                adresse = resultatRequete.getString("adresse");
                 dernierDiplome = resultatRequete.getString("dernier_diplome_etudiant");
 
-
+                telephone = resultatRequete.getString("telephone");
+                adresse = resultatRequete.getString("adresse");
                 ficheEtudiant = new FicheEtudiant(
                         id ,
                         ref_createur ,

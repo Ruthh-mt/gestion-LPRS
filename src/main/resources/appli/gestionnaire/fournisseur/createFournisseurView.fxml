@@ -45,6 +45,7 @@
             <Label layoutX="295.0" layoutY="260.0" text="Frais de livraison du fournisseur : " />
             <TextField fx:id="fraisLivraisonField" layoutX="234.0" layoutY="277.0" maxWidth="-Infinity" prefHeight="26.0" prefWidth="252.0" />
             <Separator layoutX="172.0" layoutY="304.0" maxWidth="-Infinity" prefHeight="18.0" prefWidth="375.0" />
+            <Label fx:id="errorLabel" textFill="RED" />
             <Button mnemonicParsing="false" onAction="#onAddFournisseur" text="Ajouter" />
          </children>
       </VBox>

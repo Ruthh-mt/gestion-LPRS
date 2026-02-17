@@ -7,6 +7,7 @@ module appli{
     requires java.desktop;
     requires jbcrypt;
     requires spring.security.crypto;
+    requires javafx.graphics;
 
     opens appli to javafx.fxml;
     exports appli;
@@ -26,7 +27,14 @@ module appli{
     opens appli.secretaire to javafx.fxml;
     exports appli.secretaire;
 
-    opens model to javafx.base;
+    opens appli.gestionnaire.commande to javafx.fxml;
+    exports appli.gestionnaire.commande;
 
+    opens appli.gestionnaire.fournisseur to javafx.fxml;
+    exports appli.gestionnaire.fournisseur;
 
+    opens model to javafx.fxml;
+    exports model;
+    opens model.gestionnaire to javafx.fxml;
+    exports model.gestionnaire;
 }

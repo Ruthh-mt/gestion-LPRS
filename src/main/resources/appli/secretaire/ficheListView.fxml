@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="401.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.secretaire.FicheListController">
+<AnchorPane prefHeight="401.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.secretaire.FicheListController">
    <children>
       <Label layoutX="159.0" layoutY="14.0" prefHeight="25.0" prefWidth="381.0" text="Mes fiches">
          <font>
@@ -17,7 +17,8 @@
       <Button fx:id="redirectionAccueilBtn" layoutX="52.0" layoutY="346.0" mnemonicParsing="false" onAction="#redirectionAccueil" text="Retour vers l'accueil" />
       <Button layoutX="511.0" layoutY="346.0" mnemonicParsing="false" text="Voir mes dossiers" />
       <Button fx:id="modiferFicheBtn" layoutX="530.0" layoutY="145.0" mnemonicParsing="false" onAction="#redirectionUpdateFiche" text="Modifier la fiche" />
-      <Button fx:id="creerFicheBtn" layoutX="533.0" layoutY="224.0" mnemonicParsing="false" onAction="#redirectionCreateFiche" text="Créer une fiche" />
-      <Label layoutX="540.0" layoutY="21.0" text="Session de " />
+      <Button fx:id="creerFicheBtn" layoutX="263.0" layoutY="346.0" mnemonicParsing="false" onAction="#redirectionCreateFiche" text="Créer une fiche" />
+      <Label layoutX="553.0" layoutY="34.0" />
+      <Label fx:id="sessionLabel" layoutX="539.0" layoutY="34.0" text="label session" />
    </children>
 </AnchorPane>
