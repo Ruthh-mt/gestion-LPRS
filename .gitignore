@@ -39,4 +39,4 @@ build/
 
 ### Security ###
 **/src/main/**/security/
-**/src/main/**/database/
+**/src/main/**/Database.java
