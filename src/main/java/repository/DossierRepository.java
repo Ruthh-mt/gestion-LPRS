@@ -69,6 +69,7 @@ public class DossierRepository {
             heure = rs.getTime("heure");
             filiere = rs.getString("filiere");
             motivation = rs.getString("motivation");
+            dossier = new DossierInscription(id,date,heure,filiere,motivation);
             dossiers.add(dossier);
         }
         return dossiers;
