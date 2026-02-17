@@ -18,6 +18,7 @@ public class    StartApplication extends Application {
         mainStage.setScene(scene);
         mainStage.show();
     }
+
     public static void changeScene(String nomDuFichierFxml, String namePage) throws IOException {
         FXMLLoader fxmlLoader = new
                 FXMLLoader(StartApplication.class.getResource(nomDuFichierFxml + "View.fxml"));
