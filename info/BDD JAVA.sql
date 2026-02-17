@@ -42,6 +42,7 @@ CREATE TABLE utilisateur(
                             mdp varchar(255) NOT NULL,
                             role varchar(30) NOT NULL,
                             ref_filiere int default NULL,
+                            code varchar(6) default NULL,
                             PRIMARY KEY(id_utilisateur)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
