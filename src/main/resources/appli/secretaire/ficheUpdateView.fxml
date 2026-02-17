@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="528.0" prefWidth="658.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.secretaire.FicheUpdateController">
+<AnchorPane prefHeight="528.0" prefWidth="658.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.secretaire.FicheUpdateController">
     <children>
         <Label fx:id="nomLabel" layoutX="73.0" layoutY="194.0" text="Téléphone" />
         <Label fx:id="prenomLabel" layoutX="81.0" layoutY="64.0" text="Nom" />
@@ -34,6 +34,7 @@
             <Font size="27.0" />
          </font>
       </Label>
-      <Label fx:id="sessionLabel" layoutX="511.0" layoutY="64.0" text="Label" />
+      <Label fx:id="sessionLabel" layoutX="511.0" layoutY="64.0" text="sessionLabel" />
+      <Label fx:id="erreurLabel" layoutX="440.0" layoutY="242.0" text="Erreur label" />
     </children>
 </AnchorPane>

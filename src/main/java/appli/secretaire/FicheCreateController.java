@@ -1,6 +1,7 @@
 package appli.secretaire;
 
 import appli.StartApplication;
+import javafx.scene.control.*;
 import session.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,13 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.lang.classfile.Label;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -29,7 +25,9 @@ public class FicheCreateController implements Initializable {
 
     @FXML
     private Button cancelButton;
+    @FXML
     private javafx.scene.control.Label dernierDiplomeLabel;
+    @FXML
     private Button retourButton;
 
     @FXML
@@ -54,13 +52,16 @@ public class FicheCreateController implements Initializable {
     @FXML
     private ComboBox<String> dernierDiplomeComboBox;
 
-@FXML
+    @FXML
+    private Label erreurLabel;
+
+
+
+
     FicheEtudiantRepository ficheEtudiantRepository = new FicheEtudiantRepository();
 
     Utilisateur utilisateurActuel = Session.getInstance().getUtilisateur();
 
-    @FXML
-    private Label erreurLabel ;
 
     public void createFicheEtudiant() throws SQLException, IOException {
 
@@ -73,7 +74,7 @@ public class FicheCreateController implements Initializable {
     String adresse = adresseTextfield.getText();
 
     if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || telephone.isEmpty() || adresse.isEmpty() || dernierDiplome.isEmpty()) {
-        System.out.println("Manque un champ");
+        erreurLabel.setText("Manque un champ");
     }
     else {
         FicheEtudiant newFiche = new FicheEtudiant(ref_createur , nom,prenom,email,dernierDiplome,telephone,adresse);
@@ -103,7 +104,7 @@ public void retourListe() throws IOException {
     @Override
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        erreurLabel.setVisible(false);
         dernierDiplomeComboBox.getItems().addAll(
                 "BTS SIO SLAM",
                 "BTS SIO SISR",

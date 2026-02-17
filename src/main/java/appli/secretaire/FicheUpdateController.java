@@ -37,6 +37,8 @@ public class FicheUpdateController {
     private TextField adresseTextfield;
     @FXML
     private ComboBox<String> dernierDiplomeComboBox;
+    @FXML
+    private Label erreurLabel ;
 
     private Utilisateur sessionActuel = Session.getInstance().getUtilisateur();
     private FicheEtudiantRepository fer = new FicheEtudiantRepository();
@@ -46,8 +48,8 @@ public class FicheUpdateController {
     @FXML
     public void initialize()
     {
+        erreurLabel.setVisible(false);
         this.sessionLabel.setText("Session de "+sessionActuel.getNom());
-
     }
 
     @FXML
@@ -55,8 +57,37 @@ public class FicheUpdateController {
         StartApplication.changeScene("secretaire/ficheList","Liste des fiches");
     }
 
-    public void updateFiche(){
-     
+    public void updateFiche() throws SQLException, IOException {
+        int ref_createur = sessionActuel.getId() ;
+        String nom = nomTextField.getText();
+        String prenom = prenomTextField.getText();
+        String email = emailTextField.getText();
+        String telephone = telephoneTextField.getText();
+        String adresse = adresseTextfield.getText();
+        String dernierDiplome = dernierDiplomeComboBox.getValue();
+
+        if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || telephone.isEmpty() || adresse.isEmpty() || dernierDiplome.isEmpty()) {
+            erreurLabel.setText("Manque un champ");
+        }
+        else {
+            FicheEtudiant newFiche = new FicheEtudiant(ref_createur , nom,prenom,email,dernierDiplome,telephone,adresse);
+            boolean ok = fer.updateFicheEtudiant(newFiche);
+            if (ok) {
+                System.out.println("modificatin ok");
+                System.out.println("Ref createur: " + ref_createur);
+                System.out.println("nom: " + nom);
+                System.out.println("prenom: " + prenom);
+                System.out.println("email: " + email);
+                System.out.println("dernierDiplome: " + dernierDiplome);
+                System.out.println("telephone: " + telephone);
+                System.out.println("adresse: " + adresse);
+
+                StartApplication.changeScene("secretaire/ficheList","Liste des fiches");
+            }
+            else {
+                System.out.println("Erreur");
+            }
+        }
     }
 
     @FXML

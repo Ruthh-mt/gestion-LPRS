@@ -43,8 +43,6 @@ public class DossierCreateController {
       Date date = Date.valueOf(dateTextfield.getText());
       Time heure = Time.valueOf(heureTextfield.getText());
       String motivation = motivationTextfield.getText();
-
-
     }
 
     @FXML

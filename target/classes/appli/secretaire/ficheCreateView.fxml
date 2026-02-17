@@ -29,5 +29,6 @@
       <TextField fx:id="adresseTextfield" layoutX="195.0" layoutY="251.0" />
       <Label fx:id="dernierDiplomeLabel" layoutX="37.0" layoutY="312.0" text="Dernier diplome obtenu" />
       <ComboBox fx:id="dernierDiplomeComboBox" layoutX="195.0" layoutY="308.0" prefWidth="150.0" />
+      <Label fx:id="erreurLabel" layoutX="483.0" layoutY="207.0" text="erreur label" />
    </children>
 </AnchorPane>

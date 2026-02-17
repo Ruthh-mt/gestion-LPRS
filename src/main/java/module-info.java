@@ -8,6 +8,7 @@ module appli{
     requires jbcrypt;
     requires spring.security.crypto;
     requires javafx.graphics;
+    requires jakarta.mail;
 
     opens appli to javafx.fxml;
     exports appli;
