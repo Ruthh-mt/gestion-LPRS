@@ -42,9 +42,11 @@ public class FicheListController implements Initializable {
     @FXML
     private javafx.scene.control.Button redirectionDossierBtn ;
 
-    @FXML
+
     private FicheEtudiantRepository ficheEtudiantRepository = new FicheEtudiantRepository();
 
+    @FXML
+    private Button supprimerFicheBtn;
 
 @FXML
     public void redirectionCreateFiche() throws IOException {
@@ -71,6 +73,16 @@ public class FicheListController implements Initializable {
     }
 
     @FXML
+    public void redirectionDossierBtn() throws IOException {
+    StartApplication.changeScene("secretaire/dossierList","Dossier");
+    }
+
+    @FXML
+    public void redirectionAjouterDossier() throws IOException {
+        StartApplication.changeScene("secretaire/dossierCreate","Créer un dossier");
+    }
+
+    @FXML
     public void gestionListe() throws IOException {
 
         tableView.setOnMouseClicked(event -> {
@@ -84,6 +96,7 @@ public class FicheListController implements Initializable {
 
                     SessionFiche.getInstance().sauvegardeSession(fe);
                     modiferFicheBtn.setVisible(true);
+                    supprimerFicheBtn.setVisible(true);
                 }
             }
         });
@@ -95,6 +108,7 @@ public class FicheListController implements Initializable {
         this.sessionLabel.setText("Session de "+Session.getInstance().getUtilisateur().getPrenom()+" "+Session.getInstance().getUtilisateur().getNom());
         System.out.println("Id session :"+ Session.getInstance().getUtilisateur().getId());
         modiferFicheBtn.setVisible(false);
+        supprimerFicheBtn.setVisible(false);
         String[][] colonnes = {
                 {"Nom", "nomEtudiant"},
                 {"Prénom", "prenomEtudiant"},
