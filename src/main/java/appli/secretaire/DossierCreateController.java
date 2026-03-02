@@ -4,12 +4,16 @@ import appli.StartApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.FicheEtudiant;
+import model.Filiere;
+import repository.FiliereRepository;
 import session.Session;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class DossierCreateController {
 
@@ -26,13 +30,15 @@ public class DossierCreateController {
     @FXML
     public Button retourButton;
     @FXML
-    public ComboBox<> refFiliereTextfield;
+    public ComboBox<Integer> refFiliereTextfield;
     @FXML
-    public ComboBox refFicheTextfield;
+    public ComboBox<Integer> refFicheTextfield;
     @FXML
     public DatePicker dateTextField;
     @FXML
     private Label sessionLabel ;
+
+    FiliereRepository filiereRepository = new FiliereRepository();
 
     @FXML
     public void ajouterDossier() {
@@ -44,8 +50,11 @@ public class DossierCreateController {
     }
 
     @FXML
-    public void initialize() {
-        sessionLabel.setText("Session de ");
+    public void initialize() throws SQLException {
+       ArrayList<Filiere> filieres = new ArrayList<>();
+       filieres = filiereRepository.getAllFiliere();
+        sessionLabel.setText("Session de ")
+        ;
     }
 
     @FXML
