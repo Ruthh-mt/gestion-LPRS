@@ -2,23 +2,23 @@ package appli.secretaire;
 
 import appli.StartApplication;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.FicheEtudiant;
+import model.Filiere;
+import repository.FiliereRepository;
 import session.Session;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class DossierCreateController {
 
 
-    @FXML
-    public TextField dateTextfield;
+
     @FXML
     public TextField heureTextfield;
     @FXML
@@ -30,11 +30,15 @@ public class DossierCreateController {
     @FXML
     public Button retourButton;
     @FXML
-    public TextField refFiliereTextfield;
+    public ComboBox<Integer> refFiliereTextfield;
     @FXML
-    public TextField refFicheTextfield;
+    public ComboBox<Integer> refFicheTextfield;
+    @FXML
+    public DatePicker dateTextField;
     @FXML
     private Label sessionLabel ;
+
+    FiliereRepository filiereRepository = new FiliereRepository();
 
     @FXML
     public void ajouterDossier() {
@@ -46,8 +50,11 @@ public class DossierCreateController {
     }
 
     @FXML
-    public void initialize() {
-        sessionLabel.setText("Session de ");
+    public void initialize() throws SQLException {
+       ArrayList<Filiere> filieres = new ArrayList<>();
+       filieres = filiereRepository.getAllFiliere();
+        sessionLabel.setText("Session de ")
+        ;
     }
 
     @FXML

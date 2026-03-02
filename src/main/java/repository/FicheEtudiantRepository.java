@@ -58,11 +58,12 @@ public class FicheEtudiantRepository {
     }
 
 
-    public Boolean deleteFicheEtudiant(int id) throws SQLException {
-        String sql = "DELETE FROM fiche_etudiante WHERE id=?";
+    public void deleteFicheEtudiant(int id) throws SQLException {
+        String sql = "DELETE FROM fiche_etudiante WHERE id_fiche_etudiante=?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, id);
-        return ps.execute();
+        System.out.printf("Fiche numéro %d supprimé",id);
+        ps.execute();
     }
 
     public FicheEtudiant getFicheEtudiant(int id) throws SQLException {
@@ -146,5 +147,19 @@ public class FicheEtudiantRepository {
             System.out.println("Erreur lors de la requête  " + e.getMessage());
         }
         return ficheEtudiants;
+    }
+
+    public boolean supprimerFiche(String email) {
+        String delete = "DELETE FROM utilisateur WHERE email=? ";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(delete);
+            stmt.setString(1, email);
+            stmt.executeUpdate();
+            System.out.println("User deleted with sucess : " + '\n' + ">> mail was : " + email);
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la suppresion : " + '\n' + " >>" + e.getMessage());
+            return false;
+        }
     }
 }

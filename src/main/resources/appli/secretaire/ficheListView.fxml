@@ -20,6 +20,6 @@
       <Button fx:id="creerFicheBtn" layoutX="263.0" layoutY="346.0" mnemonicParsing="false" onAction="#redirectionCreateFiche" text="Créer une fiche" />
       <Label layoutX="553.0" layoutY="34.0" />
       <Label fx:id="sessionLabel" layoutX="539.0" layoutY="34.0" text="label session" />
-      <Button fx:id="supprimerFicheBtn" layoutX="530.0" layoutY="201.0" mnemonicParsing="false" text="Supprimer la fiche" />
+      <Button fx:id="supprimerFicheBtn" layoutX="530.0" layoutY="201.0" mnemonicParsing="false" text="Supprimer la fiche" onAction="#supprimerFiche" />
    </children>
 </AnchorPane>
