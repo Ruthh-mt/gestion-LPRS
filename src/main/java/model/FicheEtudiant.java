@@ -45,6 +45,17 @@ public class FicheEtudiant {
         this.adresseEtudiant = adresseEtudiant;
 
     }
+    public FicheEtudiant(String nomEtudiant,String prenomEtudiant,String emailEtudiant, String dernierDiplome,
+                         String telephoneEtudiant ,String adresseEtudiant ) {
+        this.refCreateur = refCreateur;
+        this.nomEtudiant = nomEtudiant;
+        this.prenomEtudiant = prenomEtudiant;
+        this.emailEtudiant = emailEtudiant;
+        this.dernierDiplome = dernierDiplome;
+        this.telephoneEtudiant = telephoneEtudiant;
+        this.adresseEtudiant = adresseEtudiant;
+
+    }
 
     public int getIdFicheEtudiante() {
         return idFicheEtudiante;

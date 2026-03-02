@@ -112,5 +112,19 @@ public class Utilisateur {
     public void setCode(String code) {
         this.code = code;
     }
+
+    @Override
+    public String toString() {
+        return "Utilisateur{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", email='" + email + '\'' +
+                ", motDePasse='" + motDePasse + '\'' +
+                ", role='" + role + '\'' +
+                ", refFiliere=" + refFiliere +
+                ", code='" + code + '\'' +
+                '}';
+    }
 }
 

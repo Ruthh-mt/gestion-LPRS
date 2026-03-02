@@ -59,6 +59,7 @@ public class FicheUpdateController {
 
     public void updateFiche() throws SQLException, IOException {
         int ref_createur = sessionActuel.getId() ;
+        int idFicheActuel = ficheActuel.getIdFicheEtudiante();
         String nom = nomTextField.getText();
         String prenom = prenomTextField.getText();
         String email = emailTextField.getText();
@@ -70,8 +71,8 @@ public class FicheUpdateController {
             erreurLabel.setText("Manque un champ");
         }
         else {
-            FicheEtudiant newFiche = new FicheEtudiant(ref_createur , nom,prenom,email,dernierDiplome,telephone,adresse);
-            boolean ok = fer.updateFicheEtudiant(newFiche);
+            FicheEtudiant newFiche = new FicheEtudiant(nom,prenom,email,dernierDiplome,telephone,adresse);
+            boolean ok = fer.mettreAJourFiche(newFiche,idFicheActuel);
             if (ok) {
                 System.out.println("modificatin ok");
                 System.out.println("Ref createur: " + ref_createur);
@@ -83,6 +84,7 @@ public class FicheUpdateController {
                 System.out.println("adresse: " + adresse);
 
                 StartApplication.changeScene("secretaire/ficheList","Liste des fiches");
+                System.out.println("UPDATE OK");
             }
             else {
                 System.out.println("Erreur");

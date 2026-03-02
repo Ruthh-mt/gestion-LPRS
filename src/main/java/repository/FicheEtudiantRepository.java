@@ -37,27 +37,22 @@ public class FicheEtudiantRepository {
         }
     }
 
-    public boolean updateFicheEtudiant(FicheEtudiant fe) throws SQLException {
-        String sql = "UPDATE fiche_entreprise SET" +
-                "nom_etudiant = ? ," +
-                "prenom_etudiant = ?," +
-                "email_etudiant = ?," +
-                "dernier_diplome_etudiant = ?," +
-                "telephone = ?," +
-                "adresse = ?";
+    public boolean mettreAJourFiche(FicheEtudiant fe,int id) throws SQLException {
+        String update = "UPDATE fiche_etudiante SET nom_etudiant=?,prenom_etudiant=?,email_etudiant=?,dernier_diplome_etudiant=?,telephone=?,adresse=? WHERE id_fiche_etudiante=?";
         try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, fe.getNomEtudiant());
-            ps.setString(2, fe.getPrenomEtudiant());
-            ps.setString(3, fe.getEmailEtudiant());
-            ps.setString(4, fe.getDernierDiplome());
-            ps.setString(5, fe.getTelephoneEtudiant());
-            ps.setString(6, fe.getAdresseEtudiant());
-            ps.execute();
+            PreparedStatement stmt = this.connection.prepareStatement(update);
+            stmt.setString(1, fe.getNomEtudiant());
+            stmt.setString(2, fe.getPrenomEtudiant());
+            stmt.setString(3, fe.getEmailEtudiant());
+            stmt.setString(4, fe.getDernierDiplome());
+            stmt.setString(5, fe.getTelephoneEtudiant());
+            stmt.setString(6, fe.getAdresseEtudiant());
+            stmt.setInt(7,id);
+
+            stmt.executeUpdate();
             return true;
-        }
-        catch (SQLException e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la mise a jour de lA FICHE : " + '\n' + " >>" + e.getMessage());
             return false;
         }
     }
