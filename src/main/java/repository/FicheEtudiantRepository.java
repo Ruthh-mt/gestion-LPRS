@@ -148,18 +148,4 @@ public class FicheEtudiantRepository {
         }
         return ficheEtudiants;
     }
-
-    public boolean supprimerFiche(String email) {
-        String delete = "DELETE FROM utilisateur WHERE email=? ";
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(delete);
-            stmt.setString(1, email);
-            stmt.executeUpdate();
-            System.out.println("User deleted with sucess : " + '\n' + ">> mail was : " + email);
-            return true;
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de la suppresion : " + '\n' + " >>" + e.getMessage());
-            return false;
-        }
-    }
 }

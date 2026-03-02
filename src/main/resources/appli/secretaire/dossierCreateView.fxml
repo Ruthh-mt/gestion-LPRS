@@ -29,7 +29,9 @@
       <ComboBox fx:id="refFicheTextfield" layoutX="424.0" layoutY="171.0" prefWidth="150.0" />
       <ComboBox fx:id="refFiliereTextfield" layoutX="424.0" layoutY="120.0" prefWidth="150.0" />
       <Label layoutX="45.0" layoutY="233.0" prefHeight="17.0" prefWidth="49.0" text="Minute" />
-      <ComboBox fx:id="heureTextfield" layoutX="106.0" layoutY="171.0" prefWidth="150.0" />
-      <ComboBox fx:id="minuteTextField" layoutX="102.0" layoutY="229.0" prefWidth="150.0" />
+      <ComboBox fx:id="heureTextfield" layoutX="106.0" layoutY="171.0" prefHeight="25.0" prefWidth="102.0" />
+      <ComboBox fx:id="minuteTextField" layoutX="106.0" layoutY="229.0" prefHeight="25.0" prefWidth="102.0" />
+      <Label layoutX="41.0" layoutY="279.0" prefHeight="17.0" prefWidth="53.0" text="Secondes" />
+      <ComboBox layoutX="102.0" layoutY="275.0" prefHeight="25.0" prefWidth="113.0" />
    </children>
 </AnchorPane>

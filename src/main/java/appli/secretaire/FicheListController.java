@@ -146,7 +146,6 @@ public class FicheListController implements Initializable {
     suppression = false ;
        int idFiche = SessionFiche.getInstance().getFiche().getIdFicheEtudiante();
         ficheEtudiantRepository.deleteFicheEtudiant(idFiche);
-        suppression = true;
      }
 }
 
