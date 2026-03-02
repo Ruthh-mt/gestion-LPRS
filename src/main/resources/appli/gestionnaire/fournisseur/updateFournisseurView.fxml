@@ -46,7 +46,13 @@
                 <TextField fx:id="fraisLivraisonField" layoutX="234.0" layoutY="277.0" maxWidth="-Infinity" prefHeight="26.0" prefWidth="252.0" />
                 <Separator layoutX="172.0" layoutY="304.0" maxWidth="-Infinity" prefHeight="18.0" prefWidth="375.0" />
                 <Label fx:id="errorLabel" textFill="RED" />
+            <ToolBar maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="198.0">
+              <items>
                 <Button mnemonicParsing="false" onAction="#onUpdateFournisseur" text="Modifier" />
+                  <Separator blendMode="OVERLAY" orientation="VERTICAL" prefHeight="30.0" prefWidth="34.0" />
+                      <Button mnemonicParsing="false" onAction="#onDeleteFournisseur" text="Supprimer" textFill="RED" />
+              </items>
+            </ToolBar>
             </children>
         </VBox>
     </center>
