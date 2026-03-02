@@ -42,7 +42,7 @@
                         <Font name="Consolas Bold" size="36.0" />
                     </font>
                 </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="442.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="625.0" fitWidth="1043.0" layoutX="442.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="75.0">
                <image>
                   <Image url="@../../../../info/img_accueil.gif" />
                </image>
