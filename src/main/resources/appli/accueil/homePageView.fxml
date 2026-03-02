@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -40,6 +42,11 @@
                         <Font name="Consolas Bold" size="36.0" />
                     </font>
                 </Label>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="442.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../info/img_accueil.gif" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
     </items>
