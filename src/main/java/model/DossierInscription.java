@@ -7,21 +7,25 @@ public class DossierInscription {
 
     private Date date;
     private Time heure ;
-    private String filiere ;
+    private int ref_filiere ;
     private String motivation ;
     private  int id ;
+    private  int ref_fiche ;
 
 
-    public DossierInscription(Date date, Time heure, String filiere, String motivation) {
+
+    public DossierInscription(Date date, Time heure,
+                               String motivation, int ref_filiere, int ref_fiche) {
         this.date = date;
         this.heure = heure;
-        this.filiere = filiere;
         this.motivation = motivation;
+        this.id = ref_filiere;
+        this.ref_fiche = ref_fiche;
     }
-    public DossierInscription(int id , Date date, Time heure, String filiere, String motivation) {
+    public DossierInscription(int id , Date date, Time heure, String motivation,int ref_filiere, int ref_fiche) {
         this.date = date;
         this.heure = heure;
-        this.filiere = filiere;
+        this.ref_filiere = ref_filiere;
         this.motivation = motivation;
     }
 
@@ -43,12 +47,12 @@ public class DossierInscription {
         this.heure = heure;
     }
 
-    public String getFiliere() {
-        return filiere;
+    public int getFiliere() {
+        return this.ref_filiere;
     }
 
-    public void setFiliere(String filiere) {
-        this.filiere = filiere;
+    public void setFiliere(int  ref_filiere) {
+        this.ref_filiere = ref_filiere;
     }
 
     public String getMotivation() {
@@ -62,7 +66,7 @@ public class DossierInscription {
 
     @Override
     public String toString() {
-        return "Date : "+this.date + "\nHeure : "+this.heure+"\nFilière : "+this.filiere+"\nMotivation : "+this.motivation;
+        return "Date : "+this.date + "\nHeure : "+this.heure+"\nFilière : "+this.ref_filiere+"\nMotivation : "+this.motivation;
     }
 
     public int getId() {
@@ -71,5 +75,13 @@ public class DossierInscription {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getRef_fiche() {
+        return ref_fiche;
+    }
+
+    public void setRef_fiche(int ref_fiche) {
+        this.ref_fiche = ref_fiche;
     }
 }
