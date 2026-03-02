@@ -2,10 +2,7 @@ package appli.secretaire;
 
 import appli.StartApplication;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.FicheEtudiant;
 import session.Session;
 
@@ -17,8 +14,7 @@ import java.time.format.DateTimeFormatter;
 public class DossierCreateController {
 
 
-    @FXML
-    public TextField dateTextfield;
+
     @FXML
     public TextField heureTextfield;
     @FXML
@@ -30,9 +26,11 @@ public class DossierCreateController {
     @FXML
     public Button retourButton;
     @FXML
-    public TextField refFiliereTextfield;
+    public ComboBox<> refFiliereTextfield;
     @FXML
-    public TextField refFicheTextfield;
+    public ComboBox refFicheTextfield;
+    @FXML
+    public DatePicker dateTextField;
     @FXML
     private Label sessionLabel ;
 
