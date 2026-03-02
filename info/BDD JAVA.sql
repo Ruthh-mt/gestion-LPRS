@@ -20,7 +20,7 @@ CREATE TABLE fournisseur(
                             adresse_fournisseur varchar(255) NOT NULL,
                             mail_fournisseur varchar(100) NOT NULL,
                             telephone_fournisseur varchar(15) NOT NULL,
-                            delai_livraision_moyen int(10), #On veut sa voir combient de temps la commendre va prendre pour arriver
+                            delai_livraison_moyen int(10), #On veut sa voir combient de temps la commendre va prendre pour arriver
                             frais_livraison decimal(10,2) default 0.00, # On est des rat donc on va prendre que des fournisseur a 0
                             PRIMARY KEY(id_fournisseur)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

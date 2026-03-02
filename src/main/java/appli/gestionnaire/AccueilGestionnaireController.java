@@ -1,6 +1,7 @@
 package appli.gestionnaire;
 
 import appli.StartApplication;
+import appli.gestionnaire.fournisseur.UpdateFournisseurController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import model.gestionnaire.Commande;
 import model.gestionnaire.Fournisseur;
 import model.gestionnaire.Fourniture;
@@ -102,7 +104,10 @@ public class AccueilGestionnaireController  implements Initializable {
 
     @FXML
     void onCommandeChosed() {
-        System.out.println("Ben alors t'a enfin trouvé la solution");
+        commandeTableView.getItems().clear();
+        CommandeRepository commandeRepo = new CommandeRepository();
+        ObservableList <Commande>allCommandes= FXCollections.observableList(commandeRepo.getAllCommandes());
+        commandeTableView.getItems().setAll(allCommandes);
     }
 
 
@@ -113,6 +118,7 @@ public class AccueilGestionnaireController  implements Initializable {
         FournisseurRepository fournisseurRepo = new FournisseurRepository();
         ObservableList <Fournisseur>allFournisseur= FXCollections.observableList(fournisseurRepo.getAllFournisseur());
         fournisseurTableView.getItems().addAll(allFournisseur);
+
 
     }
 
@@ -164,6 +170,22 @@ public class AccueilGestionnaireController  implements Initializable {
     }
     @FXML
     void onShowMyCommandes(ActionEvent event) {
+
+    }
+    @FXML
+    void onFournisseurTableClicked(MouseEvent event) throws IOException {
+        Fournisseur selection = fournisseurTableView.getSelectionModel().getSelectedItem();
+        if (event.getClickCount() == 2) {
+            if (selection != null) {
+                StartApplication.changeScene("gestionnaire/fournisseur/updateFournisseur", "Modification Fournisseur");
+                UpdateFournisseurController controller = (UpdateFournisseurController )
+                        StartApplication. getControllerFromStage();
+                controller.initData(selection);
+            }else{
+                System.out.println("c'est null");
+            }
+        }
+
 
     }
 

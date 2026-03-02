@@ -22,14 +22,20 @@
                     </font>
                 </Label>
                 <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onPlanningClick" prefHeight="25.0" text="Planning" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="210.0" />
-                <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onFournitureClick" prefHeight="25.0" text="Fournitures" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="240.0" />
+                <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onFournitureClick" prefHeight="25.0" text="Fournitures" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="240.0">
+               <font>
+                  <Font name="Consolas" size="12.0" />
+               </font></Button>
                 <Separator layoutY="290.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="360.0" />
                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" text="Gestion" textAlignment="CENTER" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="360.0">
                     <font>
                         <Font name="Consolas Bold" size="14.0" />
                     </font>
                 </Label>
-                <Button layoutX="12.5" layoutY="325.0" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onDashboardClick" prefHeight="25.0" text="Dashboard" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="390.0" />
+                <Button layoutX="12.5" layoutY="325.0" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onDashboardClick" prefHeight="25.0" text="Dashboard" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="390.0">
+               <font>
+                  <Font name="Consolas" size="12.0" />
+               </font></Button>
                 <Separator AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="540.0" />
                 <Button layoutX="20.0" layoutY="20.0" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onProfilClick" prefHeight="25.0" text="Profil" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="650.0" />
                 <Button layoutX="10.0" layoutY="10.0" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onDeconnexionClick" prefHeight="25.0" text="Déconnexion" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="680.0" />
