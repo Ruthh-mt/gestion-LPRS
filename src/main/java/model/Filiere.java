@@ -22,4 +22,9 @@ public class Filiere {
     public void setNomFiliere(String nomFiliere) {
         this.nomFiliere = nomFiliere;
     }
+
+    @Override
+    public String toString() {
+        return this.nomFiliere;
+    }
 }

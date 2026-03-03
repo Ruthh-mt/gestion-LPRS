@@ -126,5 +126,9 @@ public class Utilisateur {
                 ", code='" + code + '\'' +
                 '}';
     }
+
+    public int getIdUtilisateur() {
+        return id;
+    }
 }
 
