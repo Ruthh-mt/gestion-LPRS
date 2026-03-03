@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.gestionnaire.fournitureFournisseur.ShowFournisseurDeFournitureController">
+   <top>
+      <Label fx:id="TitleLabel" text="Label" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+   </top>
+   <bottom>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <Button mnemonicParsing="false" onAction="#onRetourControlCenter" text="Retour au Control Center" />
+        </items>
+      </ToolBar>
+   </bottom>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="fournisseurDeFournitureTableView" layoutX="107.0" onMouseClicked="#onFournisseurDeFournitureTableViewClicked" prefHeight="351.0" prefWidth="438.0" />
+            <ToolBar layoutX="107.0" layoutY="360.0" prefHeight="40.0" prefWidth="474.0">
+              <items>
+                <Button mnemonicParsing="false" onAction="#onAjouterUnFournisseurAFourniture" text="Ajouter un Fournisseur" />
+                  <Button fx:id="supprimerFournisseurdeFourniture" disable="true" mnemonicParsing="false" onAction="#onSupprimerFournisseurdeFourniture" text="Supprimer" />
+              </items>
+            </ToolBar>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
