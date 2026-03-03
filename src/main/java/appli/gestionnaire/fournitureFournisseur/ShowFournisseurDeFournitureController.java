@@ -63,7 +63,7 @@ public class ShowFournisseurDeFournitureController implements Initializable {
         StartApplication.changeScene("gestionnaire/fournitureFournisseur/addFournisseurView.fxml","Ajouter un fournisseur");
         AddFournisseurController controller =(AddFournisseurController)
                 StartApplication.getControllerFromStage();
-                    controller.initData(fournitureSel);
+//                    controller.initData(fournitureSel);
     }
 
     @FXML
