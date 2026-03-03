@@ -32,7 +32,7 @@ public class CreateFournisseurController {
     @FXML
     void onAddFournisseur(ActionEvent event) throws IOException {
         if(adresseFournisseurField.getText().isEmpty()|| delaisLivraisonMoyenField.getText().isEmpty()|| fraisLivraisonField.getText().isEmpty()||
-                mailFournisseurField.getText().isEmpty()|| nomFournisseurField.getText().isEmpty()|| telephoneFournisseurField.getText().isEmpty()){
+                mailFournisseurField.getText().isEmpty()|| nomFournisseurField.getText().isEmpty()|| telephoneFournisseurField.getText().isEmpty()) {
             showAlert(AlertType.WARNING, "Veuillez remplir tout les champs");
 
         }else{
@@ -41,13 +41,17 @@ public class CreateFournisseurController {
             Fournisseur fournisseur=new Fournisseur(nomFournisseurField.getText(),adresseFournisseurField.getText(),mailFournisseurField.getText()
             , telephoneFournisseurField.getText(),delaisLivraison,fraisLivraison);
             FournisseurRepository repoFournisseur = new FournisseurRepository();
-            boolean result=repoFournisseur.createFournisseur(fournisseur);
-            if(result){
-                showAlert(AlertType.INFORMATION,"L'ajout du fournisseur a bien été reussie");
-                StartApplication.changeScene("gestionnaire/accueilGestionnaire","Control Center");
-            }else{
-                showAlert(AlertType.ERROR,"Erreur lors de l'ajout du fournisseur");
+            if(!repoFournisseur.verifFournisseurExiste(fournisseur)) {
+                boolean result = repoFournisseur.createFournisseur(fournisseur);
+                if (result) {
+                    showAlert(AlertType.INFORMATION, "L'ajout du fournisseur a bien été reussie");
+                    StartApplication.changeScene("gestionnaire/accueilGestionnaire", "Control Center");
+                } else {
+                    showAlert(AlertType.ERROR, "Erreur lors de l'ajout du fournisseur");
 
+                }
+            }else{
+                showAlert(AlertType.ERROR,"Le fournisseur existe deja");
             }
 
         }

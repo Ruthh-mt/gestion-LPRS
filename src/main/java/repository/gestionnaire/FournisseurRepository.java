@@ -63,11 +63,28 @@ public class FournisseurRepository {
 
     }
 
-    public Fournisseur getFournisseurByMail(Fournisseur fournisseur) {
+    public boolean verifFournisseurExiste(Fournisseur fournisseur) {
         String get = "SELECT* FROM fournisseur WHERE mail_fournisseur=? ";
         try {
             PreparedStatement stmt = this.cnx.prepareStatement(get);
-            stmt.setString(1, fournisseur.getMailFournisseur());
+            stmt.setString(1,fournisseur.getMailFournisseur());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return true;
+            }else{
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la recherche du fournisseur: " + '\n' + " >>" + e.getMessage());
+            return false;
+        }
+    }
+
+    public Fournisseur getFournisseurById(Fournisseur fournisseur) {
+        String get = "SELECT* FROM fournisseur WHERE id_fournisseur=? ";
+        try {
+            PreparedStatement stmt = this.cnx.prepareStatement(get);
+            stmt.setInt(1, fournisseur.getIdFournisseur());
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 fournisseur= new Fournisseur (
@@ -86,7 +103,6 @@ public class FournisseurRepository {
             return null;
         }
     }
-
 
     public boolean supprimerFournisseurParId(Fournisseur fournisseur) {
         String delete = "DELETE FROM fournisseur WHERE id_fournisseur=? ";
