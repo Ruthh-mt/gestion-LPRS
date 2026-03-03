@@ -55,7 +55,7 @@
                <content>
                   <AnchorPane prefHeight="470.0" prefWidth="578.0">
                      <children>
-                        <TableView fx:id="commandeTableView" layoutX="14.0" layoutY="33.0" prefHeight="346.0" prefWidth="445.0" />
+                        <TableView fx:id="commandeTableView" layoutX="14.0" layoutY="33.0" onMouseClicked="#onCommandeTableClicked" prefHeight="346.0" prefWidth="445.0" />
                         <Label layoutX="289.0" layoutY="4.0" text="Commandes">
                            <font>
                               <Font name="System Bold" size="14.0" />
@@ -76,7 +76,7 @@
                <content>
                   <AnchorPane prefHeight="455.0" prefWidth="641.0">
                      <children>
-                        <TableView fx:id="fournitureTableView" layoutX="6.0" layoutY="43.0" onMouseClicked="#onFournisseurTableClicked" prefHeight="346.0" prefWidth="445.0" />
+                        <TableView fx:id="fournitureTableView" layoutX="6.0" layoutY="43.0" onMouseClicked="#onFournitureTableClicked" prefHeight="346.0" prefWidth="445.0" />
                         <Label layoutX="289.0" layoutY="4.0" text="Fourniture">
                            <font>
                               <Font name="System Bold" size="14.0" />
@@ -84,8 +84,9 @@
                         </Label>
                         <ToolBar layoutX="2.0" layoutY="424.0" prefHeight="40.0" prefWidth="574.0">
                            <items>
-                              <Button mnemonicParsing="false" onAction="#onShowFinishedFourniture" text="Voir les fournitures bientot fini" />
+                              <Button mnemonicParsing="false" onAction="#onShowFinishedFourniture" text="Voir les fournitures bientot en rupture" />
                               <Button mnemonicParsing="false" onAction="#onNewFourniture" text="Ajouter une fourniture" />
+                              <Button fx:id="voirLesFournisseursAssocie" disable="true" mnemonicParsing="false" onAction="#onShowFournisseurDeFourniture" text="Voir les fournisseurs associée" />
                            </items>
                         </ToolBar>
                      </children>
@@ -104,8 +105,8 @@
                         </Label>
                         <ToolBar layoutX="6.0" layoutY="431.0" prefHeight="40.0" prefWidth="574.0">
                           <items>
-                              <Button mnemonicParsing="false" onAction="#onShowAllFournisseur" text="Voir tout les fournisseur" />
                               <Button mnemonicParsing="false" onAction="#onNewFournisseur" text="Ajouter un fournisseur" />
+                              <Button fx:id="voirLesFournituresAssocie" disable="true" mnemonicParsing="false" onAction="#onShowFournitureDuFournisseur" text="Voir les fournitures associées" />
                           </items>
                         </ToolBar>
                      </children>
