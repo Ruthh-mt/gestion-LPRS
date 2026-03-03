@@ -1,30 +1,37 @@
 package appli.secretaire;
 
 import appli.StartApplication;
+import appli.accueil.TimeSpinner;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.util.converter.LocalTimeStringConverter;
 import model.DossierInscription;
 import model.FicheEtudiant;
 import model.Filiere;
+import repository.DossierRepository;
+import repository.FicheEtudiantRepository;
 import repository.FiliereRepository;
-import session.Session;
-import java.time.LocalTime ;
 
-import java.io.IOException;
-import java.sql.Date;
+import javax.print.DocFlavor;
+import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime ;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.ResourceBundle;
 
-public class DossierCreateController {
+
+public class DossierCreateController implements Initializable {
+
+    public Spinner<LocalTime> heureTextfield;
 
 
-
-    @FXML
-    public ComboBox<String> heureTextfield;
-    @FXML
-    public ComboBox<String> minuteTextfield;
     @FXML
     public TextArea motivationTextfield;
     @FXML
@@ -34,40 +41,83 @@ public class DossierCreateController {
     @FXML
     public Button retourButton;
     @FXML
-    public ComboBox<Integer> refFiliereTextfield;
+    public ComboBox<Filiere> refFiliereTextfield = new ComboBox<>();
     @FXML
-    public ComboBox<Integer> refFicheTextfield;
+    public ComboBox<FicheEtudiant> refFicheTextfield = new ComboBox<>();
     @FXML
     public DatePicker dateTextField;
+
     @FXML
     private Label sessionLabel ;
 
+
     FiliereRepository filiereRepository = new FiliereRepository();
+    DossierRepository dossierRepository = new DossierRepository();
+    FicheEtudiantRepository ficheEtudiantRepository = new FicheEtudiantRepository();
 
     @FXML
-    public void ajouterDossier() {
-      int ref_filiere = refFiliereTextfield.getValue();
-      int ref_fiche =  refFicheTextfield.getValue();
-      Date date = Date.valueOf(dateTextField.getValue());
-      int minutes = Integer.parseInt(minuteTextfield.getValue());
-      int heures = Integer.parseInt(heureTextfield.getValue());
+    public void ajouterDossier() throws SQLException, IOException {
+     LocalDate   date = dateTextField.getValue();
+        Time heure = Time.valueOf(heureTextfield.getValue());
       String motivation = motivationTextfield.getText();
+      int refFiliere = refFiliereTextfield.getValue().getIdFiliere();
+      int refFiche = refFicheTextfield.getValue().getIdFicheEtudiante();
+
+        System.out.println("Date : "+date);
+        System.out.println("Heure : "+heure);
+        System.out.println("Motivation : "+motivation);
+        System.out.println("RefFiliere : "+refFiliere);
+        System.out.println("RefFiche : "+refFiche);
+        DossierInscription dossierInscription = new DossierInscription(date, heure, motivation, refFiliere, refFiche);
+        boolean ok = dossierRepository.ajouterDossier(dossierInscription);
+        if(ok){
+            StartApplication.changeScene("secretaire/dossierList","Liste des dossiers");
+
+        }
 
     }
 
-    @FXML
-    public void initialize() throws SQLException {
-       ArrayList<Filiere> filieres = new ArrayList<>();
-        String[] heures =
-                { "Monday", "Tuesday", "Wednesday",
-                        "Thursday", "Friday" };
-       filieres = filiereRepository.getAllFiliere();
-        sessionLabel.setText("Session de ")
-        ;
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        SpinnerValueFactory<LocalTime> valueFactory = new SpinnerValueFactory<LocalTime>() {
+            private LocalTime time = LocalTime.now(); @Override public void decrement(int steps) {
+                time = time.minusMinutes(steps); setValue(time);
+            }
+            @Override public void increment(int steps) {
+                time = time.plusMinutes(steps); setValue(time);
+            }
+        };
+        valueFactory.setConverter(new LocalTimeStringConverter( DateTimeFormatter.ofPattern("HH:mm"), null));
+        heureTextfield.setValueFactory(valueFactory);
+        heureTextfield.getValueFactory().setValue(LocalTime.now());
+        //----------------------------------------//
+        ArrayList<Filiere> filieres = null;
+        try {
+            filieres = new ArrayList<>(filiereRepository.getAllFilieres());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        for(Filiere filiere : filieres) {
+            refFiliereTextfield.getItems().add(filiere);
+        }
+        //---------------------------------------------------------------------
+        ArrayList<FicheEtudiant> ficheEtudiants = null;
+        try {
+            ficheEtudiants = new ArrayList<>(ficheEtudiantRepository.getToutesLesFiches());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        for(FicheEtudiant ficheEtudiant: ficheEtudiants) {
+            refFicheTextfield.getItems().add(ficheEtudiant);
+        }
+
+
     }
+
 
     @FXML
     public void redirectionListeDossier() throws IOException {
         StartApplication.changeScene("secretaire/dossierList","Dossier");
     }
+
 }
