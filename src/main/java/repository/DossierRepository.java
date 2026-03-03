@@ -5,6 +5,7 @@ import model.DossierInscription;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DossierRepository {
     private Connection connection;
@@ -19,6 +20,9 @@ public class DossierRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<DossierInscription> findAll() {
     }
 }
 
