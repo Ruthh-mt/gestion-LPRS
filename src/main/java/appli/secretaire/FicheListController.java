@@ -111,7 +111,6 @@ public class FicheListController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         this.sessionLabel.setText("Session de "+Session.getInstance().getUtilisateur().getPrenom()+" "+Session.getInstance().getUtilisateur().getNom());
-        System.out.println("Id session :"+ Session.getInstance().getUtilisateur().getId());
         modiferFicheBtn.setVisible(false);
         supprimerFicheBtn.setVisible(false);
         String[][] colonnes = {

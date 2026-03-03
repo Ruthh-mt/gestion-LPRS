@@ -19,6 +19,7 @@ import repository.SalleRepository;
 import session.Session;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -47,19 +48,19 @@ public class RendezvousCreateController {
     private final RendezVousRepository rdvRepo = new RendezVousRepository();
 
     @FXML
-    public void initialize() {
+    public void initialize() throws SQLException {
         erreurLabel.setVisible(false);
 
         // Charger les dossiers d'inscription → afficher "Prénom NOM"
-        List<DossierInscription> dossiers = dossierRepo.findAll();
+        List<DossierInscription> dossiers = dossierRepo.getAllDossiers();
         dossierComboBox.getItems().setAll(dossiers);
         dossierComboBox.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(DossierInscription item, boolean empty) {
                 super.updateItem(item, empty);
                 setText(empty || item == null ? null
-                        : item.getFicheEtudiante().getPrenomEtudiant()
-                        + " " + item.getFicheEtudiante().getNomEtudiant().toUpperCase());
+                        : item.getRef_fiche()
+                        + " " + item.getId() );
             }
         });
         dossierComboBox.setButtonCell(dossierComboBox.getCellFactory().call(null));
@@ -105,7 +106,7 @@ public class RendezvousCreateController {
         rdv.setHeure(heure);
         rdv.setStatus("Prévus");
         rdv.setRefProfesseur(professeur.getIdUtilisateur());
-        rdv.setRefDossierInscription(dossier.getIdDossierInscription());
+        rdv.setRefDossierInscription(dossier.getId());
         rdv.setRefSalle(salle.getIdSalle());
 
         if (rdvRepo.creerRendezVous(rdv)) {

@@ -64,10 +64,11 @@ public class DossierUpdateController {
     private FicheEtudiantRepository ficheEtudiantRepository = new FicheEtudiantRepository();
 
     @FXML
-    public void initialize() {
+    public void initialize() throws SQLException {
         sessionLabel.setText("Session de " + sessionActuel.getNom() + sessionActuel.getPrenom());
         erreurLabel.setVisible(false);
         this.sessionLabel.setText("Session de " + sessionActuel.getNom());
+        ;
 
         //----------------------------------------//
         ArrayList<Filiere> filieres = null;
@@ -89,6 +90,8 @@ public class DossierUpdateController {
         for (FicheEtudiant ficheEtudiant : ficheEtudiants) {
             refFicheTextfield.getItems().add(ficheEtudiant);
         }
+
+
     }
 
     @FXML
@@ -114,18 +117,18 @@ public class DossierUpdateController {
         heureTextfield.getValueFactory().setValue(LocalTime.now());
         this.dossier_actuel = dossier;
 
-        System.out.println("Id session :" + sessionActuel.getId());
-        System.out.println("Id fiche : " + dossier_actuel.getId());
 
         //REQUETE RECUPERER FICHE
         int idDossier = dossier.getId();
         Filiere filiereTrouve = filiereRepository.getFiliere(dossier_actuel.getRefFiliere());
         FicheEtudiant ficheTrouve = ficheEtudiantRepository.getFicheEtudiant(dossier_actuel.getId());
+
         //SET DATE
         dateTextField.setValue(LocalDate.now());
         motivationTextfield.setText(dossier_actuel.getMotivation());
-        refFiliereTextfield.setValue(filiereTrouve);
-        refFicheTextfield.setValue(ficheTrouve);
+
+
+
     }
 
     public void updateDossier() throws SQLException, IOException {
@@ -134,10 +137,12 @@ public class DossierUpdateController {
         String motivation = motivationTextfield.getText();
         int ref_filiere = refFiliereTextfield.getValue().getIdFiliere();
         int ref_fiche = refFicheTextfield.getValue().getIdFicheEtudiante();
-        DossierInscription dossier = new DossierInscription(date,heure,motivation,ref_filiere,ref_fiche);
-       boolean ok = dossierRepository.mettreAJourDossier(dossier);
+        int idActuel = dossier_actuel.getId();
+        DossierInscription dossier = new DossierInscription(idActuel ,date, heure, motivation, ref_filiere, ref_fiche);
+       boolean ok = dossierRepository.mettreAjourDossier(dossier);
        if (ok) {
            System.out.println("Mise à jour effectué");
+           erreurLabel.setText("Modification effectué");
        }
     }
 

@@ -28,6 +28,7 @@ public class DossierInscription {
         this.date = date ;
         this.heure = heure;
         this.refFiliere = refFiliere ;
+        this.ref_fiche = ref_fiche;
         this.motivation = motivation;
     }
 

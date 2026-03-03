@@ -110,8 +110,6 @@ public class DossierListController implements Initializable {
             tableviewDossier.getItems().add(d);
         }
     }
-
-
     @FXML
     public void gestionListe() throws IOException {
 

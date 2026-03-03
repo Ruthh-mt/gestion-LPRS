@@ -17,7 +17,7 @@ public class DossierRepository {
     }
 
     public boolean ajouterDossier(DossierInscription doss) throws SQLException {
-        String sql = "INSERT INTO dossier_inscription (date,heure,motivation_etudiant,ref_filiere,ref_fiche_etudiante) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO dossier_inscription (date_dossier,heure,motivation_etudiant,ref_filiere,ref_fiche_etudiante) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setDate(1, java.sql.Date.valueOf(doss.getDate().toLocalDate()));
@@ -49,7 +49,7 @@ public class DossierRepository {
             ResultSet resultatRequete = stmt.executeQuery();
             while (resultatRequete.next()) {
                 id = resultatRequete.getInt("id_dossier_inscription");
-                date = resultatRequete.getDate("date");
+                date = resultatRequete.getDate("date_dossier");
                 heure = resultatRequete.getTime("heure");
                 motivation = resultatRequete.getString("motivation_etudiant");
                 ref_filiere = resultatRequete.getInt("ref_filiere");
@@ -91,7 +91,7 @@ public class DossierRepository {
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             id_dossier = rs.getInt("id_dossier_inscription");
-            date = rs.getDate("date");
+            date = rs.getDate("date_dossier");
             heure = rs.getTime("heure");
             motivation = rs.getString("motivation_etudiant");
             ref_filiere = rs.getInt("ref_filiere");
@@ -101,25 +101,74 @@ public class DossierRepository {
         return dossierInscription;
     }
 
+    public boolean mettreAjourDossier(DossierInscription doss) throws SQLException {
 
-    public boolean mettreAJourDossier(DossierInscription di) throws SQLException {
-        String update = "UPDATE dossier_inscription SET date=?,heure=?,motivation_etudiant=?,ref_filiere=?,ref_fiche WHERE id_dossier_inscription=?";
+        System.out.println("\n========== DEBUG: Début mise à jour dossier ==========");
+
+        // Vérification de l'objet reçu
+        System.out.println("Objet DossierInscription reçu :");
+        System.out.println(" - ID dossier           : " + doss.getId());
+        System.out.println(" - Date dossier         : " + doss.getDate());
+        System.out.println(" - Heure dossier        : " + doss.getHeure());
+        System.out.println(" - Motivation           : " + doss.getMotivation());
+        System.out.println(" - Ref filière          : " + doss.getRefFiliere());
+        System.out.println(" - Ref fiche étudiante  : " + doss.getRef_fiche());
+
+        String sql = "UPDATE dossier_inscription " +
+                "SET date_dossier = ?, heure = ?, motivation_etudiant = ?, ref_filiere = ?, ref_fiche_etudiante = ? " +
+                "WHERE id_dossier_inscription = ?";
+
+        System.out.println("\nRequête SQL préparée :\n" + sql);
+
         try {
-            PreparedStatement stmt = this.connection.prepareStatement(update);
-            stmt.setDate(1, java.sql.Date.valueOf(di.getDate().toLocalDate()));
-            stmt.setTime(2, di.getHeure());
-            stmt.setString(3, di.getMotivation());
-            stmt.setInt(4, di.getRefFiliere());
-            stmt.setInt(5, di.getRef_fiche());
-            stmt.setInt(6, di.getId());
+            PreparedStatement ps = connection.prepareStatement(sql);
 
-            stmt.executeUpdate();
+            // Debug avant affectation
+            System.out.println("\nAffectation des paramètres :");
+
+            ps.setDate(1, java.sql.Date.valueOf(doss.getDate().toLocalDate()));
+            System.out.println(" - Param 1 (date_dossier)        = " + doss.getDate().toLocalDate());
+
+            ps.setTime(2, doss.getHeure());
+            System.out.println(" - Param 2 (heure)               = " + doss.getHeure());
+
+            ps.setString(3, doss.getMotivation());
+            System.out.println(" - Param 3 (motivation_etudiant) = " + doss.getMotivation());
+
+            ps.setInt(4, doss.getRefFiliere());
+            System.out.println(" - Param 4 (ref_filiere)         = " + doss.getRefFiliere());
+
+            ps.setInt(5, doss.getRef_fiche());
+            System.out.println(" - Param 5 (ref_fiche_etudiante) = " + doss.getRef_fiche());
+
+            ps.setInt(6, doss.getId());
+            System.out.println(" - Param 6 (id_dossier)          = " + doss.getId());
+
+            System.out.println("\nExécution de la requête...");
+            int rows = ps.executeUpdate();
+            System.out.println("Résultat : " + rows + " ligne(s) mise(s) à jour.");
+
+            System.out.println("========== DEBUG: Fin mise à jour dossier ==========\n");
             return true;
+
         } catch (SQLException e) {
-            System.out.println("Erreur lors de la mise a jour du dossier: " + '\n' + " >>" + e.getMessage());
-            return false;
+
+            System.out.println("\n========== ERREUR SQL ==========");
+            System.out.println("Message : " + e.getMessage());
+
+            // Détection spécifique des erreurs de clé étrangère
+            if (e.getMessage().contains("foreign key")) {
+                System.out.println("⚠️  ERREUR FK : La valeur ref_fiche_etudiante ("
+                        + doss.getRef_fiche() +
+                        ") n'existe pas dans dossier. !");
+            }
+
+            System.out.println("================================\n");
         }
+
+        return false;
     }
+
 }
 
 
