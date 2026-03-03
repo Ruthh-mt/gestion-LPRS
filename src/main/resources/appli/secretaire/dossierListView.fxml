@@ -8,15 +8,15 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.secretaire.DossierListController">
    <children>
-      <TableView fx:id="tableviewDossier" layoutX="63.0" layoutY="81.0" onSort="#gestionListe" prefHeight="237.0" prefWidth="355.0" />
+      <TableView fx:id="tableviewDossier" layoutX="63.0" layoutY="81.0" onMouseClicked="#gestionListe" prefHeight="237.0" prefWidth="355.0" />
       <Label fx:id="sessionLabel" layoutX="474.0" layoutY="55.0" text="sessionLabel" />
       <Label layoutX="91.0" layoutY="14.0" prefHeight="49.0" prefWidth="308.0" text="Mes dossiers">
          <font>
             <Font size="33.0" />
          </font>
       </Label>
-      <Button fx:id="modifierDossierBtn" layoutX="441.0" layoutY="165.0" mnemonicParsing="false" text="Modifier le dossier" />
-      <Button fx:id="supprimerDossierBtn" layoutX="441.0" layoutY="228.0" mnemonicParsing="false" text="Supprimer le dossier" />
+      <Button fx:id="modifierDossierBtn" layoutX="441.0" layoutY="165.0" mnemonicParsing="false" onAction="#redirectionUpdateDossier" text="Modifier le dossier" />
+      <Button fx:id="supprimerDossierBtn" layoutX="441.0" layoutY="228.0" mnemonicParsing="false" onAction="#supprimerFiche" text="Supprimer le dossier" />
       <Button fx:id="accueilBtn" layoutX="482.0" layoutY="353.0" mnemonicParsing="false" onAction="#redirectionAccueil" text="Accueil" />
       <Button fx:id="ajouterDossierBtn" layoutX="167.0" layoutY="341.0" mnemonicParsing="false" onAction="#redirectionAjouterDossier" text="Ajouter un dossier" />
    </children>

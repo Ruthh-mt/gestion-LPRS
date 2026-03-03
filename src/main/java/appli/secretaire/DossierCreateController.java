@@ -16,6 +16,7 @@ import repository.FiliereRepository;
 
 import javax.print.DocFlavor;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -23,14 +24,12 @@ import java.time.LocalTime ;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 
 public class DossierCreateController implements Initializable {
 
     public Spinner<LocalTime> heureTextfield;
-
 
     @FXML
     public TextArea motivationTextfield;
@@ -57,7 +56,7 @@ public class DossierCreateController implements Initializable {
 
     @FXML
     public void ajouterDossier() throws SQLException, IOException {
-     LocalDate   date = dateTextField.getValue();
+     java.sql.Date date = Date.valueOf(dateTextField.getValue());    ;
         Time heure = Time.valueOf(heureTextfield.getValue());
       String motivation = motivationTextfield.getText();
       int refFiliere = refFiliereTextfield.getValue().getIdFiliere();
