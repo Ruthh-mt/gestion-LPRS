@@ -66,8 +66,7 @@ public class FicheEtudiantRepository {
         ps.execute();
     }
 
-    public FicheEtudiant getFicheEtudiant(int id) throws SQLException {
-
+    public FicheEtudiant getFicheEtudiant(int id_fiche) throws SQLException {
         int ref_createur = 0 ;
         String nom_etudiant = "";
         String prenom_etudiant = "";
@@ -79,9 +78,9 @@ public class FicheEtudiantRepository {
 
         String sql = "SELECT * FROM fiche_etudiante WHERE id_fiche_etudiante = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, id);
+        ps.setInt(1, id_fiche);
         ResultSet rs = ps.executeQuery();
-       while (rs.next()) {
+       if(rs.next()) {
            ref_createur = rs.getInt("ref_createur");
            nom_etudiant = rs.getString("nom_etudiant");
            prenom_etudiant = rs.getString("prenom_etudiant");
@@ -89,19 +88,13 @@ public class FicheEtudiantRepository {
            dernier_diplome_etudiant = rs.getString("dernier_diplome_etudiant");
            telephone_etudiant = rs.getString("telephone");
            adresse_etudiant = rs.getString("adresse");
-           fe = new FicheEtudiant(id,ref_createur,nom_etudiant,prenom_etudiant,email_etudiant,dernier_diplome_etudiant,telephone_etudiant,adresse_etudiant);
+           fe = new FicheEtudiant(id_fiche,ref_createur,nom_etudiant,prenom_etudiant,email_etudiant,dernier_diplome_etudiant,telephone_etudiant,adresse_etudiant);
        }
        return fe;
-
 }
 
     public ArrayList<FicheEtudiant> getToutesLesFiches() throws SQLException {
-        try (Statement st = connection.createStatement()) {
-            ResultSet rs = st.executeQuery("SELECT COUNT(*) AS nb FROM fiche_etudiante");
-            if (rs.next()) System.out.println("NB lignes fiche_etudiante = " + rs.getInt("nb"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
 
         String sql = "SELECT * from fiche_etudiante";
         ArrayList<FicheEtudiant> ficheEtudiants = new ArrayList<>();

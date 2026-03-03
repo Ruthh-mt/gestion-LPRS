@@ -17,6 +17,7 @@ import session.SessionFiche;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class FicheUpdateController {
@@ -50,6 +51,14 @@ public class FicheUpdateController {
     {
         erreurLabel.setVisible(false);
         this.sessionLabel.setText("Session de "+sessionActuel.getNom());
+        ArrayList<FicheEtudiant> ficheEtudiants = null;
+
+        dernierDiplomeComboBox.getItems().addAll(
+                "BTS SIO SLAM",
+                "BTS SIO SISR",
+                "Licence informatique",
+                "BUT informatique"
+        );
     }
 
     @FXML
@@ -109,6 +118,7 @@ public class FicheUpdateController {
        telephoneTextField.setText(feTrouve.getTelephoneEtudiant());
        nomFicheLabel.setText(
                ficheActuel.getPrenomEtudiant()+" "+ficheActuel.getNomEtudiant());
+
    }
 
 }

@@ -68,7 +68,6 @@ public class DossierUpdateController {
         sessionLabel.setText("Session de " + sessionActuel.getNom() + sessionActuel.getPrenom());
         erreurLabel.setVisible(false);
         this.sessionLabel.setText("Session de " + sessionActuel.getNom());
-        ;
 
         //----------------------------------------//
         ArrayList<Filiere> filieres = null;
@@ -90,8 +89,6 @@ public class DossierUpdateController {
         for (FicheEtudiant ficheEtudiant : ficheEtudiants) {
             refFicheTextfield.getItems().add(ficheEtudiant);
         }
-
-
     }
 
     @FXML
@@ -121,14 +118,27 @@ public class DossierUpdateController {
         //REQUETE RECUPERER FICHE
         int idDossier = dossier.getId();
         Filiere filiereTrouve = filiereRepository.getFiliere(dossier_actuel.getRefFiliere());
-        FicheEtudiant ficheTrouve = ficheEtudiantRepository.getFicheEtudiant(dossier_actuel.getId());
-
+        if (filiereTrouve != null) {
+            System.out.println("Des filières sont trouvés");
+        }
+        else{
+            System.out.println("Pas de filières");
+        }
+        FicheEtudiant ficheTrouve = ficheEtudiantRepository.getFicheEtudiant(dossier_actuel.getRef_fiche());
+        if(ficheTrouve != null) {
+            System.out.println("Une fiche est trouvé");
+        }
+        else{
+            System.out.println("Pas de fiche");
+        }
         //SET DATE
         dateTextField.setValue(LocalDate.now());
+        // SET MOTIVATION
         motivationTextfield.setText(dossier_actuel.getMotivation());
-
-
-
+        //SET FILIERE
+        refFiliereTextfield.setValue(filiereTrouve);
+        // SET FICHE
+        refFicheTextfield.setValue(ficheTrouve);
     }
 
     public void updateDossier() throws SQLException, IOException {
@@ -142,7 +152,7 @@ public class DossierUpdateController {
        boolean ok = dossierRepository.mettreAjourDossier(dossier);
        if (ok) {
            System.out.println("Mise à jour effectué");
-           erreurLabel.setText("Modification effectué");
+           StartApplication.changeScene("secretaire/dossierList","Liste des dossiers");
        }
     }
 
