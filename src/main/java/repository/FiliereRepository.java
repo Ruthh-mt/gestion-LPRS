@@ -28,6 +28,7 @@ public class FiliereRepository {
                 filiere = new Filiere(id, nom);
                 System.out.println("Nom : "+filiere.getNomFiliere());
                 System.out.println("Id filière : "+filiere.getIdFiliere());
+                filiere = new Filiere(id, nom);
                 filieres.add(filiere);
             }
         } catch (SQLException e) {

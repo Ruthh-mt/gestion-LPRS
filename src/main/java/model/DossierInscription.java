@@ -1,11 +1,12 @@
 package model;
 
+import java.sql.Date;
 import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class DossierInscription {
 
-    private Date date;
+    private LocalDate date;
     private Time heure ;
     private int ref_filiere ;
     private String motivation ;
@@ -14,16 +15,16 @@ public class DossierInscription {
 
 
 
-    public DossierInscription(Date date, Time heure,
-                               String motivation, int ref_filiere, int ref_fiche) {
+    public DossierInscription(LocalDate date, Time heure,
+                              String motivation, int ref_filiere, int ref_fiche) {
         this.date = date;
         this.heure = heure;
         this.motivation = motivation;
-        this.id = ref_filiere;
+        this.ref_filiere = ref_filiere;
         this.ref_fiche = ref_fiche;
     }
-    public DossierInscription(int id , Date date, Time heure, String motivation,int ref_filiere, int ref_fiche) {
-        this.date = date;
+    public DossierInscription(int id ,Date date, Time heure, String motivation, int ref_filiere, int ref_fiche) {
+        this.date = date.toLocalDate();
         this.heure = heure;
         this.ref_filiere = ref_filiere;
         this.motivation = motivation;
@@ -31,12 +32,12 @@ public class DossierInscription {
 
 
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.date = date.toLocalDate();
     }
 
     public Time getHeure() {

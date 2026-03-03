@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.DossierInscription;
 import model.FicheEtudiant;
 import model.Utilisateur;
+import repository.DossierRepository;
 import session.Session;
 import session.SessionFiche;
 
@@ -21,6 +22,8 @@ import java.util.ResourceBundle;
 
 public class DossierListController implements Initializable {
 
+    @FXML
+    TableView<DossierInscription> tableviewDossier;
     @FXML
     private  Button accueilBtn;
     @FXML
@@ -36,6 +39,7 @@ public class DossierListController implements Initializable {
     private Label sessionLabel ;
 
     Utilisateur userSession = Session.getInstance().getUtilisateur();
+    DossierRepository dossierRepository = new DossierRepository();
 
     @FXML
     public void redirectionAccueil() throws IOException {
@@ -52,6 +56,34 @@ public class DossierListController implements Initializable {
      sessionLabel.setText("Session de "+userSession.getPrenom()+" "+userSession.getNom());
      modifierDossierBtn.setVisible(false);
      supprimerDossierBtn.setVisible(false);
+        this.sessionLabel.setText("Session de "+Session.getInstance().getUtilisateur().getPrenom()+" "+Session.getInstance().getUtilisateur().getNom());
+        System.out.println("Id session :"+ Session.getInstance().getUtilisateur().getId());
+        modifierDossierBtn.setVisible(false);
+        supprimerDossierBtn.setVisible(false);
+        String[][] colonnes = {
+                {"Date", "date"},
+                {"Heure", "heure"},
+                {"Motivation", "motivation"},
+                {"Etudiant", ""},
+
+        };
+
+        for (String[] col : colonnes) {
+            TableColumn<DossierInscription, String> column =
+                    new TableColumn<>(col[0]);
+            column.setCellValueFactory(
+                    new PropertyValueFactory<>(col[1])
+            );
+            tableviewDossier.getColumns().add(column);
+        }
+        try {
+            tableviewDossier.getItems().setAll(
+                   dossierRepository.getAllDossiers()
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML
