@@ -57,7 +57,6 @@ public class profilUpdateController {
         userSession.setEmail(email);
 
         if (repo.mettreAJourUtilisateur(userSession)) {
-            showAlert(Alert.AlertType.INFORMATION, "Profil mis à jour avec succès.");
             StartApplication.changeScene("profil/profilRead", "Profil");
         } else {
             erreurLabel.setText("Erreur lors de la mise à jour.");
@@ -68,13 +67,5 @@ public class profilUpdateController {
     @FXML
     void onAnnulerClick(ActionEvent event) throws IOException {
         StartApplication.changeScene("profil/profilRead", "Profil");
-    }
-
-    private void showAlert(Alert.AlertType type, String message) {
-        Alert alert = new Alert(type);
-        alert.setTitle("Profil");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }
