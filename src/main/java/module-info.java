@@ -40,6 +40,9 @@ module appli{
     opens appli.gestionnaire.fournitureFournisseur to javafx.fxml;
     exports appli.gestionnaire.fournitureFournisseur;
 
+    opens appli.motDePasse to javafx.fxml;
+    exports appli.motDePasse;
+
     opens model to javafx.fxml;
     exports model;
     opens model.gestionnaire to javafx.fxml;
