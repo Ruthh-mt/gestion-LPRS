@@ -49,6 +49,9 @@ public class DossierCreateController implements Initializable {
     @FXML
     private Label sessionLabel ;
 
+    @FXML
+    private Label erreurLabel;
+
 
     FiliereRepository filiereRepository = new FiliereRepository();
     DossierRepository dossierRepository = new DossierRepository();
@@ -70,8 +73,15 @@ public class DossierCreateController implements Initializable {
         DossierInscription dossierInscription = new DossierInscription(date, heure, motivation, refFiliere, refFiche);
         boolean ok = dossierRepository.ajouterDossier(dossierInscription);
         if(ok){
-            StartApplication.changeScene("secretaire/dossierList","Liste des dossiers");
-
+            erreurLabel.setVisible(true);
+              erreurLabel.setText("Dossier ajouté avec succès");
+            erreurLabel.setStyle("-fx-text-fill: green;");
+            dateTextField.getEditor().clear();
+            heureTextfield.getEditor().clear();
+            motivationTextfield.clear();
+            refFiliereTextfield.getItems().clear();
+            refFicheTextfield.getItems().clear();
+            StartApplication.changeScene("secretaire/dossierCreate","creer un dossier");
         }
 
     }
@@ -110,7 +120,7 @@ public class DossierCreateController implements Initializable {
             refFicheTextfield.getItems().add(ficheEtudiant);
         }
 
-
+     erreurLabel.setVisible(false);
     }
 
 

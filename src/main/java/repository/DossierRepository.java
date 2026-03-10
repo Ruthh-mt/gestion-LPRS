@@ -17,7 +17,7 @@ public class DossierRepository {
     }
 
     public boolean ajouterDossier(DossierInscription doss) throws SQLException {
-        String sql = "INSERT INTO dossier_inscription (date_dossier,heure,motivation_etudiant,ref_filiere,ref_fiche_etudiante) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO dossier_inscription (date,heure,motivation_etudiant,ref_filiere,ref_fiche_etudiante) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setDate(1, java.sql.Date.valueOf(doss.getDate().toLocalDate()));
@@ -49,7 +49,7 @@ public class DossierRepository {
             ResultSet resultatRequete = stmt.executeQuery();
             while (resultatRequete.next()) {
                 id = resultatRequete.getInt("id_dossier_inscription");
-                date = resultatRequete.getDate("date_dossier");
+                date = resultatRequete.getDate("date");
                 heure = resultatRequete.getTime("heure");
                 motivation = resultatRequete.getString("motivation_etudiant");
                 ref_filiere = resultatRequete.getInt("ref_filiere");

@@ -19,10 +19,10 @@
       <Label layoutX="343.0" layoutY="124.0" text="Ref filière" />
       <Label layoutX="57.0" layoutY="124.0" text="Date" />
       <Label layoutX="52.0" layoutY="175.0" text="Heure " />
-      <Label layoutX="91.0" layoutY="287.0" text="Motivation " />
-      <Button fx:id="validerButton" layoutX="91.0" layoutY="356.0" mnemonicParsing="false" onAction="#ajouterDossier" text="Valider" />
-      <Button fx:id="annulerButton" layoutX="177.0" layoutY="356.0" mnemonicParsing="false" text="Annuler" />
-      <TextArea fx:id="motivationTextfield" layoutX="206.0" layoutY="272.0" prefHeight="47.0" prefWidth="239.0" />
+      <Label layoutX="39.0" layoutY="254.0" text="Motivation " />
+      <Button fx:id="validerButton" layoutX="73.0" layoutY="319.0" mnemonicParsing="false" onAction="#ajouterDossier" text="Valider" />
+      <Button fx:id="annulerButton" layoutX="164.0" layoutY="319.0" mnemonicParsing="false" text="Annuler" />
+      <TextArea fx:id="motivationTextfield" layoutX="131.0" layoutY="239.0" prefHeight="47.0" prefWidth="239.0" />
       <Button fx:id="retourButton" layoutX="492.0" layoutY="393.0" mnemonicParsing="false" onAction="#redirectionListeDossier" text="Retour" />
       <Label layoutX="343.0" layoutY="175.0" text="Ref fiche " />
       <Label fx:id="sessionLabel" layoutX="485.0" layoutY="64.0" text="sessionLabel" />
@@ -30,5 +30,6 @@
       <ComboBox fx:id="refFicheTextfield" layoutX="424.0" layoutY="171.0" prefWidth="150.0" />
       <ComboBox fx:id="refFiliereTextfield" layoutX="424.0" layoutY="120.0" prefWidth="150.0" />
       <Spinner fx:id="heureTextfield" layoutX="102.0" layoutY="171.0" />
+      <Label fx:id="erreurLabel" layoutX="222.0" layoutY="385.0" text="erreurLabel" />
    </children>
 </AnchorPane>

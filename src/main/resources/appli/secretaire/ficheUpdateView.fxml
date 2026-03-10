@@ -35,6 +35,6 @@
          </font>
       </Label>
       <Label fx:id="sessionLabel" layoutX="511.0" layoutY="64.0" text="sessionLabel" />
-      <Label fx:id="erreurLabel" layoutX="440.0" layoutY="242.0" text="Erreur label" />
+      <Label fx:id="erreurLabel" layoutX="440.0" layoutY="242.0" prefHeight="53.0" prefWidth="81.0" text="Erreur label" />
     </children>
 </AnchorPane>

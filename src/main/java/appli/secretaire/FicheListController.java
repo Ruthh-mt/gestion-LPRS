@@ -53,6 +53,8 @@ public class FicheListController implements Initializable {
 
 
 
+
+
 @FXML
     public void redirectionCreateFiche() throws IOException {
         StartApplication.changeScene("secretaire/ficheCreate","Créer une fiche");

@@ -2,24 +2,36 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="401.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.secretaire.FicheListController">
+<AnchorPane prefHeight="506.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.secretaire.FicheListController">
    <children>
-      <Label layoutX="159.0" layoutY="14.0" prefHeight="25.0" prefWidth="381.0" text="Mes fiches">
+      <Label layoutX="249.0" layoutY="10.0" prefHeight="47.0" prefWidth="211.0" text="Mes fiches">
          <font>
-            <Font size="28.0" />
+            <Font name="System Bold" size="32.0" />
          </font>
       </Label>
-      <TableView fx:id="tableView" layoutX="35.0" layoutY="57.0" onMouseClicked="#gestionListe" prefHeight="240.0" prefWidth="455.0" />
-      <Button fx:id="redirectionAccueilBtn" layoutX="52.0" layoutY="346.0" mnemonicParsing="false" onAction="#redirectionAccueil" text="Retour vers l'accueil" />
-      <Button fx:id="redirectionDossierBtn" layoutX="511.0" layoutY="346.0" mnemonicParsing="false" onAction="#redirectionDossierBtn" text="Voir mes dossiers" />
-      <Button fx:id="modiferFicheBtn" layoutX="530.0" layoutY="145.0" mnemonicParsing="false" onAction="#redirectionUpdateFiche" text="Modifier la fiche" />
-      <Button fx:id="creerFicheBtn" layoutX="263.0" layoutY="346.0" mnemonicParsing="false" onAction="#redirectionCreateFiche" text="Créer une fiche" />
+      <TableView fx:id="tableView" layoutX="23.0" layoutY="223.0" onMouseClicked="#gestionListe" prefHeight="177.0" prefWidth="407.0" />
+      <Button fx:id="redirectionAccueilBtn" layoutX="47.0" layoutY="428.0" mnemonicParsing="false" onAction="#redirectionAccueil" text="Retour vers l'accueil" />
+      <Button fx:id="redirectionDossierBtn" layoutX="506.0" layoutY="428.0" mnemonicParsing="false" onAction="#redirectionDossierBtn" text="Voir mes dossiers" />
+      <Button fx:id="modiferFicheBtn" layoutX="544.0" layoutY="264.0" mnemonicParsing="false" onAction="#redirectionUpdateFiche" text="Modifier la fiche" />
+      <Button fx:id="creerFicheBtn" layoutX="258.0" layoutY="428.0" mnemonicParsing="false" onAction="#redirectionCreateFiche" text="Créer une fiche" />
       <Label layoutX="553.0" layoutY="34.0" />
       <Label fx:id="sessionLabel" layoutX="539.0" layoutY="34.0" text="label session" />
-      <Button fx:id="supprimerFicheBtn" layoutX="530.0" layoutY="201.0" mnemonicParsing="false" onAction="#supprimerFiche" text="Supprimer la fiche" />
+      <Button fx:id="supprimerFicheBtn" layoutX="539.0" layoutY="330.0" mnemonicParsing="false" onAction="#supprimerFiche" text="Supprimer la fiche" />
+      <Separator layoutX="7.0" layoutY="209.0" prefHeight="1.0" prefWidth="669.0" />
+      <Label layoutX="74.0" layoutY="76.0" text="Nom " />
+      <Label layoutX="68.0" layoutY="129.0" text="Prenom" />
+      <Label layoutX="362.0" layoutY="76.0" text="Email" />
+      <Label layoutX="362.0" layoutY="129.0" text="Dernier diplome" />
+      <Button layoutX="175.0" layoutY="172.0" mnemonicParsing="false" text="Rechercher" />
+      <TextField layoutX="485.0" layoutY="125.0" />
+      <TextField layoutX="485.0" layoutY="72.0" />
+      <TextField layoutX="138.0" layoutY="72.0" />
+      <TextField layoutX="138.0" layoutY="126.0" />
    </children>
 </AnchorPane>
