@@ -1,5 +1,5 @@
 package appli.gestionnaire.fournitureFournisseur;
 
-public class ShowFournitureDeFournisseurController {
+public class ShowFournitureDUnFournisseurController {
 
 }

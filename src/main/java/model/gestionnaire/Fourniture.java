@@ -61,4 +61,9 @@ public class Fourniture {
     public void setStockMinimum(int stockMinimum) {
         this.stockMinimum = stockMinimum;
     }
+
+    @Override
+    public String toString() {
+        return  libelle;
+    }
 }

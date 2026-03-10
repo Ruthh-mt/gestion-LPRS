@@ -1,7 +1,6 @@
 package appli.gestionnaire.fourniture;
 
 import appli.StartApplication;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.gestionnaire.Fourniture;
@@ -28,7 +27,7 @@ public class CreateFournitureController {
     private TextField stockMinimumField;
 
     @FXML
-    void onAddFourniture(ActionEvent event) throws IOException {
+    void onAddFourniture() throws IOException {
         if(libelleField.getText().isEmpty() || stockActuelleField.getText().isEmpty() || stockMinimumField.getText().isEmpty()
         || descriptionField.getText().isEmpty()){
             showAlert(Alert.AlertType.WARNING,"Veuillez remplir tous les champs");
@@ -42,8 +41,8 @@ public class CreateFournitureController {
             FournitureRepository fournitureRepo=new FournitureRepository();
             boolean success=fournitureRepo.createFourniture(fourniture);
             if(success){
-                Optional<ButtonType>choice=showAlertConfirmation(Alert.AlertType.CONFIRMATION,"La fourniture a bien été crée. Voulez vous ajouter un ou des fournisseurs ?.");
-                if(choice.equals(ButtonType.OK)){
+                Optional<ButtonType>choice=showAlertConfirmation();
+                if(choice.isPresent() && choice.get()==ButtonType.OK){
                     StartApplication.changeScene("fournitureFournisseur/addFournisseur","liaison avec Fournisseur");
                 }else{
                     StartApplication.changeScene("gestionnaire/accueilGestionnaire","Control Center");
@@ -57,7 +56,7 @@ public class CreateFournitureController {
     }
 
     @FXML
-    void onReturnAccueilGestionnaire(ActionEvent event) throws IOException {
+    void onReturnAccueilGestionnaire() throws IOException {
         StartApplication.changeScene("gestionnaire/AccueilGestionnaire","Control Center");
     }
     private void showAlert(Alert.AlertType type, String message) {
@@ -67,11 +66,11 @@ public class CreateFournitureController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    private Optional<ButtonType> showAlertConfirmation(Alert.AlertType type, String message) {
-        Alert alert = new Alert(type);
+    private Optional<ButtonType> showAlertConfirmation() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Ajout Fourniture");
         alert.setHeaderText(null);
-        alert.setContentText(message);
+        alert.setContentText("La fourniture a bien été crée. Voulez vous ajouter un ou des fournisseurs ?.");
         return alert.showAndWait();
     }
 }

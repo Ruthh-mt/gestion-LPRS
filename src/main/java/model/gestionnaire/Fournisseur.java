@@ -27,7 +27,9 @@ public class Fournisseur {
         this.delaiLivraisionMoyen = delaiLivraisionMoyen;
         this.fraisLivraison = fraisLivraison;
     }
-
+    public Fournisseur(int id) {
+        this.idFournisseur=id;
+    }
     public int getIdFournisseur() {
         return idFournisseur;
     }
@@ -82,5 +84,11 @@ public class Fournisseur {
 
     public void setDelaiLivraisionMoyen(int delaiLivraisionMoyen) {
         this.delaiLivraisionMoyen = delaiLivraisionMoyen;
+    }
+
+    @Override
+    public String toString() {
+        return  nomfournisseur + "=>" +
+                mailFournisseur;
     }
 }
