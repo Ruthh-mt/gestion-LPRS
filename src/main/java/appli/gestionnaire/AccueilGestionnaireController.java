@@ -4,7 +4,7 @@ import appli.StartApplication;
 import appli.gestionnaire.commande.UpdateCommandeController;
 import appli.gestionnaire.fournisseur.UpdateFournisseurController;
 import appli.gestionnaire.fourniture.UpdateFournitureController;
-import appli.gestionnaire.fournitureFournisseur.ShowFournisseurDeFournitureController;
+//import appli.gestionnaire.fournitureFournisseur.ShowFournisseurDeFournitureController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -234,7 +234,7 @@ public class AccueilGestionnaireController  implements Initializable {
         voirLesFournisseursAssocie.setVisible(true);
     }
     }
-
+/*
     @FXML
     void onShowFournisseurDeFourniture(ActionEvent event) throws IOException {
         Fourniture selection = fournitureTableView.getSelectionModel().getSelectedItem();
@@ -242,7 +242,7 @@ public class AccueilGestionnaireController  implements Initializable {
         ShowFournisseurDeFournitureController controller = (ShowFournisseurDeFournitureController)
                 StartApplication. getControllerFromStage();
         controller.initData(selection);
-    }
+    }*/
     //partie random
     @FXML
     void onRetourHomePage(ActionEvent event) throws IOException {

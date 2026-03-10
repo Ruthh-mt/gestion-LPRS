@@ -82,9 +82,9 @@ public class DossierListController implements Initializable {
                 {"Date", "date"},
                 {"Heure", "heure"},
                 {"Motivation", "motivation"},
-                {"Ref filiere", "refFiliere"},
-
-
+                {"Nom", "nomEtudiant"},
+                {"Prenom", "prenom"} ,
+                {"Filière d'interêt", "nomFiliere"}
         };
 
         for (int i = 0; i < colonnes.length; i++) {
@@ -93,6 +93,12 @@ public class DossierListController implements Initializable {
                 maCol.setCellValueFactory(new PropertyValueFactory<>("refFiliere"));
                 tableviewDossier.getColumns().add(maCol);
             }
+            if (colonnes[i][0].equals("Nom")) {
+                TableColumn<DossierInscription, FicheEtudiant> maCol = new TableColumn<>(colonnes[i][0]);
+                maCol.setCellValueFactory(new PropertyValueFactory<>("nomEtudiant"));
+                tableviewDossier.getColumns().add(maCol);
+            }
+
             else {
                 TableColumn<DossierInscription, String> maCol = new TableColumn<>(colonnes[i][1]);
                 maCol.setCellValueFactory(new PropertyValueFactory<>(colonnes[i][1]));

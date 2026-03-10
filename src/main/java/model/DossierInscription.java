@@ -12,6 +12,8 @@ public class DossierInscription {
     private String motivation ;
     private  int idDossier ;
     private  int ref_fiche ;
+    private String nom ;
+    private String prenom ;
 
 
 
@@ -30,6 +32,13 @@ public class DossierInscription {
         this.refFiliere = refFiliere ;
         this.ref_fiche = ref_fiche;
         this.motivation = motivation;
+    }
+    public DossierInscription(Date date, Time heure, String motivation,String nom , String prenom,String nom_filiere) {
+        this.date = date ;
+        this.heure = heure;
+        this.motivation = motivation;
+        this.prenom = prenom ;
+        this.nom = nom ;
     }
 
 
