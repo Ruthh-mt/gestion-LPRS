@@ -5,20 +5,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import model.gestionnaire.Fournisseur;
 import model.gestionnaire.Fourniture;
 import model.gestionnaire.FournitureFournisseur;
+import repository.gestionnaire.FournisseurRepository;
 import repository.gestionnaire.FournitureFournisseurRepository;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ShowFournisseurDeFournitureController implements Initializable {
+public class ShowFournisseurDUneFournitureController implements Initializable {
 
     private Fourniture fournitureSel;
     @FXML
@@ -60,14 +61,25 @@ public class ShowFournisseurDeFournitureController implements Initializable {
 
     @FXML
     void onAjouterUnFournisseurAFourniture() throws IOException {
-        StartApplication.changeScene("gestionnaire/fournitureFournisseur/addFournisseurView.fxml","Ajouter un fournisseur");
-        AddFournisseurController controller =(AddFournisseurController)
+        StartApplication.changeScene("gestionnaire/fournitureFournisseur/addFournisseurPourFourniture","Ajouter un fournisseur");
+        AddFournisseurPourFournitureController controller =(AddFournisseurPourFournitureController)
                 StartApplication.getControllerFromStage();
-//                    controller.initData(fournitureSel);
+                   controller.initData(fournitureSel);
     }
 
     @FXML
-    void onFournisseurDeFournitureTableViewClicked() {
+    void onFournisseurDeFournitureTableViewClicked(MouseEvent event) throws IOException {
+        FournitureFournisseur selection = fournisseurDeFournitureTableView.getSelectionModel().getSelectedItem();
+        if (event.getClickCount() == 2) {
+            if (selection != null) {
+                StartApplication.changeScene("gestionnaire/fourniture/updateFournitureFournisseur", "Modification");
+                UpdateFournitureFournisseurController controller = (UpdateFournitureFournisseurController)
+                        StartApplication. getControllerFromStage();
+                controller.initData(selection);
+            }
+        }else if(selection!=null) {
+            supprimerFournisseurdeFourniture.setDisable(false);
+        }
 
     }
 
@@ -81,13 +93,12 @@ public class ShowFournisseurDeFournitureController implements Initializable {
         StartApplication.changeScene("gestionnaire/accueilGestionnaire","Control Center");
     }
 
-
-    public Fourniture getFournitureSel() {
-        return fournitureSel;
-    }
-
-    public void setFournitureSel(Fourniture fournitureSel) {
-        this.fournitureSel = fournitureSel;
+    private void showAlert(Alert.AlertType type, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle("Ajout d'un Fournisseur pour "+ fournitureSel.getLibelle());
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 
