@@ -52,7 +52,7 @@ public class RendezvousCreateController {
         erreurLabel.setVisible(false);
 
         // Charger les dossiers d'inscription → afficher "Prénom NOM"
-        List<DossierInscription> dossiers = dossierRepo.getAllDossiers();
+        List<DossierInscription> dossiers = dossierRepo .getAllDossiers();
         dossierComboBox.getItems().setAll(dossiers);
         dossierComboBox.setCellFactory(lv -> new ListCell<>() {
             @Override
