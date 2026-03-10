@@ -19,7 +19,7 @@
 
                 <Separator AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="540.0" />
 
-                <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onAnnulerClick" prefHeight="25.0" text="Retour" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="650.0" />
+                <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onAnnulerClick" prefHeight="25.0" text="Retour" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="680.0" />
             </children>
         </AnchorPane>
 
