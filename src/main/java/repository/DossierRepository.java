@@ -4,6 +4,7 @@ import database.Database;
 import model.DossierInscription;
 import model.FicheEtudiant;
 import model.Filiere;
+import session.Session;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -33,8 +34,8 @@ public class DossierRepository {
         return false;
     }
 
-    public ArrayList<DossierInscription> getAllDossiers() throws SQLException {
-        String sql = "SELECT * from dossier_inscription";
+    public ArrayList<DossierInscription> getAllDossiers(int refUser) throws SQLException {
+        String sql = "SELECT * from dossier_inscription di inner join fiche_etudiante fe ON di.ref_fiche_etudiante = fe.id_fiche_etudiante where ref_createur = ?";
         ArrayList<DossierInscription> dossiers = new ArrayList<>();
         DossierInscription dossierInscription = null;
         int id = 0;
@@ -46,6 +47,7 @@ public class DossierRepository {
 
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1,refUser);
             ResultSet resultatRequete = stmt.executeQuery();
             while (resultatRequete.next()) {
                 id = resultatRequete.getInt("id_dossier_inscription");
@@ -54,6 +56,7 @@ public class DossierRepository {
                 motivation = resultatRequete.getString("motivation_etudiant");
                 ref_filiere = resultatRequete.getInt("ref_filiere");
                 ref_fiche = resultatRequete.getInt("ref_fiche_etudiante");
+                
 
                 dossierInscription = new DossierInscription(id, date, heure, motivation, ref_filiere, ref_fiche);
                 dossiers.add(dossierInscription);
@@ -103,8 +106,6 @@ public class DossierRepository {
 
     public boolean mettreAjourDossier(DossierInscription doss) throws SQLException {
 
-        System.out.println("\n========== DEBUG: Début mise à jour dossier ==========");
-
         // Vérification de l'objet reçu
         System.out.println("Objet DossierInscription reçu :");
         System.out.println(" - ID dossier           : " + doss.getId());
@@ -148,22 +149,19 @@ public class DossierRepository {
             int rows = ps.executeUpdate();
             System.out.println("Résultat : " + rows + " ligne(s) mise(s) à jour.");
 
-            System.out.println("========== DEBUG: Fin mise à jour dossier ==========\n");
             return true;
 
         } catch (SQLException e) {
 
-            System.out.println("\n========== ERREUR SQL ==========");
             System.out.println("Message : " + e.getMessage());
 
             // Détection spécifique des erreurs de clé étrangère
             if (e.getMessage().contains("foreign key")) {
-                System.out.println("⚠️  ERREUR FK : La valeur ref_fiche_etudiante ("
+                System.out.println("  ERREUR FK : La valeur ref_fiche_etudiante ("
                         + doss.getRef_fiche() +
                         ") n'existe pas dans dossier. !");
             }
 
-            System.out.println("================================\n");
         }
 
         return false;

@@ -13,6 +13,7 @@ import model.Filiere;
 import repository.DossierRepository;
 import repository.FicheEtudiantRepository;
 import repository.FiliereRepository;
+import session.Session;
 
 import javax.print.DocFlavor;
 import java.net.URL;
@@ -112,7 +113,7 @@ public class DossierCreateController implements Initializable {
         //---------------------------------------------------------------------
         ArrayList<FicheEtudiant> ficheEtudiants = null;
         try {
-            ficheEtudiants = new ArrayList<>(ficheEtudiantRepository.getToutesLesFiches());
+            ficheEtudiants = new ArrayList<>(ficheEtudiantRepository.getToutesLesFiches(Session.getInstance().getUtilisateur().getIdUtilisateur()));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

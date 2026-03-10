@@ -82,7 +82,7 @@ public class DossierUpdateController {
         //---------------------------------------------------------------------
         ArrayList<FicheEtudiant> ficheEtudiants = null;
         try {
-            ficheEtudiants = new ArrayList<>(ficheEtudiantRepository.getToutesLesFiches());
+            ficheEtudiants = new ArrayList<>(ficheEtudiantRepository.getToutesLesFiches(Session.getInstance().getUtilisateur().getIdUtilisateur()));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

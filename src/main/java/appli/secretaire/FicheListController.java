@@ -51,10 +51,6 @@ public class FicheListController implements Initializable {
     @FXML
     private boolean suppression = false;
 
-
-
-
-
 @FXML
     public void redirectionCreateFiche() throws IOException {
         StartApplication.changeScene("secretaire/ficheCreate","Créer une fiche");
@@ -130,9 +126,10 @@ public class FicheListController implements Initializable {
             );
             tableView.getColumns().add(column);
         }
+        int refUser = Session.getInstance().getUtilisateur().getIdUtilisateur();
         try {
             tableView.getItems().setAll(
-                    ficheEtudiantRepository.getToutesLesFiches()
+                    ficheEtudiantRepository.getToutesLesFiches(refUser)
             );
         } catch (SQLException e) {
             e.printStackTrace();

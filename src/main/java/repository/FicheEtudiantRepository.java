@@ -93,10 +93,10 @@ public class FicheEtudiantRepository {
        return fe;
 }
 
-    public ArrayList<FicheEtudiant> getToutesLesFiches() throws SQLException {
+    public ArrayList<FicheEtudiant> getToutesLesFiches(int refUser) throws SQLException {
 
 
-        String sql = "SELECT * from fiche_etudiante";
+        String sql = "SELECT * from fiche_etudiante where ref_createur = ?";
         ArrayList<FicheEtudiant> ficheEtudiants = new ArrayList<>();
         int id = 0;
         int ref_createur = 0 ;
@@ -109,6 +109,7 @@ public class FicheEtudiantRepository {
         FicheEtudiant ficheEtudiant = null;
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1,refUser);
             ResultSet resultatRequete = stmt.executeQuery();
             while (resultatRequete.next()) {
                 id = resultatRequete.getInt("id_fiche_etudiante");

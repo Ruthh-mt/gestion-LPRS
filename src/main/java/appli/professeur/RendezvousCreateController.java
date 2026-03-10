@@ -51,8 +51,9 @@ public class RendezvousCreateController {
     public void initialize() throws SQLException {
         erreurLabel.setVisible(false);
 
+        int refUser = Session.getInstance().getUtilisateur().getIdUtilisateur();
         // Charger les dossiers d'inscription → afficher "Prénom NOM"
-        List<DossierInscription> dossiers = dossierRepo.getAllDossiers();
+        List<DossierInscription> dossiers = dossierRepo.getAllDossiers(refUser);
         dossierComboBox.getItems().setAll(dossiers);
         dossierComboBox.setCellFactory(lv -> new ListCell<>() {
             @Override

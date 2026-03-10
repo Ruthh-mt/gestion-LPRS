@@ -101,8 +101,9 @@ public class DossierListController implements Initializable {
         }
 
         ArrayList<DossierInscription> lesDossiers = null;
+        int refUser = Session.getInstance().getUtilisateur().getIdUtilisateur();
         try {
-            lesDossiers = dossierRepository.getAllDossiers();
+            lesDossiers = dossierRepository.getAllDossiers(refUser);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
