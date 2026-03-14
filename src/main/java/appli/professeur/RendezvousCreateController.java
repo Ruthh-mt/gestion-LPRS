@@ -52,6 +52,7 @@ public class RendezvousCreateController {
         erreurLabel.setVisible(false);
 
         int refUser = Session.getInstance().getUtilisateur().getIdUtilisateur();
+
         // Charger les dossiers d'inscription → afficher "Prénom NOM"
         List<DossierInscription> dossiers = dossierRepo.getAllDossiers(refUser);
         dossierComboBox.getItems().setAll(dossiers);
@@ -60,13 +61,12 @@ public class RendezvousCreateController {
             protected void updateItem(DossierInscription item, boolean empty) {
                 super.updateItem(item, empty);
                 setText(empty || item == null ? null
-                        : item.getRef_fiche()
-                        + " " + item.getId() );
+                        : item.getPrenom() + " " + item.getNom());
             }
         });
         dossierComboBox.setButtonCell(dossierComboBox.getCellFactory().call(null));
 
-        // Charger les salles disponibles (non occupées)
+        // Charger les salles disponibles
         List<Salle> salles = salleRepo.findSallesDisponibles();
         salleComboBox.getItems().setAll(salles);
         salleComboBox.setCellFactory(lv -> new ListCell<>() {
@@ -87,7 +87,6 @@ public class RendezvousCreateController {
         String heureStr = heureField.getText().trim();
         Salle salle = salleComboBox.getValue();
 
-        // Validation
         if (dossier == null || date == null || heureStr.isEmpty() || salle == null) {
             afficherErreur("Veuillez remplir tous les champs.");
             return;
@@ -101,7 +100,6 @@ public class RendezvousCreateController {
             return;
         }
 
-        // Créer et sauvegarder le rendez-vous
         RendezVous rdv = new RendezVous();
         rdv.setDateRendezVous(date);
         rdv.setHeure(heure);

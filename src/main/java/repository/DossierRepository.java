@@ -35,7 +35,7 @@ public class DossierRepository {
     }
 
     public ArrayList<DossierInscription> getAllDossiers(int refUser) throws SQLException {
-        String sql = "SELECT date_inscription,heure,motivation_etudiant,nom_etudiant,prenom_etudiant,f.nom \n" +
+        String sql = "SELECT di.id_dossier_inscription,date_inscription,heure,motivation_etudiant,nom_etudiant,prenom_etudiant,f.nom \n" +
                 "                from dossier_inscription di  \n" +
                 "                 inner JOIN filiere f on f.id_filiere = di.ref_filiere\n" +
                 "                inner join fiche_etudiante fe ON di.ref_fiche_etudiante = fe.id_fiche_etudiante \n" +
@@ -65,6 +65,7 @@ public class DossierRepository {
                 prenom = resultatRequete.getString("prenom_etudiant");
                 nom_filiere = resultatRequete.getString("nom");
                 dossier = new DossierInscription(date,heure,motivation,nom,prenom,nom_filiere);
+                dossier.setId(resultatRequete.getInt("id_dossier_inscription"));
                 dossiers.add(dossier);
             }
         } catch (SQLException e) {

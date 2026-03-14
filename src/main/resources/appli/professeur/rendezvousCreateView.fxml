@@ -65,7 +65,7 @@
                 <Label text="Salle :" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="340.0">
                     <font><Font name="Consolas Bold" size="14.0" /></font>
                 </Label>
-                <ComboBox fx:id="salleComboBox" promptText="Sélectionner une salle" AnchorPane.leftAnchor="280.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="335.0" maxWidth="1.7976931348623157E808" />
+                <ComboBox fx:id="salleComboBox" promptText="Sélectionner une salle" AnchorPane.leftAnchor="280.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="335.0" maxWidth="1.7976931348623157E308" />
 
                 <!-- Statut (info lecture seule) -->
                 <Label text="Statut :" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="400.0">
