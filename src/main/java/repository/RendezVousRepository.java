@@ -42,9 +42,6 @@ public class RendezVousRepository {
         }
     }
 
-    /**
-     * Retourne tous les rendez-vous d'un professeur.
-     */
     public List<RendezVous> findByProfesseur(int refProfesseur) {
         String sql = "SELECT * FROM rendez_vous WHERE ref_professeur = ? ORDER BY date_rendez_vous, heure";
         List<RendezVous> liste = new ArrayList<>();
@@ -61,9 +58,6 @@ public class RendezVousRepository {
         return liste;
     }
 
-    /**
-     * Retourne tous les rendez-vous.
-     */
     public List<RendezVous> findAll() {
         String sql = "SELECT * FROM rendez_vous ORDER BY date_rendez_vous, heure";
         List<RendezVous> liste = new ArrayList<>();
@@ -79,10 +73,6 @@ public class RendezVousRepository {
         return liste;
     }
 
-    /**
-     * Met à jour le statut d'un rendez-vous ('Prévus', 'Annulé', 'Passé').
-     * Si annulé, libère la salle.
-     */
     public boolean updateStatut(int idRendezVous, String nouveauStatut) {
         String sql = "UPDATE rendez_vous SET status = ? WHERE id_rendez_vous = ?";
         try {
@@ -101,9 +91,6 @@ public class RendezVousRepository {
         }
     }
 
-    /**
-     * Supprime un rendez-vous et libère la salle associée.
-     */
     public boolean supprimerRendezVous(int idRendezVous) {
         int refSalle = getRefSalle(idRendezVous);
         String sql = "DELETE FROM rendez_vous WHERE id_rendez_vous = ?";
@@ -118,9 +105,6 @@ public class RendezVousRepository {
             return false;
         }
     }
-
-    // ── Helpers ────────────────────────────────────────────────────────────────
-
     private RendezVous mapRow(ResultSet rs) throws SQLException {
         return new RendezVous(
                 rs.getInt("id_rendez_vous"),
@@ -144,5 +128,23 @@ public class RendezVousRepository {
             System.out.println("Erreur récupération ref_salle : " + e.getMessage());
         }
         return -1;
+    }
+
+    public boolean mettreAJourRendezVous(RendezVous rdv) {
+        String sql = "UPDATE rendez_vous SET date_rendez_vous = ?, heure = ?, status = ?, " +
+                "ref_dossier_inscription = ?, ref_salle = ? WHERE id_rendez_vous = ?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(rdv.getDateRendezVous()));
+            ps.setTime(2, Time.valueOf(rdv.getHeure()));
+            ps.setString(3, rdv.getStatus());
+            ps.setInt(4, rdv.getRefDossierInscription());
+            ps.setInt(5, rdv.getRefSalle());
+            ps.setInt(6, rdv.getIdRendezVous());
+            return ps.executeUpdate() == 1;
+        } catch (SQLException e) {
+            System.out.println("Erreur mise à jour rendez-vous : " + e.getMessage());
+            return false;
+        }
     }
 }
