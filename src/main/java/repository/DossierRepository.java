@@ -65,7 +65,7 @@ public class DossierRepository {
                 prenom = resultatRequete.getString("prenom_etudiant");
                 nom_filiere = resultatRequete.getString("nom");
                 dossier = new DossierInscription(date,heure,motivation,nom,prenom,nom_filiere);
-                 dossiers.add(dossier);
+                dossiers.add(dossier);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
