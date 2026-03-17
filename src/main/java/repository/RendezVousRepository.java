@@ -19,9 +19,24 @@ public class RendezVousRepository {
         this.salleRepo = new SalleRepository();
     }
 
-    /**
-     * Crée un rendez-vous et marque la salle comme occupée.
-     */
+    public void marquerRendezVousPassés() {
+        String sql = "UPDATE rendez_vous SET status = 'Passé' " +
+                "WHERE status = 'Prévus' " +
+                "AND (date_rendez_vous < ? OR (date_rendez_vous = ? AND heure < ?))";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(sql);
+            LocalDate today = LocalDate.now();
+            LocalTime now = LocalTime.now();
+            ps.setDate(1, Date.valueOf(today));
+            ps.setDate(2, Date.valueOf(today));
+            ps.setTime(3, Time.valueOf(now));
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erreur marquage passés : " + e.getMessage());
+        }
+    }
+
+    // Remplacer creerRendezVous() — supprimer l'appel marquerOccupee
     public boolean creerRendezVous(RendezVous rdv) {
         String sql = "INSERT INTO rendez_vous (date_rendez_vous, heure, status, ref_professeur, " +
                 "ref_dossier_inscription, ref_salle) VALUES (?, ?, ?, ?, ?, ?)";
@@ -34,7 +49,6 @@ public class RendezVousRepository {
             ps.setInt(5, rdv.getRefDossierInscription());
             ps.setInt(6, rdv.getRefSalle());
             ps.executeUpdate();
-            salleRepo.marquerOccupee(rdv.getRefSalle());
             return true;
         } catch (SQLException e) {
             System.out.println("Erreur création rendez-vous : " + e.getMessage());
@@ -73,6 +87,7 @@ public class RendezVousRepository {
         return liste;
     }
 
+    // Remplacer updateStatut() — supprimer l'appel marquerLibre
     public boolean updateStatut(int idRendezVous, String nouveauStatut) {
         String sql = "UPDATE rendez_vous SET status = ? WHERE id_rendez_vous = ?";
         try {
@@ -80,10 +95,6 @@ public class RendezVousRepository {
             ps.setString(1, nouveauStatut);
             ps.setInt(2, idRendezVous);
             ps.executeUpdate();
-            if ("Annulé".equals(nouveauStatut)) {
-                int refSalle = getRefSalle(idRendezVous);
-                if (refSalle != -1) salleRepo.marquerLibre(refSalle);
-            }
             return true;
         } catch (SQLException e) {
             System.out.println("Erreur mise à jour statut : " + e.getMessage());
@@ -91,14 +102,14 @@ public class RendezVousRepository {
         }
     }
 
+
+    // Remplacer supprimerRendezVous() — supprimer l'appel marquerLibre
     public boolean supprimerRendezVous(int idRendezVous) {
-        int refSalle = getRefSalle(idRendezVous);
         String sql = "DELETE FROM rendez_vous WHERE id_rendez_vous = ?";
         try {
             PreparedStatement ps = cnx.prepareStatement(sql);
             ps.setInt(1, idRendezVous);
             ps.executeUpdate();
-            if (refSalle != -1) salleRepo.marquerLibre(refSalle);
             return true;
         } catch (SQLException e) {
             System.out.println("Erreur suppression rendez-vous : " + e.getMessage());

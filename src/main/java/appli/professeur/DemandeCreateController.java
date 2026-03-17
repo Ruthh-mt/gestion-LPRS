@@ -170,7 +170,6 @@ public class DemandeCreateController {
 
     @FXML
     private void onDemanderClick() {
-        // TODO : traiter rows et envoyer la demande
     }
 
     @FXML

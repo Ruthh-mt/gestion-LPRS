@@ -20,6 +20,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.List;
 import java.util.Locale;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
+import javafx.util.Duration;
 
 public class PlanningController {
 
@@ -39,8 +42,17 @@ public class PlanningController {
     @FXML
     public void initialize() {
         moisActuel = YearMonth.now();
+        rdvRepo.marquerRendezVousPassés();
         construireEnTetes();
         chargerCalendrier();
+
+        // Rafraîchissement automatique toutes les 60 secondes
+        autoRefresh = new Timeline(new KeyFrame(Duration.seconds(60), e -> {
+            rdvRepo.marquerRendezVousPassés();
+            chargerCalendrier();
+        }));
+        autoRefresh.setCycleCount(Timeline.INDEFINITE);
+        autoRefresh.play();
     }
 
     // ── Navigation ──────────────────────────────────────────────
@@ -186,20 +198,25 @@ public class PlanningController {
         return label;
     }
 
+    private Timeline autoRefresh;
+
     // ── Navigation pages ────────────────────────────────────────
 
     @FXML
     void onProfilClick(ActionEvent event) throws IOException {
+        autoRefresh.stop();
         StartApplication.changeScene("profil/profilRead", "Profil");
     }
 
     @FXML
     void onRetourClick(ActionEvent event) throws IOException {
+        autoRefresh.stop();
         StartApplication.changeScene("accueil/homePage", "Accueil");
     }
 
     @FXML
     void onRdvClick(ActionEvent event) throws IOException {
+        autoRefresh.stop();
         StartApplication.changeScene("professeur/rendezvousCreate", "Rendez-vous");
     }
 }
