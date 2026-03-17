@@ -44,7 +44,7 @@ public class AddFournisseurPourFournitureController {
     @FXML
     void onAjouterFournisseur() throws IOException {
         if(refFournisseurField.getValue()!=null && prixField.getText()!=null) {
-            FournitureFournisseur fournitureFournisseur = new FournitureFournisseur(fournitureSel.getIdFourniture(), refFournisseurField.getValue().getIdFournisseur(), Double.parseDouble(prixField.getText()));
+            FournitureFournisseur fournitureFournisseur = new FournitureFournisseur(fournitureSel, refFournisseurField.getValue(), Double.parseDouble(prixField.getText()));
             FournitureFournisseurRepository fournitureFournisseurRepo = new FournitureFournisseurRepository();
             boolean success= fournitureFournisseurRepo.addFournitureFournisseur(fournitureFournisseur);
             if(success) {

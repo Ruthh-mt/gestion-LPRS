@@ -8,15 +8,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import model.gestionnaire.Fournisseur;
+
 import model.gestionnaire.Fourniture;
 import model.gestionnaire.FournitureFournisseur;
-import repository.gestionnaire.FournisseurRepository;
+
 import repository.gestionnaire.FournitureFournisseurRepository;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ShowFournisseurDUneFournitureController implements Initializable {
@@ -31,16 +32,18 @@ public class ShowFournisseurDUneFournitureController implements Initializable {
     @FXML
     private Button supprimerFournisseurdeFourniture;
 
+
     public void initData(Fourniture fourniture){
         fournitureSel = fourniture;
         FournitureFournisseurRepository fournitureFournisseurRepo= new FournitureFournisseurRepository();
-        ObservableList<FournitureFournisseur> allFournisseurs= FXCollections.observableList(fournitureFournisseurRepo.getAllFournisseursByFournitureId(fournitureSel.getIdFourniture()));
+        ObservableList<FournitureFournisseur> allFournisseurs= FXCollections.observableList(fournitureFournisseurRepo.getAllFournisseursByFournitureId(fournitureSel));
         fournisseurDeFournitureTableView.getItems().setAll(allFournisseurs);
         TitleLabel.setText("Liste des fournisseurs pour : "+fournitureSel.getLibelle());
 
     }
 
     public void initialize(URL location, ResourceBundle resources){
+
         String [][] colonnes = {
                 {"Fourniture","refFourniture"},
                 {"Fournisseur","refFournisseur"},
@@ -68,14 +71,15 @@ public class ShowFournisseurDUneFournitureController implements Initializable {
     }
 
     @FXML
-    void onFournisseurDeFournitureTableViewClicked(MouseEvent event) throws IOException {
+    void onFournisseurDeFournitureTableViewClicked(MouseEvent event) throws IOException, SQLException {
         FournitureFournisseur selection = fournisseurDeFournitureTableView.getSelectionModel().getSelectedItem();
+        System.out.println( selection);
         if (event.getClickCount() == 2) {
             if (selection != null) {
-                StartApplication.changeScene("gestionnaire/fourniture/updateFournitureFournisseur", "Modification");
+                StartApplication.changeScene("gestionnaire/fournitureFournisseur/updateFournitureFournisseur", "Modification");
                 UpdateFournitureFournisseurController controller = (UpdateFournitureFournisseurController)
                         StartApplication. getControllerFromStage();
-                controller.initData(selection);
+                controller.initialize(selection);
             }
         }else if(selection!=null) {
             supprimerFournisseurdeFourniture.setDisable(false);
@@ -85,7 +89,15 @@ public class ShowFournisseurDUneFournitureController implements Initializable {
 
     @FXML
     void onSupprimerFournisseurdeFourniture() {
-
+        FournitureFournisseurRepository fournitureFournisseurRepo = new FournitureFournisseurRepository();
+        FournitureFournisseur selection = fournisseurDeFournitureTableView.getSelectionModel().getSelectedItem();
+        boolean success=fournitureFournisseurRepo.supprimerFournitureFournisseur(selection);
+        if (success) {
+            System.out.println("Suppression fourniture fournisseur reussi ");
+            showAlert(Alert.AlertType.INFORMATION,"Suppression de la fourniture : "+selection.getRefFourniture().getLibelle()+"au fournisseur "+selection.getRefFournisseur().getNomfournisseur() ,"La suppression est reussi");
+        }else{
+            showAlert(Alert.AlertType.ERROR,"Suppression de la fourniture : "+selection.getRefFourniture().getLibelle()+"au fournisseur "+selection.getRefFournisseur().getNomfournisseur() ,"Erreur lors de la suppression");
+        }
     }
 
     @FXML
@@ -93,9 +105,9 @@ public class ShowFournisseurDUneFournitureController implements Initializable {
         StartApplication.changeScene("gestionnaire/accueilGestionnaire","Control Center");
     }
 
-    private void showAlert(Alert.AlertType type, String message) {
+    private void showAlert(Alert.AlertType type,String titre, String message) {
         Alert alert = new Alert(type);
-        alert.setTitle("Ajout d'un Fournisseur pour "+ fournitureSel.getLibelle());
+        alert.setTitle(titre);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();

@@ -4,16 +4,13 @@ import appli.StartApplication;
 import appli.gestionnaire.commande.UpdateCommandeController;
 import appli.gestionnaire.fournisseur.UpdateFournisseurController;
 import appli.gestionnaire.fourniture.UpdateFournitureController;
-import appli.gestionnaire.fournitureFournisseur.ShowFournisseurDeFournitureController;
+import appli.gestionnaire.fournitureFournisseur.ShowFournisseurDUneFournitureController;
+import appli.gestionnaire.fournitureFournisseur.ShowFournitureDUnFournisseurController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import model.gestionnaire.Commande;
@@ -121,29 +118,29 @@ public class AccueilGestionnaireController  implements Initializable {
     }
 
     @FXML
-    void onNewCommand(ActionEvent event) {
+    void onNewCommand() {
 
     }
 
 
     @FXML
-    void onShowPastCommand(ActionEvent event) {
+    void onShowPastCommand() {
 
     }
     @FXML
-    void onShowMyCommandes(ActionEvent event) {
+    void onShowMyCommandes() {
 
     }
 
     @FXML
     void onCommandeTableClicked(MouseEvent event) throws IOException {
-        Commande selection = commandeTableView.getSelectionModel().getSelectedItem();
+        Commande selectionCommande = commandeTableView.getSelectionModel().getSelectedItem();
         if (event.getClickCount() == 2) {
-            if (selection != null) {
+            if (selectionCommande != null) {
                 StartApplication.changeScene("gestionnaire/commande/updateCommande", "Modification Commande");
                 UpdateCommandeController controller = (UpdateCommandeController)
                         StartApplication. getControllerFromStage();
-                controller.initData(selection);
+                controller.initData(selectionCommande);
             }else{
                 System.out.println("c'est null");
             }
@@ -163,38 +160,42 @@ public class AccueilGestionnaireController  implements Initializable {
     }
 
     @FXML
-    void onNewFournisseur(ActionEvent event) throws IOException {
+    void onNewFournisseur() throws IOException {
         StartApplication.changeScene("gestionnaire/fournisseur/createFournisseur","Ajouter un fournisseur");
 
     }
 
 
     @FXML
-    void onShowAllFournisseur(ActionEvent event) {
+    void onShowAllFournisseur() {
 
     }
 
     @FXML
     void onFournisseurTableClicked(MouseEvent event) throws IOException {
-        Fournisseur selection = fournisseurTableView.getSelectionModel().getSelectedItem();
+        Fournisseur selectionFournisseur = fournisseurTableView.getSelectionModel().getSelectedItem();
         if (event.getClickCount() == 2) {
-            if (selection != null) {
+            if (selectionFournisseur != null) {
                 StartApplication.changeScene("gestionnaire/fournisseur/updateFournisseur", "Modification Fournisseur");
                 UpdateFournisseurController controller = (UpdateFournisseurController )
                         StartApplication. getControllerFromStage();
-                controller.initData(selection);
+                controller.initData(selectionFournisseur);
             }else{
                 System.out.println("c'est null");
             }
-        }else if(selection!=null){
-            voirLesFournituresAssocie.setVisible(true);
+        }else if(selectionFournisseur!=null){
+            voirLesFournituresAssocie.setDisable(false);
         }
     }
 
     @FXML
-    void onShowFournitureDuFournisseur(ActionEvent event) throws IOException {
-        StartApplication.changeScene("gestionnaire/fournitureFournisseur/showFournitureDeFournisseur","Listes des fournitures associées a ce fournisseur");
+    void onShowFournitureDuFournisseur() throws IOException {
+        Fournisseur selectionFournisseur = fournisseurTableView.getSelectionModel().getSelectedItem();
+        StartApplication.changeScene("gestionnaire/fournitureFournisseur/showFournitureDUnFournisseur","Listes des fourniture associés a ce fournisseur");
 
+        ShowFournitureDUnFournisseurController controller = (ShowFournitureDUnFournisseurController)
+                StartApplication.getControllerFromStage();
+        controller.initData(selectionFournisseur);
     }
 
     //partie fourniture
@@ -208,45 +209,52 @@ public class AccueilGestionnaireController  implements Initializable {
     }
 
     @FXML
-    void onNewFourniture(ActionEvent event) throws IOException {
+    void onNewFourniture() throws IOException {
         StartApplication.changeScene("gestionnaire/fourniture/createFourniture","Ajouter une fourniture");
 
     }
 
     @FXML
-    void onShowFinishedFourniture(ActionEvent event) {
+    void onShowFinishedFourniture() {
 
     }
 
     @FXML
     void onFournitureTableClicked(MouseEvent event) throws IOException {
-        Fourniture selection = fournitureTableView.getSelectionModel().getSelectedItem();
+        Fourniture selectionFourniture = fournitureTableView.getSelectionModel().getSelectedItem();
         if (event.getClickCount() == 2) {
-            if (selection != null) {
+            if (selectionFourniture != null) {
                 StartApplication.changeScene("gestionnaire/fourniture/updateFourniture", "Modification Fourniture");
                 UpdateFournitureController controller = (UpdateFournitureController)
                         StartApplication. getControllerFromStage();
-                controller.initData(selection);
-            }else{
-                System.out.println("c'est null");
+                controller.initData(selectionFourniture);
             }
-        }else if(selection!=null){
-        voirLesFournisseursAssocie.setVisible(true);
-    }
+        }else if(selectionFourniture!=null) {
+            voirLesFournisseursAssocie.setDisable(false);
+        }
     }
 
     @FXML
-    void onShowFournisseurDeFourniture(ActionEvent event) throws IOException {
-        Fourniture selection = fournitureTableView.getSelectionModel().getSelectedItem();
-        StartApplication.changeScene("gestionnaire/fournitureFournisseur/showFournisseurDeFourniture","Listes des fournisseurs associée a cette fourniture");
-        ShowFournisseurDeFournitureController controller = (ShowFournisseurDeFournitureController)
-                StartApplication. getControllerFromStage();
-        controller.initData(selection);
+    void onShowFournisseurDeFourniture() throws IOException {
+        Fourniture selectionFourniture = fournitureTableView.getSelectionModel().getSelectedItem();
+        StartApplication.changeScene("gestionnaire/fournitureFournisseur/showFournisseurDUneFourniture","Listes des fournisseurs associée a cette fourniture");
+
+        ShowFournisseurDUneFournitureController controller = (ShowFournisseurDUneFournitureController)
+                StartApplication.getControllerFromStage();
+        controller.initData(selectionFourniture);
+
     }
     //partie random
     @FXML
-    void onRetourHomePage(ActionEvent event) throws IOException {
+    void onRetourHomePage() throws IOException {
         StartApplication.changeScene("accueil/homePage","Accueil");
 
+    }
+    private void showAlert(Alert.AlertType type, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle("Ajout Fourniture");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

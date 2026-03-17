@@ -88,7 +88,7 @@ public class Fournisseur {
 
     @Override
     public String toString() {
-        return  nomfournisseur + "=>" +
+        return  nomfournisseur + " :: " +
                 mailFournisseur;
     }
 }

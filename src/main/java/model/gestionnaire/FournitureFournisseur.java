@@ -1,36 +1,30 @@
 package model.gestionnaire;
 
-import java.util.ArrayList;
 
 public class FournitureFournisseur {
-    private int refFourniture;
-    private int refFournisseur;
+    private Fourniture refFourniture;
+    private Fournisseur refFournisseur;
     private double prix;
 
-    public FournitureFournisseur(int refFourniture, int refFournisseur, double prix) {
-        this.refFourniture = refFourniture;
-        this.refFournisseur = refFournisseur;
-        this.prix = prix;
+    public FournitureFournisseur(Fourniture fourniture, Fournisseur fournisseur, double prix) {
+        this.refFourniture=fourniture;
+        this.refFournisseur=fournisseur;
+        this.prix=prix;
     }
 
-    public FournitureFournisseur(int refFourniture, int refFournisseur) {
-        this.refFourniture = refFourniture;
-        this.refFournisseur = refFournisseur;
-    }
-
-    public int getRefFourniture() {
+    public Fourniture getRefFourniture() {
         return refFourniture;
     }
 
-    public void setRefFourniture(int refFourniture) {
+    public void setRefFourniture(Fourniture refFourniture) {
         this.refFourniture = refFourniture;
     }
 
-    public int getRefFournisseur() {
+    public Fournisseur getRefFournisseur() {
         return refFournisseur;
     }
 
-    public void setRefFournisseur(int refFournisseur) {
+    public void setRefFournisseur(Fournisseur refFournisseur) {
         this.refFournisseur = refFournisseur;
     }
 
@@ -40,5 +34,14 @@ public class FournitureFournisseur {
 
     public void setPrix(double prix) {
         this.prix = prix;
+    }
+
+    @Override
+    public String toString() {
+        return "FournitureFournisseur{" +
+                "refFourniture=" + refFourniture +
+                ", refFournisseur=" + refFournisseur +
+                ", prix=" + prix +
+                '}';
     }
 }
