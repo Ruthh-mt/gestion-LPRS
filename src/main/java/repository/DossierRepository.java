@@ -34,38 +34,60 @@ public class DossierRepository {
         return false;
     }
 
+    // Méthode avec filtre — pour le secrétaire
     public ArrayList<DossierInscription> getAllDossiers(int refUser) throws SQLException {
-        String sql = "SELECT di.id_dossier_inscription,date_inscription,heure,motivation_etudiant,nom_etudiant,prenom_etudiant,f.nom \n" +
-                "                from dossier_inscription di  \n" +
-                "                 inner JOIN filiere f on f.id_filiere = di.ref_filiere\n" +
-                "                inner join fiche_etudiante fe ON di.ref_fiche_etudiante = fe.id_fiche_etudiante \n" +
-                "                \n" +
-                "                 where ref_createur = ?";
+        String sql = "SELECT di.id_dossier_inscription, date_inscription, heure, motivation_etudiant, " +
+                "nom_etudiant, prenom_etudiant, f.nom " +
+                "FROM dossier_inscription di " +
+                "INNER JOIN filiere f ON f.id_filiere = di.ref_filiere " +
+                "INNER JOIN fiche_etudiante fe ON di.ref_fiche_etudiante = fe.id_fiche_etudiante " +
+                "WHERE fe.ref_createur = ?";
         ArrayList<DossierInscription> dossiers = new ArrayList<>();
-        DossierInscription dossierInscription = null;
-        int id = 0;
-        Date date = null;
-        Time heure = null;
-        String motivation = null;
-        int ref_filiere = 0;
-        int ref_fiche = 0;
-        String nom = null ;
-        String prenom = null ;
-        String nom_filiere = null ;
-        DossierInscription dossier = null ;
+        DossierInscription dossier = null;
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1,refUser);
-            ResultSet resultatRequete = stmt.executeQuery();
-            while (resultatRequete.next()) {
-                date = resultatRequete.getDate("date_inscription");
-                heure = resultatRequete.getTime("heure");
-                motivation = resultatRequete.getString("motivation_etudiant");
-                nom = resultatRequete.getString("nom_etudiant");
-                prenom = resultatRequete.getString("prenom_etudiant");
-                nom_filiere = resultatRequete.getString("nom");
-                dossier = new DossierInscription(date,heure,motivation,nom,prenom,nom_filiere);
-                dossier.setId(resultatRequete.getInt("id_dossier_inscription"));
+            stmt.setInt(1, refUser);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                dossier = new DossierInscription(
+                        rs.getDate("date_inscription"),
+                        rs.getTime("heure"),
+                        rs.getString("motivation_etudiant"),
+                        rs.getString("nom_etudiant"),
+                        rs.getString("prenom_etudiant"),
+                        rs.getString("nom")
+                );
+                dossier.setId(rs.getInt("id_dossier_inscription"));
+                dossiers.add(dossier);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dossiers;
+    }
+
+    // Méthode sans filtre — pour le professeur
+    public ArrayList<DossierInscription> getAllDossiers() {
+        String sql = "SELECT di.id_dossier_inscription, date_inscription, heure, motivation_etudiant, " +
+                "nom_etudiant, prenom_etudiant, f.nom " +
+                "FROM dossier_inscription di " +
+                "INNER JOIN filiere f ON f.id_filiere = di.ref_filiere " +
+                "INNER JOIN fiche_etudiante fe ON di.ref_fiche_etudiante = fe.id_fiche_etudiante";
+        ArrayList<DossierInscription> dossiers = new ArrayList<>();
+        DossierInscription dossier = null;
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                dossier = new DossierInscription(
+                        rs.getDate("date_inscription"),
+                        rs.getTime("heure"),
+                        rs.getString("motivation_etudiant"),
+                        rs.getString("nom_etudiant"),
+                        rs.getString("prenom_etudiant"),
+                        rs.getString("nom")
+                );
+                dossier.setId(rs.getInt("id_dossier_inscription"));
                 dossiers.add(dossier);
             }
         } catch (SQLException e) {

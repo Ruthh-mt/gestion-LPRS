@@ -51,10 +51,7 @@ public class RendezvousCreateController {
     public void initialize() throws SQLException {
         erreurLabel.setVisible(false);
 
-        int refUser = Session.getInstance().getUtilisateur().getIdUtilisateur();
-
-        // Charger les dossiers d'inscription → afficher "Prénom NOM"
-        List<DossierInscription> dossiers = dossierRepo.getAllDossiers(refUser);
+        List<DossierInscription> dossiers = dossierRepo.getAllDossiers();
         dossierComboBox.getItems().setAll(dossiers);
         dossierComboBox.setCellFactory(lv -> new ListCell<>() {
             @Override
@@ -66,8 +63,8 @@ public class RendezvousCreateController {
         });
         dossierComboBox.setButtonCell(dossierComboBox.getCellFactory().call(null));
 
-        // Charger les salles disponibles
-        List<Salle> salles = salleRepo.findSallesDisponibles();
+        // Charger toutes les salles au départ
+        List<Salle> salles = salleRepo.findAll();
         salleComboBox.getItems().setAll(salles);
         salleComboBox.setCellFactory(lv -> new ListCell<>() {
             @Override
@@ -97,6 +94,15 @@ public class RendezvousCreateController {
             heure = LocalTime.parse(heureStr);
         } catch (DateTimeParseException e) {
             afficherErreur("Format d'heure invalide. Utilisez HH:mm (ex : 09:30).");
+            return;
+        }
+
+        // Vérification disponibilité de la salle
+        List<Salle> sallesDisponibles = salleRepo.findSallesDisponibles(date, heure);
+        boolean salleDisponible = sallesDisponibles.stream()
+                .anyMatch(s -> s.getIdSalle() == salle.getIdSalle());
+        if (!salleDisponible) {
+            afficherErreur("Cette salle est déjà occupée sur ce créneau (±1h).");
             return;
         }
 

@@ -55,10 +55,7 @@ public class RendezvousUpdateController {
     public void initialize() throws SQLException {
         erreurLabel.setVisible(false);
 
-        int refUser = professeur.getIdUtilisateur();
-
-        // Charger les dossiers
-        List<DossierInscription> dossiers = dossierRepo.getAllDossiers(refUser);
+        List<DossierInscription> dossiers = dossierRepo.getAllDossiers();
         dossierComboBox.getItems().setAll(dossiers);
         dossierComboBox.setCellFactory(lv -> new ListCell<>() {
             @Override
@@ -132,6 +129,15 @@ public class RendezvousUpdateController {
             heure = LocalTime.parse(heureStr);
         } catch (DateTimeParseException e) {
             afficherErreur("Format d'heure invalide. Utilisez HH:mm (ex : 09:30).");
+            return;
+        }
+
+        // Vérification disponibilité de la salle (en excluant le RDV actuel)
+        List<Salle> sallesDisponibles = salleRepo.findSallesDisponibles(date, heure, rdv.getIdRendezVous());
+        boolean salleDisponible = sallesDisponibles.stream()
+                .anyMatch(s -> s.getIdSalle() == salle.getIdSalle());
+        if (!salleDisponible) {
+            afficherErreur("Cette salle est déjà occupée sur ce créneau (±1h).");
             return;
         }
 
