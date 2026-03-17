@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `demande_fourniture` (
 DROP TABLE IF EXISTS `dossier_inscription`;
 CREATE TABLE IF NOT EXISTS `dossier_inscription` (
                                                      `id_dossier_inscription` int NOT NULL AUTO_INCREMENT,
-                                                     `date` date NOT NULL,
+                                                     `date_inscription` date NOT NULL,
                                                      `heure` time NOT NULL,
                                                      `motivation_etudiant` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
     `ref_filiere` int NOT NULL,
