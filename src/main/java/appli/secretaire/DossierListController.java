@@ -28,6 +28,7 @@ import java.util.ResourceBundle;
 
 public class DossierListController implements Initializable {
 
+    public Button redirectionDossierReadBtn;
     @FXML
     TableView<DossierInscription> tableviewDossier;
     @FXML
@@ -48,6 +49,21 @@ public class DossierListController implements Initializable {
     @FXML
     public void redirectionAccueil() throws IOException {
         StartApplication.changeScene("accueil/homePage","Accueil");
+    }
+
+    @FXML
+    public void redirectionDossierRead() throws IOException, SQLException {
+        DossierInscription di = tableviewDossier.getSelectionModel().getSelectedItem();
+        int ref_fiche = di.getRef_fiche();
+        FXMLLoader fxmlLoader = new
+                FXMLLoader(StartApplication.class.getResource("secretaire/dossierRead" + "View.fxml"));
+        Parent root = fxmlLoader.load();
+        DossierReadController dossierReadController = fxmlLoader.getController();
+        dossierReadController.initData(di,ref_fiche);
+        Stage mainStage = (Stage) tableviewDossier.getScene().getWindow();
+
+        mainStage.setScene(new Scene(root));
+        mainStage.show();
     }
 
     @FXML
@@ -74,6 +90,7 @@ public class DossierListController implements Initializable {
         sessionLabel.setText("Session de " + userSession.getPrenom() + " " + userSession.getNom());
         modifierDossierBtn.setVisible(false);
         supprimerDossierBtn.setVisible(false);
+        redirectionDossierReadBtn.setVisible(false);
         this.sessionLabel.setText("Session de " + Session.getInstance().getUtilisateur().getPrenom() + " " + Session.getInstance().getUtilisateur().getNom());
         System.out.println("Id session :" + Session.getInstance().getUtilisateur().getId());
         modifierDossierBtn.setVisible(false);
@@ -84,18 +101,13 @@ public class DossierListController implements Initializable {
                 {"Motivation", "motivation"},
                 {"Nom", "nomEtudiant"},
                 {"Prenom", "prenom"} ,
-                {"Filière d'interêt", "nomFiliere"}
+                {"Filière","nomFiliere"}
         };
 
         for (int i = 0; i < colonnes.length; i++) {
             if (colonnes[i][0].equals("Ref filiere")) {
                 TableColumn<DossierInscription, Integer> maCol = new TableColumn<>(colonnes[i][0]);
                 maCol.setCellValueFactory(new PropertyValueFactory<>("refFiliere"));
-                tableviewDossier.getColumns().add(maCol);
-            }
-            if (colonnes[i][0].equals("Nom")) {
-                TableColumn<DossierInscription, FicheEtudiant> maCol = new TableColumn<>(colonnes[i][0]);
-                maCol.setCellValueFactory(new PropertyValueFactory<>("nomEtudiant"));
                 tableviewDossier.getColumns().add(maCol);
             }
 
@@ -127,11 +139,12 @@ public class DossierListController implements Initializable {
                 DossierInscription di = tableviewDossier.getSelectionModel().getSelectedItem();
 
                 if (di != null) {
-                    System.out.println("Double clic sur : " + di.toString());
+                    System.out.println("Double clic sur Dossier : " + di.getId());
 
                     //SessionFiche.getInstance().sauvegardeSession(di);
                     modifierDossierBtn.setVisible(true);
                     supprimerDossierBtn.setVisible(true);
+                    redirectionDossierReadBtn.setVisible(true);
                     dossierActuel = di;
 
                 }

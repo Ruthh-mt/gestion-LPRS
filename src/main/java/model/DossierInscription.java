@@ -12,8 +12,10 @@ public class DossierInscription {
     private String motivation ;
     private  int idDossier ;
     private  int ref_fiche ;
-    private String nom ;
-    private String prenom ;
+    private String nomEtudiant ;
+    private String prenomEtudiant ;
+    private String nomFiliere ;
+    String emailEtudiant ;
 
 
 
@@ -33,12 +35,14 @@ public class DossierInscription {
         this.ref_fiche = ref_fiche;
         this.motivation = motivation;
     }
-    public DossierInscription(Date date, Time heure, String motivation,String nom , String prenom,String nom_filiere) {
+    public DossierInscription(Date date, Time heure, String motivation,String nomEtudiant , String prenomEtudiant,String emailEtudiant , String nomFiliere, int refFiliere) {
         this.date = date ;
         this.heure = heure;
         this.motivation = motivation;
-        this.prenom = prenom ;
-        this.nom = nom ;
+        this.prenomEtudiant = prenomEtudiant ;
+        this.nomEtudiant = nomEtudiant ;
+        this.nomFiliere = nomFiliere;
+        this.refFiliere = refFiliere ;
     }
 
 
@@ -75,6 +79,12 @@ public class DossierInscription {
         this.motivation = motivation;
     }
 
+    public String getNomFiliere() {
+        return this.nomFiliere ;
+    }
+    public String getEmailEtudiant() {
+        return this.emailEtudiant ;
+    }
 
     @Override
     public String toString() {
@@ -97,16 +107,16 @@ public class DossierInscription {
         this.ref_fiche = ref_fiche;
     }
 
-    public String getNom() {
-        return nom;
+    public String getNomEtudiant() {
+        return nomEtudiant;
     }
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setNomEtudiant(String nom) {
+        this.nomEtudiant = nom;
     }
-    public String getPrenom() {
-        return prenom;
+    public String getPrenomEtudiant() {
+        return prenomEtudiant;
     }
     public void setPrenom(String prenom) {
-        this.prenom = prenom;
+        this.prenomEtudiant = prenom;
     }
 }

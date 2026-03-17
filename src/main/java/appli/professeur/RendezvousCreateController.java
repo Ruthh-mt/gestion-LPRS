@@ -61,7 +61,7 @@ public class RendezvousCreateController {
             protected void updateItem(DossierInscription item, boolean empty) {
                 super.updateItem(item, empty);
                 setText(empty || item == null ? null
-                        : item.getPrenom() + " " + item.getNom());
+                        : item.getPrenomEtudiant() + " " + item.getNomEtudiant());
             }
         });
         dossierComboBox.setButtonCell(dossierComboBox.getCellFactory().call(null));

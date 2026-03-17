@@ -35,7 +35,7 @@ public class DossierRepository {
     }
 
     public ArrayList<DossierInscription> getAllDossiers(int refUser) throws SQLException {
-        String sql = "SELECT di.id_dossier_inscription,date_inscription,heure,motivation_etudiant,nom_etudiant,prenom_etudiant,f.nom \n" +
+        String sql = "SELECT di.id_dossier_inscription,date_inscription,heure,motivation_etudiant,di.ref_filiere , nom_etudiant,prenom_etudiant,email_etudiant ,f.nom , di.ref_filiere\n" +
                 "                from dossier_inscription di  \n" +
                 "                 inner JOIN filiere f on f.id_filiere = di.ref_filiere\n" +
                 "                inner join fiche_etudiante fe ON di.ref_fiche_etudiante = fe.id_fiche_etudiante \n" +
@@ -51,6 +51,7 @@ public class DossierRepository {
         int ref_fiche = 0;
         String nom = null ;
         String prenom = null ;
+        String email = null ;
         String nom_filiere = null ;
         DossierInscription dossier = null ;
         try {
@@ -63,8 +64,10 @@ public class DossierRepository {
                 motivation = resultatRequete.getString("motivation_etudiant");
                 nom = resultatRequete.getString("nom_etudiant");
                 prenom = resultatRequete.getString("prenom_etudiant");
+                email = resultatRequete.getString("email_etudiant");
                 nom_filiere = resultatRequete.getString("nom");
-                dossier = new DossierInscription(date,heure,motivation,nom,prenom,nom_filiere);
+                ref_filiere = resultatRequete.getInt("ref_filiere");
+                dossier = new DossierInscription(date,heure,motivation,nom,prenom,email,nom_filiere,ref_filiere);
                 dossier.setId(resultatRequete.getInt("id_dossier_inscription"));
                 dossiers.add(dossier);
             }
@@ -73,6 +76,7 @@ public class DossierRepository {
         }
         return dossiers;
     }
+
 
     public boolean supprimerDossier(DossierInscription dossier) {
         String sql = "DELETE FROM dossier_inscription WHERE id_dossier_inscription =?";
