@@ -51,23 +51,20 @@ public class RendezvousCreateController {
     public void initialize() throws SQLException {
         erreurLabel.setVisible(false);
 
-        int refUser = Session.getInstance().getUtilisateur().getIdUtilisateur();
-        // Charger les dossiers d'inscription → afficher "Prénom NOM"
-        List<DossierInscription> dossiers = dossierRepo.getAllDossiers(refUser);
+        List<DossierInscription> dossiers = dossierRepo.getAllDossiers();
         dossierComboBox.getItems().setAll(dossiers);
         dossierComboBox.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(DossierInscription item, boolean empty) {
                 super.updateItem(item, empty);
                 setText(empty || item == null ? null
-                        : item.getRef_fiche()
-                        + " " + item.getId() );
+                        : item.getPrenomEtudiant() + " " + item.getNomEtudiant());
             }
         });
         dossierComboBox.setButtonCell(dossierComboBox.getCellFactory().call(null));
 
-        // Charger les salles disponibles (non occupées)
-        List<Salle> salles = salleRepo.findSallesDisponibles();
+        // Charger toutes les salles au départ
+        List<Salle> salles = salleRepo.findAll();
         salleComboBox.getItems().setAll(salles);
         salleComboBox.setCellFactory(lv -> new ListCell<>() {
             @Override
@@ -87,7 +84,6 @@ public class RendezvousCreateController {
         String heureStr = heureField.getText().trim();
         Salle salle = salleComboBox.getValue();
 
-        // Validation
         if (dossier == null || date == null || heureStr.isEmpty() || salle == null) {
             afficherErreur("Veuillez remplir tous les champs.");
             return;
@@ -101,7 +97,15 @@ public class RendezvousCreateController {
             return;
         }
 
-        // Créer et sauvegarder le rendez-vous
+        // Vérification disponibilité de la salle
+        List<Salle> sallesDisponibles = salleRepo.findSallesDisponibles(date, heure);
+        boolean salleDisponible = sallesDisponibles.stream()
+                .anyMatch(s -> s.getIdSalle() == salle.getIdSalle());
+        if (!salleDisponible) {
+            afficherErreur("Cette salle est déjà occupée sur ce créneau (±1h).");
+            return;
+        }
+
         RendezVous rdv = new RendezVous();
         rdv.setDateRendezVous(date);
         rdv.setHeure(heure);

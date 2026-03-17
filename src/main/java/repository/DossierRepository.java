@@ -18,7 +18,7 @@ public class DossierRepository {
     }
 
     public boolean ajouterDossier(DossierInscription doss) throws SQLException {
-        String sql = "INSERT INTO dossier_inscription (date,heure,motivation_etudiant,ref_filiere,ref_fiche_etudiante) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO dossier_inscription (date_inscription,heure,motivation_etudiant,ref_filiere,ref_fiche_etudiante) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setDate(1, java.sql.Date.valueOf(doss.getDate().toLocalDate()));
@@ -35,7 +35,12 @@ public class DossierRepository {
     }
 
     public ArrayList<DossierInscription> getAllDossiers(int refUser) throws SQLException {
-        String sql = "SELECT * from dossier_inscription di inner join fiche_etudiante fe ON di.ref_fiche_etudiante = fe.id_fiche_etudiante where ref_createur = ?";
+        String sql = "SELECT di.id_dossier_inscription,date_inscription,heure,motivation_etudiant,di.ref_filiere , nom_etudiant,prenom_etudiant,email_etudiant ,f.nom , di.ref_filiere\n" +
+                "                from dossier_inscription di  \n" +
+                "                 inner JOIN filiere f on f.id_filiere = di.ref_filiere\n" +
+                "                inner join fiche_etudiante fe ON di.ref_fiche_etudiante = fe.id_fiche_etudiante \n" +
+                "                \n" +
+                "                 where ref_createur = ?";
         ArrayList<DossierInscription> dossiers = new ArrayList<>();
         DossierInscription dossierInscription = null;
         int id = 0;
@@ -44,28 +49,34 @@ public class DossierRepository {
         String motivation = null;
         int ref_filiere = 0;
         int ref_fiche = 0;
-
+        String nom = null ;
+        String prenom = null ;
+        String email = null ;
+        String nom_filiere = null ;
+        DossierInscription dossier = null ;
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1,refUser);
             ResultSet resultatRequete = stmt.executeQuery();
             while (resultatRequete.next()) {
-                id = resultatRequete.getInt("id_dossier_inscription");
-                date = resultatRequete.getDate("date");
+                date = resultatRequete.getDate("date_inscription");
                 heure = resultatRequete.getTime("heure");
                 motivation = resultatRequete.getString("motivation_etudiant");
+                nom = resultatRequete.getString("nom_etudiant");
+                prenom = resultatRequete.getString("prenom_etudiant");
+                email = resultatRequete.getString("email_etudiant");
+                nom_filiere = resultatRequete.getString("nom");
                 ref_filiere = resultatRequete.getInt("ref_filiere");
-                ref_fiche = resultatRequete.getInt("ref_fiche_etudiante");
-                
-
-                dossierInscription = new DossierInscription(id, date, heure, motivation, ref_filiere, ref_fiche);
-                dossiers.add(dossierInscription);
+                dossier = new DossierInscription(date,heure,motivation,nom,prenom,email,nom_filiere,ref_filiere);
+                dossier.setId(resultatRequete.getInt("id_dossier_inscription"));
+                dossiers.add(dossier);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return dossiers;
     }
+
 
     public boolean supprimerDossier(DossierInscription dossier) {
         String sql = "DELETE FROM dossier_inscription WHERE id_dossier_inscription =?";
@@ -94,7 +105,7 @@ public class DossierRepository {
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             id_dossier = rs.getInt("id_dossier_inscription");
-            date = rs.getDate("date_dossier");
+            date = rs.getDate("date_inscription");
             heure = rs.getTime("heure");
             motivation = rs.getString("motivation_etudiant");
             ref_filiere = rs.getInt("ref_filiere");

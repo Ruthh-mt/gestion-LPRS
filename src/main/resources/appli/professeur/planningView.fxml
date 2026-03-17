@@ -5,25 +5,77 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <SplitPane dividerPositions="0.15" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.professeur.PlanningController">
     <items>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+        <!-- MENU LATÉRAL -->
+        <AnchorPane minHeight="0.0" minWidth="0.0">
             <children>
-                <Button layoutX="117.0" layoutY="143.0" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onRdvClick" prefHeight="25.0" text="Ajouter un rendez-vous" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onRdvClick" prefHeight="25.0" text="Ajouter un rendez-vous" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                <Separator AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
+                <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onMoisPrecedentClick" prefHeight="25.0" text="◀ Mois précédent" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0" />
+                <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onMoisSuivantClick" prefHeight="25.0" text="Mois suivant ▶" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="110.0" />
+                <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onAujourdhuiClick" prefHeight="25.0" text="Aujourd'hui" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="140.0" />
+                <Separator AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="540.0" />
                 <Button alignment="CENTER" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onProfilClick" prefHeight="25.0" text="Profil" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="650.0" />
                 <Button alignment="CENTER" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onRetourClick" prefHeight="25.0" text="Retour" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="680.0" />
-                <Separator layoutX="59.0" layoutY="632.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="540.0" />
             </children>
         </AnchorPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #DDDDDD;">
+
+        <!-- CONTENU PRINCIPAL -->
+        <AnchorPane minHeight="0.0" minWidth="0.0" style="-fx-background-color: #EEEEEE;">
             <children>
-                <Label alignment="CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" text="PLANNING" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+                <!-- Titre du mois -->
+                <Label fx:id="moisLabel" alignment="CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" text="PLANNING" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                     <font>
-                        <Font name="Consolas Bold" size="36.0" />
+                        <Font name="Consolas Bold" size="30.0" />
                     </font>
                 </Label>
+
+                <Separator AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0" />
+
+                <!-- En-têtes des jours -->
+                <GridPane fx:id="joursSemaineGrid" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="70.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" />
+                    </rowConstraints>
+                </GridPane>
+
+                <!-- Grille du calendrier -->
+                <GridPane fx:id="calendrierGrid" gridLinesVisible="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints vgrow="ALWAYS" percentHeight="16.66" />
+                        <RowConstraints vgrow="ALWAYS" percentHeight="16.66" />
+                        <RowConstraints vgrow="ALWAYS" percentHeight="16.66" />
+                        <RowConstraints vgrow="ALWAYS" percentHeight="16.66" />
+                        <RowConstraints vgrow="ALWAYS" percentHeight="16.66" />
+                        <RowConstraints vgrow="ALWAYS" percentHeight="16.66" />
+                    </rowConstraints>
+                </GridPane>
             </children>
         </AnchorPane>
     </items>

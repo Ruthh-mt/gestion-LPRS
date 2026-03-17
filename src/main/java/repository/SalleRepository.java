@@ -3,12 +3,11 @@ package repository;
 import database.Database;
 import model.Salle;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 public class SalleRepository {
 
@@ -37,21 +36,53 @@ public class SalleRepository {
         return salles;
     }
 
-    public List<Salle> findSallesDisponibles() {
-        String sql = "SELECT * FROM salle WHERE est_occupe = 0";
+    public List<Salle> findSallesDisponibles(LocalDate date, LocalTime heure) {
+        String sql = "SELECT * FROM salle s " +
+                "WHERE s.id_salle NOT IN (" +
+                "  SELECT ref_salle FROM rendez_vous " +
+                "  WHERE date_rendez_vous = ? " +
+                "  AND status != 'Annulé' " +
+                "  AND heure < ADDTIME(?, '01:00:00') " +
+                "  AND ADDTIME(heure, '01:00:00') > ?" +
+                ")";
         List<Salle> salles = new ArrayList<>();
         try {
             PreparedStatement ps = cnx.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(date));
+            ps.setTime(2, Time.valueOf(heure));
+            ps.setTime(3, Time.valueOf(heure));
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                salles.add(new Salle(
-                        rs.getInt("id_salle"),
-                        rs.getInt("capacite"),
-                        false
-                ));
+                salles.add(new Salle(rs.getInt("id_salle"), rs.getInt("capacite"), rs.getBoolean("est_occupe")));
             }
         } catch (SQLException e) {
-            System.out.println("Erreur récupération salles disponibles : " + e.getMessage());
+            System.out.println("Erreur salles disponibles : " + e.getMessage());
+        }
+        return salles;
+    }
+    public List<Salle> findSallesDisponibles(LocalDate date, LocalTime heure, int excludeRdvId) {
+        String sql = "SELECT * FROM salle s " +
+                "WHERE s.id_salle NOT IN (" +
+                "  SELECT ref_salle FROM rendez_vous " +
+                "  WHERE date_rendez_vous = ? " +
+                "  AND status != 'Annulé' " +
+                "  AND id_rendez_vous != ? " +
+                "  AND heure < ADDTIME(?, '01:00:00') " +
+                "  AND ADDTIME(heure, '01:00:00') > ?" +
+                ")";
+        List<Salle> salles = new ArrayList<>();
+        try {
+            PreparedStatement ps = cnx.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(date));
+            ps.setInt(2, excludeRdvId);
+            ps.setTime(3, Time.valueOf(heure));
+            ps.setTime(4, Time.valueOf(heure));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                salles.add(new Salle(rs.getInt("id_salle"), rs.getInt("capacite"), rs.getBoolean("est_occupe")));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur salles disponibles : " + e.getMessage());
         }
         return salles;
     }

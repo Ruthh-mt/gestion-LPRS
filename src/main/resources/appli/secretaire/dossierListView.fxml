@@ -19,5 +19,6 @@
       <Button fx:id="supprimerDossierBtn" layoutX="441.0" layoutY="228.0" mnemonicParsing="false" onAction="#supprimerFiche" text="Supprimer le dossier" />
       <Button fx:id="accueilBtn" layoutX="482.0" layoutY="353.0" mnemonicParsing="false" onAction="#redirectionAccueil" text="Accueil" />
       <Button fx:id="ajouterDossierBtn" layoutX="167.0" layoutY="341.0" mnemonicParsing="false" onAction="#redirectionAjouterDossier" text="Ajouter un dossier" />
+      <Button fx:id="redirectionDossierReadBtn" layoutX="443.0" layoutY="116.0" mnemonicParsing="false" onAction="#redirectionDossierRead" prefHeight="25.0" prefWidth="113.0" text="Voir le dossier" />
    </children>
 </AnchorPane>

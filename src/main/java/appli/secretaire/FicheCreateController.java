@@ -109,7 +109,9 @@ public void retourListe() throws IOException {
                 "BTS SIO SLAM",
                 "BTS SIO SISR",
                 "Licence informatique",
-                "BUT informatique"
+                "BUT informatique",
+                "BAC Scientifique",
+                "BAC STI2D"
         );
     }
 
