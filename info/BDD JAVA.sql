@@ -18,6 +18,7 @@ DROP TABLE IF EXISTS `commande_fourniture`;
 CREATE TABLE IF NOT EXISTS `commande_fourniture` (
                                                      `ref_commande` int NOT NULL,
                                                      `ref_fourniture` int NOT NULL,
+                                                     `qte` int NOT NULL,
                                                      KEY `FK_commande_fourniture_commande` (`ref_commande`),
     KEY `FK_commande_fourniture_fourniture` (`ref_fourniture`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -41,6 +42,7 @@ DROP TABLE IF EXISTS `demande_fourniture`;
 CREATE TABLE IF NOT EXISTS `demande_fourniture` (
                                                     `ref_demande` int NOT NULL,
                                                     `ref_fourniture` int NOT NULL,
+                                                    `qte` int NOT NULL,
                                                     KEY `FK_demande_fourniture_demande` (`ref_demande`),
     KEY `FK_demande_fourniture_fourniture` (`ref_fourniture`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
