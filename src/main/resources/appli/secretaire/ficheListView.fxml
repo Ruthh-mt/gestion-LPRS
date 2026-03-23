@@ -5,23 +5,30 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="506.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.secretaire.FicheListController">
+<AnchorPane prefHeight="506.0" prefWidth="777.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.secretaire.FicheListController">
    <children>
-      <TableView fx:id="tableView" layoutX="26.0" layoutY="111.0" onMouseClicked="#gestionListe" prefHeight="177.0" prefWidth="513.0" />
-      <Button fx:id="redirectionAccueilBtn" layoutX="47.0" layoutY="428.0" mnemonicParsing="false" onAction="#redirectionAccueil" text="Retour vers l'accueil" />
-      <Button fx:id="redirectionDossierBtn" layoutX="560.0" layoutY="221.0" mnemonicParsing="false" onAction="#redirectionDossierBtn" text="Voir mes dossiers" />
-      <Button fx:id="modiferFicheBtn" layoutX="117.0" layoutY="317.0" mnemonicParsing="false" onAction="#redirectionUpdateFiche" text="Modifier la fiche" />
-      <Button fx:id="creerFicheBtn" layoutX="566.0" layoutY="159.0" mnemonicParsing="false" onAction="#redirectionCreateFiche" text="Créer une fiche" />
+      <TableView fx:id="tableView" layoutX="26.0" layoutY="111.0" onMouseClicked="#gestionListe" prefHeight="222.0" prefWidth="514.0" />
+      <Button fx:id="redirectionAccueilBtn" layoutX="14.0" layoutY="447.0" mnemonicParsing="false" onAction="#redirectionAccueil" text="Retour vers l'accueil" />
+      <Button fx:id="redirectionDossierBtn" layoutX="651.0" layoutY="447.0" mnemonicParsing="false" onAction="#redirectionDossierBtn" text="Voir mes dossiers" />
       <Label layoutX="553.0" layoutY="34.0" />
-      <Label fx:id="sessionLabel" layoutX="539.0" layoutY="34.0" text="label session" />
-      <Button fx:id="supprimerFicheBtn" layoutX="367.0" layoutY="317.0" mnemonicParsing="false" onAction="#supprimerFiche" text="Supprimer la fiche" />
-      <Separator layoutX="-22.0" layoutY="93.0" prefHeight="2.0" prefWidth="696.0" />
-      <Label layoutX="214.0" layoutY="16.0" prefHeight="69.0" prefWidth="251.0" text="Mes fiches">
+      <Label fx:id="sessionLabel" layoutX="584.0" layoutY="68.0" text="label session" />
+      <Separator layoutX="-22.0" layoutY="96.0" prefHeight="0.0" prefWidth="800.0" />
+      <Label layoutX="103.0" layoutY="16.0" prefHeight="70.0" prefWidth="362.0" text="Fiches étudiantes">
          <font>
             <Font size="47.0" />
          </font>
       </Label>
+      <VBox layoutX="599.0" layoutY="122.0" prefHeight="200.0" prefWidth="122.0" spacing="50.0">
+         <children>
+            <Button fx:id="ficheReadBtn" mnemonicParsing="false" onAction="#redirectionFicheRead" prefHeight="26.0" prefWidth="110.0" text="Voir la fiche" />
+            <Button fx:id="modiferFicheBtn" mnemonicParsing="false" onAction="#redirectionUpdateFiche" prefHeight="26.0" prefWidth="112.0" text="Modifier la fiche" />
+            <Button fx:id="supprimerFicheBtn" mnemonicParsing="false" onAction="#supprimerFiche" text="Supprimer la fiche" />
+         </children>
+      </VBox>
+      <Button fx:id="creerFicheBtn" layoutX="234.0" layoutY="355.0" mnemonicParsing="false" onAction="#redirectionCreateFiche" prefHeight="26.0" prefWidth="113.0" text="Ajouter une fiche" />
+      <Separator layoutX="3.0" layoutY="427.0" prefHeight="3.0" prefWidth="778.0" />
    </children>
 </AnchorPane>

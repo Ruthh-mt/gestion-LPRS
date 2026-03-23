@@ -2,9 +2,14 @@ package appli.secretaire;
 
 import appli.StartApplication;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 import model.DossierInscription;
 import model.FicheEtudiant;
 import model.Filiere;
@@ -19,24 +24,38 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ResourceBundle;
 
+import static appli.StartApplication.mainStage;
+
 public class DossierReadController implements Initializable {
 
 
-    public Label nomLabel;
-    public Label prenomLabel;
-    public Label emailLabel;
-    public Label dernierDiplomeLabel;
-    public Label dateInscriptionLabel;
-    public Label heureLabel;
-    public Label filiereLabel;
-    public TextArea motivationArea;
-    public Label titreDossier;
+    @FXML
+    private Label nomLabel;
+    @FXML
+    private Label prenomLabel;
+    @FXML
+    private Label emailLabel;
+    @FXML
+    private Label dernierDiplomeLabel;
+    @FXML
+    private Label dateInscriptionLabel;
+    @FXML
+    private Label heureLabel;
+    @FXML
+    private Label filiereLabel;
+    @FXML
+    private TextArea motivationArea;
+    @FXML
+    private Label titreDossier;
+
+    @FXML
+    private Button redirectionUpdateDossierBtn ;
 
     DossierRepository dr = new DossierRepository();
     FicheEtudiantRepository fr = new FicheEtudiantRepository();
-    FiliereRepository fir = new FiliereRepository();
-    DossierInscription dossierActuel = null ;
-    FicheEtudiant ficheActuel = null ;
+    FiliereRepository filiereRepository = new FiliereRepository();
+    DossierInscription dossierActuel = null;
+    FicheEtudiant ficheActuel = null;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -46,23 +65,42 @@ public class DossierReadController implements Initializable {
     public void retourListe() throws IOException {
         StartApplication.changeScene("secretaire/dossierList","liste dossiers");
     }
-
     @FXML
-    public void initData(DossierInscription dossierInscription , int ref_fiche) throws SQLException {
+    public void initData(DossierInscription dossierInscription) throws SQLException {
         this.dossierActuel = dossierInscription ;
+        System.out.println("Dossier actuel : "+dossierActuel);
+        // Recuperer fiche
+        this.ficheActuel = fr.getFicheEtudiant(dossierActuel.getRefFiche());
+        //Recuperer filière
+        int ref_filiere = this.dossierActuel.getRefFiliere();
+        Filiere filiere = filiereRepository.getFiliere(ref_filiere);
+
+        //Remplissage des champs
         titreDossier.setText("Dossier n°"+dossierActuel.getId());
         dateInscriptionLabel.setText(String.valueOf(this.dossierActuel.getDate()));
         heureLabel.setText(String.valueOf(this.dossierActuel.getHeure()));
-        filiereLabel.setText(dossierActuel.getNomFiliere());
-        nomLabel.setText(dossierActuel.getNomEtudiant());
-        prenomLabel.setText(dossierActuel.getPrenomEtudiant());
-        emailLabel.setText(dossierActuel.getEmailEtudiant());
-        //Get fiche
+        nomLabel.setText(ficheActuel.getNomEtudiant());
+        prenomLabel.setText(ficheActuel.getPrenomEtudiant());
+        emailLabel.setText(ficheActuel.getEmailEtudiant());
+        motivationArea.setText(dossierActuel.getMotivation());
+        dernierDiplomeLabel.setText(ficheActuel.getDernierDiplome());
+        filiereLabel.setText(filiere.getNomFiliere());
 
         System.out.println("Id dossier :"+ dossierInscription.getId());
 
-
-
-
     }
+
+    @FXML
+    public void redirectionUpdateDossier() throws IOException, SQLException {
+        FXMLLoader fxmlLoader = new
+                FXMLLoader(StartApplication.class.getResource("secretaire/dossierUpdate" + "View.fxml"));
+        Parent root = fxmlLoader.load();
+        DossierUpdateController dossierUpdateController = fxmlLoader.getController();
+        dossierUpdateController.initData(dossierActuel);
+        Stage mainStage = (Stage) redirectionUpdateDossierBtn.getScene().getWindow();
+
+        mainStage.setScene(new Scene(root));
+        mainStage.show();
+    }
+
 }

@@ -5,30 +5,48 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="528.0" prefWidth="658.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.secretaire.FicheCreateController">
+<AnchorPane prefHeight="466.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.secretaire.FicheCreateController">
    <children>
-      <Label fx:id="nomLabel" layoutX="73.0" layoutY="194.0" text="Téléphone" />
-      <Label fx:id="prenomLabel" layoutX="81.0" layoutY="64.0" text="Nom" />
-      <Label fx:id="emailLabel" layoutX="80.0" layoutY="149.0" text="Email" />
-      <TextField fx:id="nomTextField" layoutX="202.0" layoutY="60.0" />
-      <TextField fx:id="prenomTextField" layoutX="202.0" layoutY="102.0" />
-      <TextField fx:id="emailTextField" layoutX="202.0" layoutY="145.0" />
-      <TextField fx:id="telephoneTextField" layoutX="202.0" layoutY="190.0" />
       <Label layoutX="174.0" layoutY="14.0" text="Ajouter une fiche étudiant ">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
-      <Button fx:id="validerButton" layoutX="102.0" layoutY="390.0" mnemonicParsing="false" onAction="#createFicheEtudiant" text="Valider" />
-      <Button fx:id="cancelButton" layoutX="256.0" layoutY="390.0" mnemonicParsing="false" text="Annuler" />
-      <Button fx:id="retourButton" layoutX="483.0" layoutY="390.0" mnemonicParsing="false" onAction="#retourListe" text="retour" />
-      <Label layoutX="80.0" layoutY="106.0" text="Prenom" />
-      <Label layoutX="73.0" layoutY="255.0" text="Adresse" />
-      <TextField fx:id="adresseTextfield" layoutX="195.0" layoutY="251.0" />
-      <Label fx:id="dernierDiplomeLabel" layoutX="37.0" layoutY="312.0" text="Dernier diplome obtenu" />
-      <ComboBox fx:id="dernierDiplomeComboBox" layoutX="195.0" layoutY="308.0" prefWidth="150.0" />
-      <Label fx:id="erreurLabel" layoutX="483.0" layoutY="207.0" text="erreur label" />
+      <Button fx:id="validerButton" layoutX="147.0" layoutY="291.0" mnemonicParsing="false" onAction="#createFicheEtudiant" text="Valider" />
+      <Button fx:id="cancelButton" layoutX="304.0" layoutY="291.0" mnemonicParsing="false" text="Annuler" />
+      <Button fx:id="retourButton" layoutX="22.0" layoutY="412.0" mnemonicParsing="false" onAction="#retourListe" text="Retour vers la liste des fiches" />
+      <Label fx:id="erreurLabel" layoutX="260.0" layoutY="371.0" text="erreur label" />
+      <VBox layoutX="201.0" layoutY="79.0" prefHeight="200.0" prefWidth="120.0" spacing="40.0">
+         <children>
+            <TextField fx:id="nomTextField" />
+            <TextField fx:id="prenomTextField" />
+            <TextField fx:id="emailTextField" />
+         </children>
+      </VBox>
+      <VBox layoutX="97.0" layoutY="79.0" prefHeight="222.0" prefWidth="100.0" spacing="50.0">
+         <children>
+            <Label fx:id="prenomLabel" text="Nom" />
+            <Label text="Prenom" />
+            <Label fx:id="emailLabel" text="Email" />
+         </children>
+      </VBox>
+      <VBox layoutX="516.0" layoutY="79.0" prefHeight="212.0" prefWidth="127.0" spacing="40.0">
+         <children>
+            <TextField fx:id="adresseTextfield" />
+            <ComboBox fx:id="dernierDiplomeComboBox" prefWidth="150.0" />
+            <TextField fx:id="telephoneTextField" />
+         </children>
+      </VBox>
+      <VBox layoutX="371.0" layoutY="79.0" prefHeight="200.0" prefWidth="134.0" spacing="50.0">
+         <children>
+            <Label text="Adresse" />
+            <Label fx:id="dernierDiplomeLabel" text="Dernier diplome obtenu" />
+            <Label fx:id="nomLabel" text="Téléphone" />
+         </children>
+      </VBox>
+      <Label fx:id="sessionLabel" layoutX="598.0" layoutY="34.0" text="sessionLabel" />
    </children>
 </AnchorPane>

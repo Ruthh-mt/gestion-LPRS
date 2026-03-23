@@ -35,14 +35,17 @@ public class DossierInscription {
         this.ref_fiche = ref_fiche;
         this.motivation = motivation;
     }
-    public DossierInscription(Date date, Time heure, String motivation,String nomEtudiant , String prenomEtudiant,String emailEtudiant , String nomFiliere, int refFiliere) {
+    public DossierInscription(int id ,Date date, Time heure, String motivation,String nomEtudiant , String prenomEtudiant,String emailEtudiant , String nomFiliere, int refFiliere,int ref_fiche) {
+        this.idDossier = id;
         this.date = date ;
         this.heure = heure;
         this.motivation = motivation;
         this.prenomEtudiant = prenomEtudiant ;
         this.nomEtudiant = nomEtudiant ;
+        this.emailEtudiant = emailEtudiant ;
         this.nomFiliere = nomFiliere;
         this.refFiliere = refFiliere ;
+        this.ref_fiche = ref_fiche;
     }
 
 
@@ -85,10 +88,14 @@ public class DossierInscription {
     public String getEmailEtudiant() {
         return this.emailEtudiant ;
     }
+    public int getRefFiche(){
+        return this.ref_fiche;
+    }
 
     @Override
     public String toString() {
-        return "Date : "+this.date + "\nHeure : "+this.heure+"\nFilière : "+this.refFiliere+"\nMotivation : "+this.motivation;
+        return "Date : "+this.date + "\nHeure : "+this.heure+"\nFilière : "+this.refFiliere+"\nMotivation : "+this.motivation +
+                "\nRef fiche : "+this.ref_fiche;
     }
 
     public int getId() {

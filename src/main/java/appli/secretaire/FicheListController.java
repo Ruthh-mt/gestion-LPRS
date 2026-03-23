@@ -13,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.FicheEtudiant;
+import model.Utilisateur;
 import repository.FicheEtudiantRepository;
 import session.Session;
 import session.SessionFiche;
@@ -42,6 +43,10 @@ public class FicheListController implements Initializable {
     @FXML
     private javafx.scene.control.Button redirectionDossierBtn ;
 
+    @FXML
+    private Button ficheReadBtn;
+
+
 
     private FicheEtudiantRepository ficheEtudiantRepository = new FicheEtudiantRepository();
 
@@ -51,6 +56,52 @@ public class FicheListController implements Initializable {
     @FXML
     private boolean suppression = false;
 
+
+    Utilisateur userActuel = Session.getInstance().getUtilisateur();
+    FicheEtudiant ficheActuel = null;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        this.sessionLabel.setText("Session de "+userActuel.getPrenom()+" "+Session.getInstance().getUtilisateur().getNom());
+        modiferFicheBtn.setVisible(false);
+        supprimerFicheBtn.setVisible(false);
+        creerFicheBtn.setVisible(false);
+        redirectionDossierBtn.setVisible(false);
+        ficheReadBtn.setVisible(false);
+        if(userActuel.getRole().equals("Secrétaire")){
+            creerFicheBtn.setVisible(true);
+            redirectionDossierBtn.setVisible(true);
+        }
+
+
+        String[][] colonnes = {
+                {"Nom", "nomEtudiant"},
+                {"Prénom", "prenomEtudiant"},
+                {"Email", "emailEtudiant"},
+                {"Dernier diplôme", "dernierDiplome"}
+        };
+
+        for (String[] col : colonnes) {
+            TableColumn<FicheEtudiant, String> column =
+                    new TableColumn<>(col[0]);
+            column.setCellValueFactory(
+                    new PropertyValueFactory<>(col[1])
+            );
+            tableView.getColumns().add(column);
+        }
+        int refUser = Session.getInstance().getUtilisateur().getIdUtilisateur();
+        try {
+            tableView.getItems().setAll(
+                    ficheEtudiantRepository.getToutesLesFiches(refUser)
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(suppression){
+            tableView.refresh();
+        }
+    }
 @FXML
     public void redirectionCreateFiche() throws IOException {
         StartApplication.changeScene("secretaire/ficheCreate","Créer une fiche");
@@ -81,8 +132,16 @@ public class FicheListController implements Initializable {
     }
 
     @FXML
-    public void redirectionAjouterDossier() throws IOException {
-        StartApplication.changeScene("secretaire/dossierCreate","Créer un dossier");
+    public void redirectionFicheRead() throws IOException, SQLException {
+        FXMLLoader fxmlLoader = new
+                FXMLLoader(StartApplication.class.getResource("secretaire/ficheRead" + "View.fxml"));
+        Parent root = fxmlLoader.load();
+        FicheReadController ficheReadController = fxmlLoader.getController();
+        ficheReadController.initData(ficheActuel);
+        Stage mainStage = (Stage) ficheReadBtn.getScene().getWindow();
+
+        mainStage.setScene(new Scene(root));
+        mainStage.show();
     }
 
     @FXML
@@ -94,56 +153,24 @@ public class FicheListController implements Initializable {
 
                 FicheEtudiant fe = tableView.getSelectionModel().getSelectedItem();
 
-                if (fe != null) {
+                if (fe != null && userActuel.getRole().equals("Secrétaire")) {
                     System.out.println("Double clic sur : " + fe.getNomEtudiant());
-
+                    System.out.println("Secrétaire : " + userActuel.getPrenom()+" "+userActuel.getNom());
                     SessionFiche.getInstance().sauvegardeSession(fe);
+                    ficheActuel = fe;
                     modiferFicheBtn.setVisible(true);
                     supprimerFicheBtn.setVisible(true);
+                    ficheReadBtn.setVisible(true);
                 }
             }
         });
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
 
-        this.sessionLabel.setText("Session de "+Session.getInstance().getUtilisateur().getPrenom()+" "+Session.getInstance().getUtilisateur().getNom());
-        modiferFicheBtn.setVisible(false);
-        supprimerFicheBtn.setVisible(false);
-        String[][] colonnes = {
-                {"Nom", "nomEtudiant"},
-                {"Prénom", "prenomEtudiant"},
-                {"Email", "emailEtudiant"},
-                {"Dernier diplôme", "dernierDiplome"}
-        };
-
-        for (String[] col : colonnes) {
-            TableColumn<FicheEtudiant, String> column =
-                    new TableColumn<>(col[0]);
-            column.setCellValueFactory(
-                    new PropertyValueFactory<>(col[1])
-            );
-            tableView.getColumns().add(column);
-        }
-        int refUser = Session.getInstance().getUtilisateur().getIdUtilisateur();
-        try {
-            tableView.getItems().setAll(
-                    ficheEtudiantRepository.getToutesLesFiches(refUser)
-            );
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        if(suppression){
-            tableView.refresh();
-        }
-    }
 
     @FXML
     public void supprimerFiche() throws SQLException, IOException {
-    suppression = false ;
-       int idFiche = SessionFiche.getInstance().getFiche().getIdFicheEtudiante();
-        ficheEtudiantRepository.deleteFicheEtudiant(idFiche);
+        ficheEtudiantRepository.deleteFicheEtudiant(ficheActuel.getIdFicheEtudiante());
      }
 }
 

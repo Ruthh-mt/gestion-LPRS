@@ -193,4 +193,25 @@ public class UtilisateurRepository {
         }
     }
 
+    public Utilisateur getUtilisateurById(int id) {
+        Utilisateur user = null;
+        String query = "SELECT * FROM utilisateur WHERE id_utilisateur = ?";
+        try {
+            PreparedStatement stmt = this.cnx.prepareStatement(query);
+            stmt.setInt(1,id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                user = new Utilisateur(
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("email")
+                );
+            }
+            return user;
+        } catch (SQLException e) {
+            System.out.println("Erreur de connexion : " + '\n' + " >>" + e.getMessage());
+            return null;
+        }
+    }
+
 }
