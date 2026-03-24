@@ -1,7 +1,10 @@
 package repository.gestionnaire;
 
 import database.Database;
+import model.Utilisateur;
+import model.gestionnaire.Commande;
 import model.gestionnaire.Demande;
+import model.gestionnaire.Fournisseur;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -63,5 +66,33 @@ public class DemandeRepository {
             System.out.println("Erreur récupération gestionnaire : " + e.getMessage());
         }
         return -1;
+    }
+
+    public ArrayList<Demande> getAllDemandes() {
+        String getAll="SELECT * FROM demande";
+        ArrayList<Demande> allDemandes=new ArrayList<>();
+        try{
+            PreparedStatement ps= cnx.prepareStatement(getAll);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                Demande demande= new Demande(
+                  rs.getInt("id_demande"),
+                  rs.getBoolean("est_valide"),
+                  rs.getInt("ref_professeur"),
+                  rs.getInt("ref_gestionnaire"),
+                        rs.getString("raison_demande"),
+                        rs.getString("status"),
+                        rs.getString("urgence"),
+                        rs.getString("date_demande")
+                );
+                allDemandes.add(demande);
+            }
+            return allDemandes;
+
+        }catch(SQLException e){
+            System.out.println( "Erreur lors de la recuperation des Demandes : "+e.getMessage());
+            return null;
+        }
+
     }
 }
