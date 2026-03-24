@@ -1,5 +1,5 @@
 package services;
-/*
+
 import java.security.SecureRandom;
 import java.util.Properties;
 
@@ -46,4 +46,4 @@ public class EmailService {
         int code = 100000 + random.nextInt(900000);
         return String.valueOf(code);
     }
-}*/
+}
