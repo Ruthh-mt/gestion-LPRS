@@ -39,6 +39,7 @@
                 <Separator AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="540.0" />
                 <Button layoutX="20.0" layoutY="20.0" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onProfilClick" prefHeight="25.0" text="Profil" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="650.0" />
                 <Button layoutX="10.0" layoutY="10.0" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onDeconnexionClick" prefHeight="25.0" text="Déconnexion" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="680.0" />
+            <Button layoutX="42.0" layoutY="543.0" mnemonicParsing="false" onAction="#onStatistiquesClick" prefHeight="25.0" prefWidth="123.0" text="Statistiques" />
             </children>
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #DDDDDD;">

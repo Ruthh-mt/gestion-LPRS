@@ -41,4 +41,9 @@ public class HomePageController {
         StartApplication.changeScene("profil/profilRead", "Profil");
     }
 
+    @FXML
+    void onStatistiquesClick(ActionEvent event) throws IOException {
+        StartApplication.changeScene("statistiques/statistiques", "Statistiques");
+    }
+
 }

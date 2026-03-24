@@ -165,10 +165,8 @@ public class AccueilGestionnaireController  implements Initializable {
         StartApplication.changeScene("gestionnaire/commande/createCommande","Faire une Commande");
         CreateCommandeController controller = (CreateCommandeController)
                 StartApplication. getControllerFromStage();
-        controller.initData(this.session);
-
+        //controller.initData(this.session);
     }
-
 
     @FXML
     void onShowPastCommand() throws IOException {
