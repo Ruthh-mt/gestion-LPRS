@@ -55,17 +55,19 @@ public class FicheCreateController implements Initializable {
     @FXML
     private Label erreurLabel;
 
+    @FXML
+    private Label sessionLabel;
 
 
 
     FicheEtudiantRepository ficheEtudiantRepository = new FicheEtudiantRepository();
 
-    Utilisateur utilisateurActuel = Session.getInstance().getUtilisateur();
+    Utilisateur userActuel = Session.getInstance().getUtilisateur();
 
 
     public void createFicheEtudiant() throws SQLException, IOException {
 
-    int ref_createur = utilisateurActuel.getId() ;
+    int ref_createur = userActuel.getId() ;
     String nom = nomTextField.getText();
     String prenom = prenomTextField.getText();
     String email = emailTextField.getText();
@@ -74,25 +76,20 @@ public class FicheCreateController implements Initializable {
     String adresse = adresseTextfield.getText();
 
     if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || telephone.isEmpty() || adresse.isEmpty() || dernierDiplome.isEmpty()) {
-        erreurLabel.setText("Manque un champ");
+        erreurLabel.setText("Veuillez remplir tous les champs !");
+        erreurLabel.setStyle("-fx-text-fill: red;");
     }
     else {
         FicheEtudiant newFiche = new FicheEtudiant(ref_createur , nom,prenom,email,dernierDiplome,telephone,adresse);
         boolean ok = ficheEtudiantRepository.AjouterFicheEtudiant(newFiche);
         if (ok) {
-            System.out.println("insertion ok");
-            System.out.println("Ref createur: " + ref_createur);
-            System.out.println("nom: " + nom);
-            System.out.println("prenom: " + prenom);
-            System.out.println("email: " + email);
-            System.out.println("dernierDiplome: " + dernierDiplome);
-            System.out.println("telephone: " + telephone);
-            System.out.println("adresse: " + adresse);
+            erreurLabel.setText("Fiche ajouté avec succès");
+            erreurLabel.setStyle("-fx-text-fill: green;");
 
-            StartApplication.changeScene("secretaire/ficheList","Liste des fiches");
         }
         else {
-            System.out.println("Erreur");
+            erreurLabel.setText("Erreur");
+            erreurLabel.setStyle("-fx-text-fill: red;");
         }
     }
 
@@ -105,6 +102,8 @@ public void retourListe() throws IOException {
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         erreurLabel.setVisible(false);
+        sessionLabel.setVisible(true);
+        sessionLabel.setText("Session de "+userActuel.getPrenom()+" "+userActuel.getNom());
         dernierDiplomeComboBox.getItems().addAll(
                 "BTS SIO SLAM",
                 "BTS SIO SISR",

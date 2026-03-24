@@ -62,7 +62,6 @@ public class FicheEtudiantRepository {
         String sql = "DELETE FROM fiche_etudiante WHERE id_fiche_etudiante=?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, id);
-        System.out.printf("Fiche numéro %d supprimé",id);
         ps.execute();
     }
 
@@ -89,11 +88,12 @@ public class FicheEtudiantRepository {
            telephone_etudiant = rs.getString("telephone");
            adresse_etudiant = rs.getString("adresse");
            fe = new FicheEtudiant(id_fiche,ref_createur,nom_etudiant,prenom_etudiant,email_etudiant,dernier_diplome_etudiant,telephone_etudiant,adresse_etudiant);
+           System.out.println(fe);
        }
        return fe;
 }
 
-    public ArrayList<FicheEtudiant> getToutesLesFiches(int refUser) throws SQLException {
+    public ArrayList<FicheEtudiant> getToutesLesFichesSecretaire(int refUser) throws SQLException {
 
 
         String sql = "SELECT * from fiche_etudiante where ref_createur = ?";
@@ -130,6 +130,56 @@ public class FicheEtudiantRepository {
                 dernierDiplome ,
                 telephone ,
                 adresse
+                );
+                ficheEtudiants.add(ficheEtudiant);
+                ResultSet rsCount = connection.createStatement()
+                        .executeQuery("SELECT COUNT(*) AS nb FROM fiche_etudiante");
+                if (rsCount.next()) System.out.println("NB lignes = " + rsCount.getInt("nb"));
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la requête  " + e.getMessage());
+        }
+        return ficheEtudiants;
+    }
+
+    public ArrayList<FicheEtudiant> getToutesLesFiches(int refUser) throws SQLException {
+
+
+        String sql = "SELECT * from fiche_etudiante where ref_createur = ?";
+        ArrayList<FicheEtudiant> ficheEtudiants = new ArrayList<>();
+        int id = 0;
+        int ref_createur = 0 ;
+        String nom = "";
+        String prenom = "";
+        String email = "";
+        String telephone = "";
+        String adresse = "";
+        String dernierDiplome = "";
+        FicheEtudiant ficheEtudiant = null;
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1,refUser);
+            ResultSet resultatRequete = stmt.executeQuery();
+            while (resultatRequete.next()) {
+                id = resultatRequete.getInt("id_fiche_etudiante");
+                ref_createur = resultatRequete.getInt("ref_createur");
+                nom = resultatRequete.getString("nom_etudiant");
+                prenom = resultatRequete.getString("prenom_etudiant");
+                email = resultatRequete.getString("email_etudiant");
+                dernierDiplome = resultatRequete.getString("dernier_diplome_etudiant");
+
+                telephone = resultatRequete.getString("telephone");
+                adresse = resultatRequete.getString("adresse");
+                ficheEtudiant = new FicheEtudiant(
+                        id ,
+                        ref_createur ,
+                        nom,
+                        prenom,
+                        email ,
+                        dernierDiplome ,
+                        telephone ,
+                        adresse
                 );
                 ficheEtudiants.add(ficheEtudiant);
                 ResultSet rsCount = connection.createStatement()

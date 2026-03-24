@@ -57,7 +57,7 @@ public class DossierUpdateController {
     @FXML
     private Button validerButton;
 
-    private Utilisateur sessionActuel = Session.getInstance().getUtilisateur();
+    private Utilisateur userActuel = Session.getInstance().getUtilisateur();
     private DossierInscription dossier_actuel;
     private DossierRepository dossierRepository = new DossierRepository();
     private FiliereRepository filiereRepository = new FiliereRepository();
@@ -65,11 +65,11 @@ public class DossierUpdateController {
 
     @FXML
     public void initialize() throws SQLException {
-        sessionLabel.setText("Session de " + sessionActuel.getNom() + sessionActuel.getPrenom());
+        sessionLabel.setText("Session de " + userActuel.getNom() + userActuel.getPrenom());
         erreurLabel.setVisible(false);
-        this.sessionLabel.setText("Session de " + sessionActuel.getNom());
+        this.sessionLabel.setText("Session de " + userActuel.getNom());
 
-        //----------------------------------------//
+        //---------Remplir comboBox Ref Filiere-------------------------------//
         ArrayList<Filiere> filieres = null;
         try {
             filieres = new ArrayList<>(filiereRepository.getAllFilieres());
@@ -79,7 +79,7 @@ public class DossierUpdateController {
         for (Filiere filiere : filieres) {
             refFiliereTextfield.getItems().add(filiere);
         }
-        //---------------------------------------------------------------------
+        //----------------------Remplir comboBox Ref Fiche-----------------------------------------------
         ArrayList<FicheEtudiant> ficheEtudiants = null;
         try {
             ficheEtudiants = new ArrayList<>(ficheEtudiantRepository.getToutesLesFiches(Session.getInstance().getUtilisateur().getIdUtilisateur()));
@@ -92,8 +92,10 @@ public class DossierUpdateController {
     }
 
     @FXML
-    public void initData(DossierInscription dossier) throws SQLException {
+    public void initData(DossierInscription dossierInscription) throws SQLException {
 
+        this.dossier_actuel = dossierInscription;
+        System.out.println(this.dossier_actuel);
         SpinnerValueFactory<LocalTime> valueFactory = new SpinnerValueFactory<LocalTime>() {
             private LocalTime time = LocalTime.now();
 
@@ -112,19 +114,19 @@ public class DossierUpdateController {
         valueFactory.setConverter(new LocalTimeStringConverter(DateTimeFormatter.ofPattern("HH:mm"), null));
         heureTextfield.setValueFactory(valueFactory);
         heureTextfield.getValueFactory().setValue(LocalTime.now());
-        this.dossier_actuel = dossier;
+
 
 
         //REQUETE RECUPERER FICHE
-        int idDossier = dossier.getId();
-        Filiere filiereTrouve = filiereRepository.getFiliere(dossier_actuel.getRefFiliere());
+        int idDossier = this.dossier_actuel.getId();
+        Filiere filiereTrouve = filiereRepository.getFiliere(this.dossier_actuel.getRefFiliere());
         if (filiereTrouve != null) {
             System.out.println("Des filières sont trouvés");
         }
         else{
             System.out.println("Pas de filières");
         }
-        FicheEtudiant ficheTrouve = ficheEtudiantRepository.getFicheEtudiant(dossier_actuel.getRef_fiche());
+        FicheEtudiant ficheTrouve = ficheEtudiantRepository.getFicheEtudiant(this.dossier_actuel.getRef_fiche());
         if(ficheTrouve != null) {
             System.out.println("Une fiche est trouvé");
         }
@@ -132,7 +134,9 @@ public class DossierUpdateController {
             System.out.println("Pas de fiche");
         }
         //SET DATE
-        dateTextField.setValue(LocalDate.now());
+        dateTextField.setValue(dossier_actuel.getDate().toLocalDate());
+        //SET HEURE
+        heureTextfield.getValueFactory().setValue(dossier_actuel.getHeure().toLocalTime());
         // SET MOTIVATION
         motivationTextfield.setText(dossier_actuel.getMotivation());
         //SET FILIERE
@@ -151,8 +155,10 @@ public class DossierUpdateController {
         DossierInscription dossier = new DossierInscription(idActuel ,date, heure, motivation, ref_filiere, ref_fiche);
        boolean ok = dossierRepository.mettreAjourDossier(dossier);
        if (ok) {
-           System.out.println("Mise à jour effectué");
-           StartApplication.changeScene("secretaire/dossierList","Liste des dossiers");
+           erreurLabel.setVisible(true);
+           erreurLabel.setText("Dossier modifié avec succès");
+           erreurLabel.setStyle("-fx-text-fill: green;");
+
        }
     }
 

@@ -10,6 +10,7 @@ import javafx.util.converter.LocalTimeStringConverter;
 import model.DossierInscription;
 import model.FicheEtudiant;
 import model.Filiere;
+import model.Utilisateur;
 import repository.DossierRepository;
 import repository.FicheEtudiantRepository;
 import repository.FiliereRepository;
@@ -58,6 +59,8 @@ public class DossierCreateController implements Initializable {
     DossierRepository dossierRepository = new DossierRepository();
     FicheEtudiantRepository ficheEtudiantRepository = new FicheEtudiantRepository();
 
+    Utilisateur userActuel = Session.getInstance().getUtilisateur();
+
     @FXML
     public void ajouterDossier() throws SQLException, IOException {
      java.sql.Date date = Date.valueOf(dateTextField.getValue());    ;
@@ -82,13 +85,14 @@ public class DossierCreateController implements Initializable {
             motivationTextfield.clear();
             refFiliereTextfield.getItems().clear();
             refFicheTextfield.getItems().clear();
-            StartApplication.changeScene("secretaire/dossierCreate","creer un dossier");
+            //StartApplication.changeScene("secretaire/dossierCreate","creer un dossier");
         }
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        sessionLabel.setText("Session de "+userActuel.getPrenom()+" "+userActuel.getNom());
         SpinnerValueFactory<LocalTime> valueFactory = new SpinnerValueFactory<LocalTime>() {
             private LocalTime time = LocalTime.now(); @Override public void decrement(int steps) {
                 time = time.minusMinutes(steps); setValue(time);

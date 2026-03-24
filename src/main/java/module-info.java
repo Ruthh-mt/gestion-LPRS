@@ -9,6 +9,9 @@ module appli{
     requires spring.security.crypto;
     requires javafx.graphics;
     requires jakarta.mail;
+    //requires appli;
+    //requires appli;
+
 
     opens appli to javafx.fxml;
     exports appli;

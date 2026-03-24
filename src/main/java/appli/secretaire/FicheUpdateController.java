@@ -57,7 +57,9 @@ public class FicheUpdateController {
                 "BTS SIO SLAM",
                 "BTS SIO SISR",
                 "Licence informatique",
-                "BUT informatique"
+                "BUT informatique",
+                "BAC Scientifique",
+                "BAC STI2D"
         );
     }
 
@@ -77,26 +79,21 @@ public class FicheUpdateController {
         String dernierDiplome = dernierDiplomeComboBox.getValue();
 
         if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || telephone.isEmpty() || adresse.isEmpty() || dernierDiplome.isEmpty()) {
-            erreurLabel.setText("Manque un champ");
+            erreurLabel.setText("Veuillez remplir tous les champs !");
+            erreurLabel.setStyle("-fx-text-fill: red;");
         }
         else {
             FicheEtudiant newFiche = new FicheEtudiant(nom,prenom,email,dernierDiplome,telephone,adresse);
             boolean ok = fer.mettreAJourFiche(newFiche,idFicheActuel);
             if (ok) {
-                System.out.println("modificatin ok");
-                System.out.println("Ref createur: " + ref_createur);
-                System.out.println("nom: " + nom);
-                System.out.println("prenom: " + prenom);
-                System.out.println("email: " + email);
-                System.out.println("dernierDiplome: " + dernierDiplome);
-                System.out.println("telephone: " + telephone);
-                System.out.println("adresse: " + adresse);
-
-                StartApplication.changeScene("secretaire/ficheList","Liste des fiches");
-                System.out.println("UPDATE OK");
+                erreurLabel.setVisible(true);
+                //MESSAGE
+                erreurLabel.setText("Fiche modifié avec succès");
+                erreurLabel.setStyle("-fx-text-fill: green;");
             }
             else {
-                System.out.println("Erreur");
+                erreurLabel.setText("Erreur");
+                erreurLabel.setStyle("-fx-text-fill: red;");
             }
         }
     }

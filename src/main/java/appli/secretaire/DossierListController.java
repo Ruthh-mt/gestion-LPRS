@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class DossierListController implements Initializable {
@@ -42,6 +43,14 @@ public class DossierListController implements Initializable {
     @FXML
     private Label sessionLabel ;
 
+    @FXML
+    private Button ajouterDossierBtn;
+
+    @FXML
+    private Button deleteDossierBtn;
+    @FXML
+
+
     Utilisateur userSession = Session.getInstance().getUtilisateur();
     DossierRepository dossierRepository = new DossierRepository();
     DossierInscription dossierActuel = null;
@@ -54,12 +63,11 @@ public class DossierListController implements Initializable {
     @FXML
     public void redirectionDossierRead() throws IOException, SQLException {
         DossierInscription di = tableviewDossier.getSelectionModel().getSelectedItem();
-        int ref_fiche = di.getRef_fiche();
         FXMLLoader fxmlLoader = new
                 FXMLLoader(StartApplication.class.getResource("secretaire/dossierRead" + "View.fxml"));
         Parent root = fxmlLoader.load();
         DossierReadController dossierReadController = fxmlLoader.getController();
-        dossierReadController.initData(di,ref_fiche);
+        dossierReadController.initData(di);
         Stage mainStage = (Stage) tableviewDossier.getScene().getWindow();
 
         mainStage.setScene(new Scene(root));
@@ -85,22 +93,27 @@ public class DossierListController implements Initializable {
 
     }
 
+    @FXML
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sessionLabel.setText("Session de " + userSession.getPrenom() + " " + userSession.getNom());
         modifierDossierBtn.setVisible(false);
         supprimerDossierBtn.setVisible(false);
+        ajouterDossierBtn.setVisible(false);
         redirectionDossierReadBtn.setVisible(false);
-        this.sessionLabel.setText("Session de " + Session.getInstance().getUtilisateur().getPrenom() + " " + Session.getInstance().getUtilisateur().getNom());
-        System.out.println("Id session :" + Session.getInstance().getUtilisateur().getId());
-        modifierDossierBtn.setVisible(false);
-        supprimerDossierBtn.setVisible(false);
+        if(userSession.getRole().equals("Secrétaire")){
+            ajouterDossierBtn.setVisible(true);
+        }
+        else{
+            ajouterDossierBtn.setVisible(false);
+        }
+        this.sessionLabel.setText("Session de " + userSession.getPrenom() + " " + userSession.getNom());
         String[][] colonnes = {
                 {"Date", "date"},
                 {"Heure", "heure"},
                 {"Motivation", "motivation"},
                 {"Nom", "nomEtudiant"},
-                {"Prenom", "prenom"} ,
+                {"Prenom", "prenomEtudiant"} ,
                 {"Filière","nomFiliere"}
         };
 
@@ -121,7 +134,7 @@ public class DossierListController implements Initializable {
         ArrayList<DossierInscription> lesDossiers = null;
         int refUser = Session.getInstance().getUtilisateur().getIdUtilisateur();
         try {
-            lesDossiers = dossierRepository.getAllDossiers(refUser);
+            lesDossiers = dossierRepository.getAllDossiersSecretaire(refUser);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -135,27 +148,22 @@ public class DossierListController implements Initializable {
         tableviewDossier.setOnMouseClicked(event -> {
 
             if (event.getClickCount() == 2) {
-
                 DossierInscription di = tableviewDossier.getSelectionModel().getSelectedItem();
-
-                if (di != null) {
-                    System.out.println("Double clic sur Dossier : " + di.getId());
-
-                    //SessionFiche.getInstance().sauvegardeSession(di);
+                if ((di != null) && userSession.getRole().equals( "Secrétaire") ) {
                     modifierDossierBtn.setVisible(true);
                     supprimerDossierBtn.setVisible(true);
                     redirectionDossierReadBtn.setVisible(true);
                     dossierActuel = di;
-
                 }
             }
         });
     }
     @FXML
-    public void supprimerFiche() throws SQLException, IOException {
+    public void supprimerDossier() throws SQLException, IOException {
          boolean ok = dossierRepository.supprimerDossier(dossierActuel);
          if(ok){
              System.out.println("Dossier supprimé");
+             StartApplication.changeScene("secretaire/dossierList","listeDossier");
          }
     }
 }
