@@ -22,7 +22,7 @@
       </Label>
    </top>
    <left>
-      <VBox alignment="TOP_CENTER" prefHeight="498.0" prefWidth="172.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="498.0" prefWidth="236.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="STATS GLOBAL">
                <font>
@@ -30,8 +30,8 @@
                </font>
             </Label>
             <Label fx:id="demandeEnCours" prefHeight="70.0" prefWidth="164.0" text="[insert num]Demande en cours" textAlignment="RIGHT" textOverrun="CLIP" />
-            <Label fx:id="commandeEnCours" prefHeight="70.0" prefWidth="164.0" text="[insert num]Commande en cours" />
-            <Label fx:id="nbFournitureVide" prefHeight="70.0" prefWidth="164.0" text="[insert num]Fourniture bientot fini" textAlignment="CENTER" />
+            <Label fx:id="commandeEnCours" prefHeight="70.0" prefWidth="192.0" text="[insert num]Commande en cours" />
+            <Label fx:id="nbFournitureVide" prefHeight="70.0" prefWidth="230.0" text="[insert num]Fourniture bientot en rupture" textAlignment="CENTER" />
          </children>
       </VBox>
    </left>
@@ -40,8 +40,8 @@
         <items>
             <MenuButton mnemonicParsing="false" text="Mon compte">
               <items>
-                <MenuItem mnemonicParsing="false" text="Profil" />
-                <MenuItem mnemonicParsing="false" text="Deconnexion" />
+                <MenuItem mnemonicParsing="false" onAction="#onProfilClicked" text="Profil" />
+                <MenuItem mnemonicParsing="false" onAction="#onDeconnexionClicked" text="Deconnexion" />
               </items>
             </MenuButton>
             <Button mnemonicParsing="false" onAction="#onRetourHomePage" text="Retour à l'accueil" />
@@ -55,15 +55,15 @@
                <content>
                   <AnchorPane prefHeight="470.0" prefWidth="578.0">
                      <children>
-                        <TableView fx:id="commandeTableView" layoutX="14.0" layoutY="33.0" onMouseClicked="#onCommandeTableClicked" prefHeight="346.0" prefWidth="445.0" />
-                        <Label layoutX="289.0" layoutY="4.0" text="Commandes">
+                        <TableView fx:id="commandeTableView" layoutX="14.0" layoutY="41.0" onMouseClicked="#onCommandeTableClicked" prefHeight="346.0" prefWidth="445.0" />
+                        <Label layoutX="259.0" layoutY="14.0" text="Commandes">
                            <font>
-                              <Font name="System Bold" size="14.0" />
+                              <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <ToolBar layoutX="6.0" layoutY="416.0" prefHeight="40.0" prefWidth="574.0">
+                        <ToolBar layoutY="430.0" prefHeight="40.0" prefWidth="574.0">
                           <items>
-                              <Button mnemonicParsing="false" onAction="#onShowPastCommand" text="Voir toutes les commandes passées" />
+                              <Button mnemonicParsing="false" onAction="#onShowPastCommand" text="Historique des commandes" />
                             <Button mnemonicParsing="false" onAction="#onShowMyCommandes" text="Voir mes commandes" />
                               <Button mnemonicParsing="false" onAction="#onNewCommand" prefHeight="26.0" prefWidth="187.0" text="Faire une nouvelle commande " />
                           </items>
@@ -72,17 +72,17 @@
                   </AnchorPane>
                </content>
           </Tab>
-            <Tab onSelectionChanged="#onFournitureChosed" text="Fourniture">
+            <Tab onSelectionChanged="#onFournitureChosed" text="Fournitures">
                <content>
                   <AnchorPane prefHeight="455.0" prefWidth="641.0">
                      <children>
-                        <TableView fx:id="fournitureTableView" layoutX="6.0" layoutY="43.0" onMouseClicked="#onFournitureTableClicked" prefHeight="346.0" prefWidth="445.0" />
-                        <Label layoutX="289.0" layoutY="4.0" text="Fourniture">
+                        <TableView fx:id="fournitureTableView" layoutX="14.0" layoutY="41.0" onMouseClicked="#onFournitureTableClicked" prefHeight="346.0" prefWidth="445.0" />
+                        <Label layoutX="262.0" layoutY="14.0" text="Fournitures">
                            <font>
-                              <Font name="System Bold" size="14.0" />
+                              <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <ToolBar layoutX="2.0" layoutY="424.0" prefHeight="40.0" prefWidth="574.0">
+                        <ToolBar layoutY="430.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="574.0">
                            <items>
                               <Button mnemonicParsing="false" onAction="#onShowFinishedFourniture" text="Voir les fournitures bientot en rupture" />
                               <Button mnemonicParsing="false" onAction="#onNewFourniture" text="Ajouter une fourniture" />
@@ -93,17 +93,17 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab onSelectionChanged="#onFournisseurChosed" text="Fournisseur">
+            <Tab onSelectionChanged="#onFournisseurChosed" text="Fournisseurs">
                <content>
                   <AnchorPane prefHeight="455.0" prefWidth="641.0">
                      <children>
-                        <TableView fx:id="fournisseurTableView" layoutX="6.0" layoutY="43.0" onMouseClicked="#onFournisseurTableClicked" prefHeight="346.0" prefWidth="445.0" />
-                        <Label layoutX="289.0" layoutY="4.0" text="Fournisseur">
+                        <TableView fx:id="fournisseurTableView" layoutX="14.0" layoutY="49.0" onMouseClicked="#onFournisseurTableClicked" prefHeight="346.0" prefWidth="445.0" />
+                        <Label layoutX="240.0" layoutY="14.0" text="Fournisseurs">
                            <font>
-                              <Font name="System Bold" size="14.0" />
+                              <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <ToolBar layoutX="6.0" layoutY="431.0" prefHeight="40.0" prefWidth="574.0">
+                        <ToolBar layoutY="431.0" prefHeight="40.0" prefWidth="574.0">
                           <items>
                               <Button mnemonicParsing="false" onAction="#onNewFournisseur" text="Ajouter un fournisseur" />
                               <Button fx:id="voirLesFournituresAssocie" disable="true" mnemonicParsing="false" onAction="#onShowFournitureDuFournisseur" text="Voir les fournitures associées" />
@@ -112,6 +112,25 @@
                      </children>
                   </AnchorPane>
                </content>
+            </Tab>
+            <Tab onSelectionChanged="#onDemandeChosed" text="Demandes">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ToolBar layoutY="430.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="574.0">
+                          <items>
+                            <Button mnemonicParsing="false" onAction="#onShowUnvalidatedDemandes" text="Voir les demandes a valider" />
+                          </items>
+                        </ToolBar>
+                        <TableView fx:id="demandesTableView" layoutX="14.0" layoutY="46.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="346.0" prefWidth="445.0" />
+                        <Label layoutX="266.0" layoutY="14.0" text="Demandes">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+              </content>
             </Tab>
         </tabs>
       </TabPane>
