@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.DossierInscription;
@@ -25,6 +22,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class DossierListController implements Initializable {
@@ -49,6 +47,7 @@ public class DossierListController implements Initializable {
     @FXML
     private Button deleteDossierBtn;
     @FXML
+    private Label erreurLabel;
 
 
     Utilisateur userSession = Session.getInstance().getUtilisateur();
@@ -101,6 +100,7 @@ public class DossierListController implements Initializable {
         supprimerDossierBtn.setVisible(false);
         ajouterDossierBtn.setVisible(false);
         redirectionDossierReadBtn.setVisible(false);
+        erreurLabel.setVisible(false);
         if(userSession.getRole().equals("Secrétaire")){
             ajouterDossierBtn.setVisible(true);
         }
@@ -160,10 +160,23 @@ public class DossierListController implements Initializable {
     }
     @FXML
     public void supprimerDossier() throws SQLException, IOException {
-         boolean ok = dossierRepository.supprimerDossier(dossierActuel);
-         if(ok){
-             System.out.println("Dossier supprimé");
-             StartApplication.changeScene("secretaire/dossierList","listeDossier");
-         }
+        Optional<ButtonType> choice = showAlertConfirmation();
+        if (choice.isPresent() && choice.get().equals(ButtonType.OK)) {
+            boolean ok = dossierRepository.supprimerDossier(dossierActuel);
+            StartApplication.changeScene("secretaire/dossierList","Liste des dossier");
+            if(ok){
+                erreurLabel.setVisible(true);
+                erreurLabel.setText("Supression effectué avec succès");
+            }
+        }
     }
+
+    private Optional<ButtonType> showAlertConfirmation() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Supprimer le dossier n°"+dossierActuel.getId());
+        alert.setHeaderText(null);
+        alert.setContentText("Valider la suppression ?");
+        return alert.showAndWait();
+    }
+
 }

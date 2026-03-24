@@ -58,11 +58,12 @@ public class FicheEtudiantRepository {
     }
 
 
-    public void deleteFicheEtudiant(int id) throws SQLException {
+    public boolean deleteFicheEtudiant(int id) throws SQLException {
         String sql = "DELETE FROM fiche_etudiante WHERE id_fiche_etudiante=?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, id);
         ps.execute();
+        return true ;
     }
 
     public FicheEtudiant getFicheEtudiant(int id_fiche) throws SQLException {

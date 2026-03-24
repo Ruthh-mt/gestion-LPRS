@@ -4,9 +4,12 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="448.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.secretaire.DossierUpdateController">
@@ -16,20 +19,50 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Label layoutX="343.0" layoutY="124.0" text="Ref filière" />
-      <Label layoutX="57.0" layoutY="124.0" text="Date" />
-      <Label layoutX="52.0" layoutY="175.0" text="Heure " />
-      <Label layoutX="91.0" layoutY="287.0" text="Motivation " />
-      <Button fx:id="validerButton" layoutX="91.0" layoutY="356.0" mnemonicParsing="false" onAction="#updateDossier" text="Enregistrer les modifications" />
-      <Button fx:id="annulerButton" layoutX="364.0" layoutY="356.0" mnemonicParsing="false" text="Annuler" />
-      <TextArea fx:id="motivationTextfield" layoutX="206.0" layoutY="272.0" prefHeight="47.0" prefWidth="239.0" />
-      <Button fx:id="retourButton" layoutX="492.0" layoutY="393.0" mnemonicParsing="false" onAction="#redirectionListDossier" text="Retour" />
-      <Label layoutX="343.0" layoutY="175.0" text="Ref fiche " />
+      <Button fx:id="retourButton" layoutX="14.0" layoutY="408.0" mnemonicParsing="false" onAction="#redirectionListDossier" text="Retour vers la liste des dossiers" />
       <Label fx:id="sessionLabel" layoutX="485.0" layoutY="64.0" text="sessionLabel" />
-      <DatePicker fx:id="dateTextField" layoutX="106.0" layoutY="120.0" />
-      <ComboBox fx:id="refFicheTextfield" layoutX="424.0" layoutY="171.0" prefWidth="150.0" />
-      <ComboBox fx:id="refFiliereTextfield" layoutX="424.0" layoutY="120.0" prefWidth="150.0" />
-      <Spinner fx:id="heureTextfield" layoutX="102.0" layoutY="171.0" />
-      <Label fx:id="erreurLabel" layoutX="213.0" layoutY="410.0" text="erreurLabel" />
+      <Label fx:id="erreurLabel" layoutX="260.0" layoutY="351.0" text="erreurLabel" />
+      <Separator layoutX="-1.0" layoutY="81.0" prefHeight="4.0" prefWidth="600.0" />
+      <HBox layoutX="32.0" layoutY="102.0" prefHeight="225.0" prefWidth="243.0">
+         <children>
+            <VBox prefHeight="73.0" prefWidth="100.0" spacing="55.0">
+               <children>
+                  <Label text="Date" />
+                  <Label text="Heure " />
+                  <Label text="Motivation " />
+               </children>
+            </VBox>
+            <VBox prefHeight="225.0" prefWidth="139.0" spacing="40.0">
+               <children>
+                  <DatePicker fx:id="dateTextField" />
+                  <Spinner fx:id="heureTextfield" />
+                  <TextArea fx:id="motivationTextfield" prefHeight="47.0" prefWidth="239.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox layoutX="330.0" layoutY="102.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="60.0" prefWidth="100.0" spacing="55.0">
+               <children>
+                  <Label text="Ref filière" />
+                  <Label text="Ref fiche " />
+               </children>
+            </VBox>
+            <VBox prefHeight="73.0" prefWidth="100.0" spacing="45.0">
+               <children>
+                  <ComboBox fx:id="refFiliereTextfield" prefWidth="150.0" />
+                  <ComboBox fx:id="refFicheTextfield" prefWidth="150.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox layoutX="170.0" layoutY="305.0" prefHeight="55.0" prefWidth="299.0" spacing="40.0">
+         <children>
+            <Button fx:id="validerButton" mnemonicParsing="false" onAction="#updateDossier" text="Enregistrer les modifications" />
+            <Button fx:id="annulerButton" mnemonicParsing="false" text="Annuler" />
+         </children>
+      </HBox>
+      <Separator layoutY="398.0" prefHeight="4.0" prefWidth="600.0" />
    </children>
 </AnchorPane>

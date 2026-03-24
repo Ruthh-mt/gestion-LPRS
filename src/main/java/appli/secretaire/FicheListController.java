@@ -1,16 +1,19 @@
 package appli.secretaire;
 
 import appli.StartApplication;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.TilePane;
+import javafx.stage.Modality;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import model.FicheEtudiant;
 import model.Utilisateur;
@@ -23,6 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class FicheListController implements Initializable {
@@ -45,6 +49,9 @@ public class FicheListController implements Initializable {
 
     @FXML
     private Button ficheReadBtn;
+
+    @FXML
+    private Label erreurLabel;
 
 
 
@@ -69,11 +76,11 @@ public class FicheListController implements Initializable {
         creerFicheBtn.setVisible(false);
         redirectionDossierBtn.setVisible(false);
         ficheReadBtn.setVisible(false);
+        erreurLabel.setVisible(false);
         if(userActuel.getRole().equals("Secrétaire")){
             creerFicheBtn.setVisible(true);
             redirectionDossierBtn.setVisible(true);
         }
-
 
         String[][] colonnes = {
                 {"Nom", "nomEtudiant"},
@@ -167,11 +174,28 @@ public class FicheListController implements Initializable {
     }
 
 
-
     @FXML
     public void supprimerFiche() throws SQLException, IOException {
-        ficheEtudiantRepository.deleteFicheEtudiant(ficheActuel.getIdFicheEtudiante());
-     }
+        Optional<ButtonType> choice = showAlertConfirmation();
+        if (choice.isPresent() && choice.get().equals(ButtonType.OK)) {
+            boolean ok = ficheEtudiantRepository.deleteFicheEtudiant(ficheActuel.getIdFicheEtudiante());
+            StartApplication.changeScene("secretaire/ficheList","Fiche");
+            if(ok){
+                erreurLabel.setVisible(true);
+                erreurLabel.setText("Suppression effectué avec succès");
+            }
+        }
+    }
+
+    private Optional<ButtonType> showAlertConfirmation() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Supprimer la fiche de : " + ficheActuel.getPrenomEtudiant()+" "+ficheActuel.getNomEtudiant());
+        alert.setHeaderText(null);
+        alert.setContentText("Valider la suppression ?");
+        return alert.showAndWait();
+    }
+
+
 }
 
 

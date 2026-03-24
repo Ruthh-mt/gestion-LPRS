@@ -68,17 +68,10 @@ public class DossierCreateController implements Initializable {
       String motivation = motivationTextfield.getText();
       int refFiliere = refFiliereTextfield.getValue().getIdFiliere();
       int refFiche = refFicheTextfield.getValue().getIdFicheEtudiante();
-
-        System.out.println("Date : "+date);
-        System.out.println("Heure : "+heure);
-        System.out.println("Motivation : "+motivation);
-        System.out.println("RefFiliere : "+refFiliere);
-        System.out.println("RefFiche : "+refFiche);
-        DossierInscription dossierInscription = new DossierInscription(date, heure, motivation, refFiliere, refFiche);
-        boolean ok = dossierRepository.ajouterDossier(dossierInscription);
-        if(ok){
+      DossierInscription dossierInscription = new DossierInscription(date, heure, motivation, refFiliere, refFiche);
+      boolean ok = dossierRepository.ajouterDossier(dossierInscription);if(ok){
             erreurLabel.setVisible(true);
-              erreurLabel.setText("Dossier ajouté avec succès");
+            erreurLabel.setText("Dossier ajouté avec succès");
             erreurLabel.setStyle("-fx-text-fill: green;");
             dateTextField.getEditor().clear();
             heureTextfield.getEditor().clear();
@@ -90,9 +83,20 @@ public class DossierCreateController implements Initializable {
 
     }
 
+    @FXML
+    public void retour() throws SQLException, IOException {
+        dateTextField.getEditor().clear();
+        heureTextfield.getEditor().clear();
+        motivationTextfield.clear();
+        refFiliereTextfield.getItems().clear();
+        refFicheTextfield.getItems().clear();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         sessionLabel.setText("Session de "+userActuel.getPrenom()+" "+userActuel.getNom());
+
+        //TIME SPINNER
         SpinnerValueFactory<LocalTime> valueFactory = new SpinnerValueFactory<LocalTime>() {
             private LocalTime time = LocalTime.now(); @Override public void decrement(int steps) {
                 time = time.minusMinutes(steps); setValue(time);
@@ -104,7 +108,7 @@ public class DossierCreateController implements Initializable {
         valueFactory.setConverter(new LocalTimeStringConverter( DateTimeFormatter.ofPattern("HH:mm"), null));
         heureTextfield.setValueFactory(valueFactory);
         heureTextfield.getValueFactory().setValue(LocalTime.now());
-        //----------------------------------------//
+        //COMBO BOX FILIERES
         ArrayList<Filiere> filieres = null;
         try {
             filieres = new ArrayList<>(filiereRepository.getAllFilieres());
@@ -114,7 +118,7 @@ public class DossierCreateController implements Initializable {
         for(Filiere filiere : filieres) {
             refFiliereTextfield.getItems().add(filiere);
         }
-        //---------------------------------------------------------------------
+        //COMBO BOX FICHES
         ArrayList<FicheEtudiant> ficheEtudiants = null;
         try {
             ficheEtudiants = new ArrayList<>(ficheEtudiantRepository.getToutesLesFiches(Session.getInstance().getUtilisateur().getIdUtilisateur()));

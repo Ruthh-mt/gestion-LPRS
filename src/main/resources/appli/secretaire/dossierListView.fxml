@@ -19,7 +19,7 @@
          </font>
       </Label>
       <Button fx:id="accueilBtn" layoutX="14.0" layoutY="474.0" mnemonicParsing="false" onAction="#redirectionAccueil" text="Retour vers l'accueil" />
-      <Button fx:id="ajouterDossierBtn" layoutX="266.0" layoutY="392.0" mnemonicParsing="false" onAction="#redirectionAjouterDossier" text="Ajouter un dossier" />
+      <Button fx:id="ajouterDossierBtn" layoutX="90.0" layoutY="395.0" mnemonicParsing="false" onAction="#redirectionAjouterDossier" text="Ajouter un dossier" />
       <Separator layoutX="-1.0" layoutY="86.0" prefHeight="0.0" prefWidth="841.0" />
       <VBox alignment="TOP_CENTER" layoutX="685.0" layoutY="152.0" prefHeight="200.0" prefWidth="132.0" spacing="50.0">
          <children>
@@ -32,5 +32,10 @@
          </padding>
       </VBox>
       <Separator layoutY="453.0" prefHeight="3.0" prefWidth="841.0" />
+      <Label fx:id="erreurLabel" layoutX="381.0" layoutY="399.0" prefHeight="17.0" prefWidth="140.0" text="erreurLabel">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

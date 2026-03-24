@@ -83,6 +83,7 @@ public class FicheCreateController implements Initializable {
         FicheEtudiant newFiche = new FicheEtudiant(ref_createur , nom,prenom,email,dernierDiplome,telephone,adresse);
         boolean ok = ficheEtudiantRepository.AjouterFicheEtudiant(newFiche);
         if (ok) {
+            erreurLabel.setVisible(true);
             erreurLabel.setText("Fiche ajouté avec succès");
             erreurLabel.setStyle("-fx-text-fill: green;");
 
@@ -92,6 +93,18 @@ public class FicheCreateController implements Initializable {
             erreurLabel.setStyle("-fx-text-fill: red;");
         }
     }
+
+}
+
+@FXML
+public void retour(ActionEvent event) throws IOException {
+    nomTextField.clear();
+    prenomTextField.clear();
+    emailTextField.clear();
+    dernierDiplomeComboBox.getItems().clear();
+    telephoneTextField.clear();
+    adresseTextfield.clear();
+
 
 }
 public void retourListe() throws IOException {

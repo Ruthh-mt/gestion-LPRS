@@ -111,28 +111,14 @@ public class DossierUpdateController {
                 setValue(time);
             }
         };
-        valueFactory.setConverter(new LocalTimeStringConverter(DateTimeFormatter.ofPattern("HH:mm"), null));
-        heureTextfield.setValueFactory(valueFactory);
-        heureTextfield.getValueFactory().setValue(LocalTime.now());
-
-
 
         //REQUETE RECUPERER FICHE
         int idDossier = this.dossier_actuel.getId();
         Filiere filiereTrouve = filiereRepository.getFiliere(this.dossier_actuel.getRefFiliere());
-        if (filiereTrouve != null) {
-            System.out.println("Des filières sont trouvés");
-        }
-        else{
-            System.out.println("Pas de filières");
-        }
         FicheEtudiant ficheTrouve = ficheEtudiantRepository.getFicheEtudiant(this.dossier_actuel.getRef_fiche());
-        if(ficheTrouve != null) {
-            System.out.println("Une fiche est trouvé");
-        }
-        else{
-            System.out.println("Pas de fiche");
-        }
+        valueFactory.setConverter(new LocalTimeStringConverter(DateTimeFormatter.ofPattern("HH:mm"), null));
+        heureTextfield.setValueFactory(valueFactory);
+        heureTextfield.getValueFactory().setValue(LocalTime.now());
         //SET DATE
         dateTextField.setValue(dossier_actuel.getDate().toLocalDate());
         //SET HEURE
@@ -145,6 +131,7 @@ public class DossierUpdateController {
         refFicheTextfield.setValue(ficheTrouve);
     }
 
+    @FXML
     public void updateDossier() throws SQLException, IOException {
         java.sql.Date date = java.sql.Date.valueOf(dateTextField.getValue());
         Time heure = Time.valueOf(heureTextfield.getValue());
@@ -162,8 +149,46 @@ public class DossierUpdateController {
        }
     }
 
+    @FXML
     public void redirectionListDossier(ActionEvent actionEvent) throws IOException {
         StartApplication.changeScene("secretaire/dossierList", "Liste des dossiers");
+    }
+
+    @FXML
+    public void annuler(ActionEvent actionEvent) throws IOException, SQLException {
+        SpinnerValueFactory<LocalTime> valueFactory = new SpinnerValueFactory<LocalTime>() {
+            private LocalTime time = LocalTime.now();
+
+            @Override
+            public void decrement(int steps) {
+                time = time.minusMinutes(steps);
+                setValue(time);
+            }
+
+            @Override
+            public void increment(int steps) {
+                time = time.plusMinutes(steps);
+                setValue(time);
+            }
+        };
+
+        //REQUETE RECUPERER FICHE
+        int idDossier = this.dossier_actuel.getId();
+        Filiere filiereTrouve = filiereRepository.getFiliere(this.dossier_actuel.getRefFiliere());
+        FicheEtudiant ficheTrouve = ficheEtudiantRepository.getFicheEtudiant(this.dossier_actuel.getRef_fiche());
+        valueFactory.setConverter(new LocalTimeStringConverter(DateTimeFormatter.ofPattern("HH:mm"), null));
+        heureTextfield.setValueFactory(valueFactory);
+        heureTextfield.getValueFactory().setValue(LocalTime.now());
+        //SET DATE
+        dateTextField.setValue(dossier_actuel.getDate().toLocalDate());
+        //SET HEURE
+        heureTextfield.getValueFactory().setValue(dossier_actuel.getHeure().toLocalTime());
+        // SET MOTIVATION
+        motivationTextfield.setText(dossier_actuel.getMotivation());
+        //SET FILIERE
+        refFiliereTextfield.setValue(filiereTrouve);
+        // SET FICHE
+        refFicheTextfield.setValue(ficheTrouve);
     }
 
 

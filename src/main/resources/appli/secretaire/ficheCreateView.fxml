@@ -16,7 +16,7 @@
          </font>
       </Label>
       <Button fx:id="validerButton" layoutX="147.0" layoutY="291.0" mnemonicParsing="false" onAction="#createFicheEtudiant" text="Valider" />
-      <Button fx:id="cancelButton" layoutX="304.0" layoutY="291.0" mnemonicParsing="false" text="Annuler" />
+      <Button fx:id="cancelButton" layoutX="304.0" layoutY="291.0" mnemonicParsing="false" onAction="#retour" text="Annuler" />
       <Button fx:id="retourButton" layoutX="22.0" layoutY="412.0" mnemonicParsing="false" onAction="#retourListe" text="Retour vers la liste des fiches" />
       <Label fx:id="erreurLabel" layoutX="260.0" layoutY="371.0" text="erreur label" />
       <VBox layoutX="201.0" layoutY="79.0" prefHeight="200.0" prefWidth="120.0" spacing="40.0">

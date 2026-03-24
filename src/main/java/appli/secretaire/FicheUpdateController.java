@@ -99,6 +99,16 @@ public class FicheUpdateController {
     }
 
     @FXML
+    public void annuler(ActionEvent actionEvent) throws IOException {
+        nomTextField.setText(ficheActuel.getNomEtudiant());
+        prenomTextField.setText(ficheActuel.getPrenomEtudiant());
+        emailTextField.setText(ficheActuel.getEmailEtudiant());
+        dernierDiplomeComboBox.setValue(ficheActuel.getDernierDiplome());
+        adresseTextfield.setText(ficheActuel.getAdresseEtudiant());
+        telephoneTextField.setText(ficheActuel.getTelephoneEtudiant());
+    }
+
+    @FXML
    public void initData(FicheEtudiant fiche) throws SQLException {
         this.ficheActuel = fiche ;
 
@@ -114,7 +124,7 @@ public class FicheUpdateController {
        adresseTextfield.setText(feTrouve.getAdresseEtudiant());
        telephoneTextField.setText(feTrouve.getTelephoneEtudiant());
        nomFicheLabel.setText(
-               ficheActuel.getPrenomEtudiant()+" "+ficheActuel.getNomEtudiant());
+               ficheActuel.getPrenomEtudiant()+" "+ficheActuel.getNomEtudiant()); // TITRE
 
    }
 

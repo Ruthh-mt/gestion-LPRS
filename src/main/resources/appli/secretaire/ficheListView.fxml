@@ -28,7 +28,8 @@
             <Button fx:id="supprimerFicheBtn" mnemonicParsing="false" onAction="#supprimerFiche" text="Supprimer la fiche" />
          </children>
       </VBox>
-      <Button fx:id="creerFicheBtn" layoutX="234.0" layoutY="355.0" mnemonicParsing="false" onAction="#redirectionCreateFiche" prefHeight="26.0" prefWidth="113.0" text="Ajouter une fiche" />
+      <Button fx:id="creerFicheBtn" layoutX="103.0" layoutY="356.0" mnemonicParsing="false" onAction="#redirectionCreateFiche" prefHeight="26.0" prefWidth="113.0" text="Ajouter une fiche" />
       <Separator layoutX="3.0" layoutY="427.0" prefHeight="3.0" prefWidth="778.0" />
+      <Label fx:id="erreurLabel" layoutX="368.0" layoutY="360.0" text="erreurLabel" />
    </children>
 </AnchorPane>

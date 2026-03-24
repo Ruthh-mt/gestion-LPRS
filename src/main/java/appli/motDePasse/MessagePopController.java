@@ -1,5 +1,5 @@
 package appli.motDePasse;
-/*
+
 import appli.StartApplication;
 import javafx.fxml.FXML;
 
@@ -50,4 +50,3 @@ public class MessagePopController {
 
     }
 }
-*/
