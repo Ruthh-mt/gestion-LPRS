@@ -121,16 +121,7 @@ public class Utilisateur {
 
     @Override
     public String toString() {
-        return "Utilisateur{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", email='" + email + '\'' +
-                ", motDePasse='" + motDePasse + '\'' +
-                ", role='" + role + '\'' +
-                ", refFiliere=" + refFiliere +
-                ", code='" + code + '\'' +
-                '}';
+        return prenom+" "+nom.toUpperCase()+" :: "+email;
     }
 
     public int getIdUtilisateur() {
