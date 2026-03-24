@@ -1,5 +1,5 @@
 package appli.motDePasse;
-/*
+
 import appli.StartApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,4 +38,4 @@ public class SaisieEmailController {
         alert.showAndWait();
     }
 
-}*/
+}
