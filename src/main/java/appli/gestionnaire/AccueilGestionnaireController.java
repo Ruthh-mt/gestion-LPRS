@@ -1,6 +1,7 @@
 package appli.gestionnaire;
 
 import appli.StartApplication;
+import appli.gestionnaire.commande.CreateCommandeController;
 import appli.gestionnaire.commande.UpdateCommandeController;
 import appli.gestionnaire.fournisseur.UpdateFournisseurController;
 import appli.gestionnaire.fourniture.UpdateFournitureController;
@@ -162,6 +163,9 @@ public class AccueilGestionnaireController  implements Initializable {
     @FXML
     void onNewCommand() throws IOException {
         StartApplication.changeScene("gestionnaire/commande/createCommande","Faire une Commande");
+        CreateCommandeController controller = (CreateCommandeController)
+                StartApplication. getControllerFromStage();
+        controller.initData(this.session);
 
     }
 
