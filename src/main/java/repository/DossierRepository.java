@@ -49,14 +49,14 @@ public class DossierRepository {
         String motivation = null;
         int ref_filiere = 0;
         int ref_fiche = 0;
-        String nom = null ;
-        String prenom = null ;
-        String email = null ;
-        String nom_filiere = null ;
-        DossierInscription dossier = null ;
+        String nom = null;
+        String prenom = null;
+        String email = null;
+        String nom_filiere = null;
+        DossierInscription dossier = null;
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1,refUser);
+            stmt.setInt(1, refUser);
             ResultSet resultatRequete = stmt.executeQuery();
             while (resultatRequete.next()) {
                 id = resultatRequete.getInt("id_dossier_inscription");
@@ -69,7 +69,7 @@ public class DossierRepository {
                 nom_filiere = resultatRequete.getString("nom");
                 ref_filiere = resultatRequete.getInt("ref_filiere");
                 ref_fiche = resultatRequete.getInt("ref_fiche_etudiante");
-                dossier = new DossierInscription(id, date,heure,motivation,nom,prenom,email,nom_filiere,ref_filiere,ref_fiche);
+                dossier = new DossierInscription(id, date, heure, motivation, nom, prenom, email, nom_filiere, ref_filiere, ref_fiche);
                 dossiers.add(dossier);
             }
         } catch (SQLException e) {
@@ -93,11 +93,11 @@ public class DossierRepository {
         String motivation = null;
         int ref_filiere = 0;
         int ref_fiche = 0;
-        String nom = null ;
-        String prenom = null ;
-        String email = null ;
-        String nom_filiere = null ;
-        DossierInscription dossier = null ;
+        String nom = null;
+        String prenom = null;
+        String email = null;
+        String nom_filiere = null;
+        DossierInscription dossier = null;
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet resultatRequete = stmt.executeQuery();
@@ -111,7 +111,7 @@ public class DossierRepository {
                 email = resultatRequete.getString("email_etudiant");
                 nom_filiere = resultatRequete.getString("nom");
                 ref_filiere = resultatRequete.getInt("ref_filiere");
-                dossier = new DossierInscription(id,date,heure,motivation,nom,prenom,email,nom_filiere,ref_filiere,ref_fiche);
+                dossier = new DossierInscription(id, date, heure, motivation, nom, prenom, email, nom_filiere, ref_filiere, ref_fiche);
                 dossier.setId(resultatRequete.getInt("id_dossier_inscription"));
                 dossiers.add(dossier);
             }
@@ -165,7 +165,6 @@ public class DossierRepository {
                 "WHERE id_dossier_inscription = ?";
 
 
-
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
 
@@ -203,6 +202,20 @@ public class DossierRepository {
         return false;
     }
 
+    public int countDossier() {
+        String sql = "Count(id_dossier_inscription) ";
+        int nb_dossier = 0;
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                nb_dossier++;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return nb_dossier;
+    }
 }
 
 

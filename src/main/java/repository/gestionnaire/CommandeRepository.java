@@ -65,6 +65,20 @@ public class CommandeRepository {
         }
 
     }
+    public int countCommandes() {
+        String sql = "Count(id_commande) from commande " ;
+        int nb_commande = 0;
+        try {
+            PreparedStatement ps = cnx.prepareStatement(sql);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                nb_commande++;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return nb_commande;
+    }
 
 }
 
