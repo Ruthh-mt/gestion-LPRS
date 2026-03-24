@@ -63,24 +63,33 @@ public class DossierCreateController implements Initializable {
 
     @FXML
     public void ajouterDossier() throws SQLException, IOException {
+
      java.sql.Date date = Date.valueOf(dateTextField.getValue());    ;
         Time heure = Time.valueOf(heureTextfield.getValue());
       String motivation = motivationTextfield.getText();
       int refFiliere = refFiliereTextfield.getValue().getIdFiliere();
       int refFiche = refFicheTextfield.getValue().getIdFicheEtudiante();
-      DossierInscription dossierInscription = new DossierInscription(date, heure, motivation, refFiliere, refFiche);
-      boolean ok = dossierRepository.ajouterDossier(dossierInscription);if(ok){
-            erreurLabel.setVisible(true);
-            erreurLabel.setText("Dossier ajouté avec succès");
-            erreurLabel.setStyle("-fx-text-fill: green;");
-            dateTextField.getEditor().clear();
-            heureTextfield.getEditor().clear();
-            motivationTextfield.clear();
-            refFiliereTextfield.getItems().clear();
-            refFicheTextfield.getItems().clear();
-            //StartApplication.changeScene("secretaire/dossierCreate","creer un dossier");
-        }
+      if(motivation.isEmpty() || refFicheTextfield.getValue() == null || refFiliere == 0 || refFiche == 0){
+          erreurLabel.setVisible(true);
+          erreurLabel.setText("Veuillez remplir la motivations");
+          erreurLabel.setStyle("-fx-text-fill: red;");
 
+      }
+      else {
+          DossierInscription dossierInscription = new DossierInscription(date, heure, motivation, refFiliere, refFiche);
+          boolean ok = dossierRepository.ajouterDossier(dossierInscription);
+          if (ok) {
+              erreurLabel.setVisible(true);
+              erreurLabel.setText("Dossier ajouté avec succès");
+              erreurLabel.setStyle("-fx-text-fill: green;");
+              dateTextField.getEditor().clear();
+              heureTextfield.getEditor().clear();
+              motivationTextfield.clear();
+              refFiliereTextfield.getItems().clear();
+              refFicheTextfield.getItems().clear();
+              //StartApplication.changeScene("secretaire/dossierCreate","creer un dossier");
+          }
+      }
     }
 
     @FXML

@@ -139,6 +139,10 @@ public class DossierUpdateController {
         int ref_filiere = refFiliereTextfield.getValue().getIdFiliere();
         int ref_fiche = refFicheTextfield.getValue().getIdFicheEtudiante();
         int idActuel = dossier_actuel.getId();
+        if(motivation.isEmpty()){
+            erreurLabel.setVisible(true);
+            erreurLabel.setText("Motivation non remplie");
+        }
         DossierInscription dossier = new DossierInscription(idActuel ,date, heure, motivation, ref_filiere, ref_fiche);
        boolean ok = dossierRepository.mettreAjourDossier(dossier);
        if (ok) {

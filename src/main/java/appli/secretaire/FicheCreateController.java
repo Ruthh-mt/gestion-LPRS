@@ -76,6 +76,7 @@ public class FicheCreateController implements Initializable {
     String adresse = adresseTextfield.getText();
 
     if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || telephone.isEmpty() || adresse.isEmpty() || dernierDiplome.isEmpty()) {
+        erreurLabel.setVisible(true);
         erreurLabel.setText("Veuillez remplir tous les champs !");
         erreurLabel.setStyle("-fx-text-fill: red;");
     }
