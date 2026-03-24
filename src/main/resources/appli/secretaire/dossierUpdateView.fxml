@@ -60,7 +60,7 @@
       <HBox layoutX="170.0" layoutY="305.0" prefHeight="55.0" prefWidth="299.0" spacing="40.0">
          <children>
             <Button fx:id="validerButton" mnemonicParsing="false" onAction="#updateDossier" text="Enregistrer les modifications" />
-            <Button fx:id="annulerButton" mnemonicParsing="false" text="Annuler" />
+            <Button fx:id="annulerButton" mnemonicParsing="false" onAction="#annuler" text="Annuler" />
          </children>
       </HBox>
       <Separator layoutY="398.0" prefHeight="4.0" prefWidth="600.0" />

@@ -176,7 +176,7 @@ public class DossierUpdateController {
             }
         };
 
-        //REQUETE RECUPERER FICHE
+        //REQUETE RECUPERER DOSSIER
         int idDossier = this.dossier_actuel.getId();
         Filiere filiereTrouve = filiereRepository.getFiliere(this.dossier_actuel.getRefFiliere());
         FicheEtudiant ficheTrouve = ficheEtudiantRepository.getFicheEtudiant(this.dossier_actuel.getRef_fiche());
@@ -189,6 +189,7 @@ public class DossierUpdateController {
         heureTextfield.getValueFactory().setValue(dossier_actuel.getHeure().toLocalTime());
         // SET MOTIVATION
         motivationTextfield.setText(dossier_actuel.getMotivation());
+
         //SET FILIERE
         refFiliereTextfield.setValue(filiereTrouve);
         // SET FICHE
