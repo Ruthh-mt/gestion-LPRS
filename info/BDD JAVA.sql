@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS `commande` (
     `ref_gestionnaire` int NOT NULL,
     `nom_commande` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
     `date_commande` date NOT NULL,
+    `status` varchar(20) COLLATE utf8mb4_general_ci NOT NULL, -- Soit "En cours" soit "Complete"
+    `date_livraison` DATE NOT NULL, -- on va aditionner les delai de livraison du fournisseur choisi  a la date de livraison
     PRIMARY KEY (`id_commande`),
     KEY `FK_commande_utilisateur_gestionnaire` (`ref_gestionnaire`),
     KEY `FK_commande_fournisseur` (`ref_fournisseur`)
