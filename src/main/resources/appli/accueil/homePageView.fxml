@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.15" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.accueil.HomePageController">
+<SplitPane dividerPositions="0.3811013767209011" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.accueil.HomePageController">
     <items>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="718.0" prefWidth="642.0">
             <children>
                 <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onFicheClick" prefHeight="25.0" text="Fiches d'étudiants" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0" />
                 <Button maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onDossierClick" prefHeight="25.0" text="Dossier d'inscription" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0" />
@@ -39,7 +39,7 @@
                 <Separator AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="540.0" />
                 <Button layoutX="20.0" layoutY="20.0" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onProfilClick" prefHeight="25.0" text="Profil" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="650.0" />
                 <Button layoutX="10.0" layoutY="10.0" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onAction="#onDeconnexionClick" prefHeight="25.0" text="Déconnexion" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="680.0" />
-            <Button layoutX="42.0" layoutY="543.0" mnemonicParsing="false" onAction="#onStatistiquesClick" prefHeight="25.0" prefWidth="123.0" text="Statistiques" />
+            <Button layoutX="10.0" layoutY="543.0" mnemonicParsing="false" onAction="#onStatistiquesClick" prefHeight="26.0" prefWidth="470.0" text="Statistiques" />
             </children>
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #DDDDDD;">

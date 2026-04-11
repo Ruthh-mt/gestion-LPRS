@@ -158,4 +158,19 @@ public class RendezVousRepository {
             return false;
         }
     }
+
+        public int countRendezVous() {
+        String sql = "SELECT COUNT(*) FROM rendez_vous" ;
+        int nb_rdv = 0;
+        try {
+            PreparedStatement ps = cnx.prepareStatement(sql);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                nb_rdv++;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return nb_rdv;
+    }
 }

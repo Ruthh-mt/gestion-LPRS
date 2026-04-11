@@ -203,7 +203,7 @@ public class DossierRepository {
     }
 
     public int countDossier() {
-        String sql = "Count(id_dossier_inscription) ";
+        String sql = "SELECT COUNT(*) FROM dossier_inscription ";
         int nb_dossier = 0;
         try {
             PreparedStatement ps = connection.prepareStatement(sql);

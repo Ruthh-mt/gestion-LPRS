@@ -66,7 +66,7 @@ public class CommandeRepository {
 
     }
     public int countCommandes() {
-        String sql = "Count(id_commande) from commande " ;
+        String sql = "SELECT COUNT(*) FROM commande " ;
         int nb_commande = 0;
         try {
             PreparedStatement ps = cnx.prepareStatement(sql);

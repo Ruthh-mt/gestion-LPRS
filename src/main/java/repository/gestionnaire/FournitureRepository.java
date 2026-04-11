@@ -110,4 +110,19 @@ public class FournitureRepository {
         }
     }
 
+    public int countQteStock() {
+        String sql = "SELECT SUM(stock_actuelle) FROM fourniture" ;
+        int qte_stock = 0;
+        try {
+            PreparedStatement ps = cnx.prepareStatement(sql);
+            ResultSet resultSet = ps.executeQuery();
+            if(resultSet.next()) {
+                qte_stock = resultSet.getInt("SUM(stock_actuelle)");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return qte_stock;
+    }
+
 }
