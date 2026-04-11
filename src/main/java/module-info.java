@@ -9,6 +9,7 @@ module appli{
     requires spring.security.crypto;
     requires javafx.graphics;
     requires jakarta.mail;
+    requires jdk.jdi;
     //requires appli;
     //requires appli;
 
@@ -46,12 +47,20 @@ module appli{
     opens appli.statistiques to javafx.fxml;
     exports appli.statistiques;
 
+    opens session to javafx.fxml;
+    exports session;
 
     opens appli.motDePasse to javafx.fxml;
     exports appli.motDePasse;
 
     opens model to javafx.fxml;
     exports model;
+
     opens model.gestionnaire to javafx.fxml;
     exports model.gestionnaire;
+
+    opens appli.gestionnaire.commandeFourniture  to javafx.fxml;
+    exports appli.gestionnaire.commandeFourniture;
+
+
 }
