@@ -4,7 +4,48 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import java.io.IOException;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import session.Session;
+
 public class HomePageController {
+    private Session sessionUser = Session.getInstance();
+    // button gestionnaire
+    @FXML
+    private Button dashboardBtn;
+    // btn secretaire
+    @FXML
+    private Button dossierInscriptionBtn;
+
+    @FXML
+    private Button ficheEtudianteBtn;
+    // btn professeur
+    @FXML
+    private Button fournitureBtn;
+
+    @FXML
+    private Button planningBtn;
+
+    @FXML
+    public void initialize(){
+        String userRole =sessionUser.getUtilisateur().getRole();
+        if("Professeur".equals(userRole)){
+            dashboardBtn.setDisable(true);
+            dossierInscriptionBtn.setDisable(true);
+            planningBtn.setDisable(true);
+        }
+        else if("Secrétaire".equals(userRole)){
+            dashboardBtn.setDisable(true);
+            fournitureBtn.setDisable(true);
+            planningBtn.setDisable(true);
+        }
+        else if("Gestionnaire".equals(userRole)){
+            planningBtn.setDisable(true);
+            dossierInscriptionBtn.setDisable(true);
+            ficheEtudianteBtn.setDisable(true);
+            fournitureBtn.setDisable(true);
+        }
+    }
 
     @FXML
     void onDashboardClick(ActionEvent event) throws IOException {

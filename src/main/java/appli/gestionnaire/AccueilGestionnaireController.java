@@ -14,7 +14,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import model.Utilisateur;
 import model.gestionnaire.Commande;
 import model.gestionnaire.Demande;
 import model.gestionnaire.Fournisseur;
@@ -27,12 +26,11 @@ import session.Session;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AccueilGestionnaireController  implements Initializable {
 
-    private Session session;
+    private Session session = Session.getInstance();
     private CommandeRepository commandeRepository;
 
     @FXML
@@ -61,13 +59,14 @@ public class AccueilGestionnaireController  implements Initializable {
     @FXML
     private Button voirLesFournituresAssocie;
 
-    public void initData(Session s) throws IOException {
-        this.session = s;
-        if(s.getUtilisateur().getRole()!="gestionnaire") {
+    @FXML
+    public void initialize() throws IOException {
+        String userRole=this.session.getUtilisateur().getRole();
+        if("gestionnaire".equals(userRole)) {
             showAlert(Alert.AlertType.ERROR,"Access Denied","Vous n'etes pas autorisé a etre sur cette page ");
             StartApplication.changeScene("accueil/homePage","Accueil");
 
-        } else if (s.getUtilisateur()==null) {
+        } else if (this.session.getUtilisateur()==null) {
             showAlert(Alert.AlertType.ERROR,"Who are you ??","Vous n'etes pas connecté veuiller vous connecter ou vous inscrire");
             StartApplication.changeScene("accueil/login","Connexion");
         }
@@ -163,9 +162,6 @@ public class AccueilGestionnaireController  implements Initializable {
     @FXML
     void onNewCommand() throws IOException {
         StartApplication.changeScene("gestionnaire/commande/createCommande","Faire une Commande");
-        CreateCommandeController controller = (CreateCommandeController)
-                StartApplication. getControllerFromStage();
-        //controller.initData(this.session);
     }
 
     @FXML
@@ -181,15 +177,11 @@ public class AccueilGestionnaireController  implements Initializable {
     @FXML
     void onCommandeTableClicked(MouseEvent event) throws IOException {
         Commande selectionCommande = commandeTableView.getSelectionModel().getSelectedItem();
-        if (event.getClickCount() == 2) {
-            if (selectionCommande != null) {
+        if (event.getClickCount() == 2 && selectionCommande != null) {
                 StartApplication.changeScene("gestionnaire/commande/updateCommande", "Modification Commande");
                 UpdateCommandeController controller = (UpdateCommandeController)
                         StartApplication. getControllerFromStage();
                 controller.initData(selectionCommande);
-            }else{
-                System.out.println("c'est null");
-            }
         }
     }
 
@@ -214,15 +206,12 @@ public class AccueilGestionnaireController  implements Initializable {
     @FXML
     void onFournisseurTableClicked(MouseEvent event) throws IOException {
         Fournisseur selectionFournisseur = fournisseurTableView.getSelectionModel().getSelectedItem();
-        if (event.getClickCount() == 2) {
-            if (selectionFournisseur != null) {
+        if (event.getClickCount() == 2 && selectionFournisseur != null) {
                 StartApplication.changeScene("gestionnaire/fournisseur/updateFournisseur", "Modification Fournisseur");
                 UpdateFournisseurController controller = (UpdateFournisseurController )
                         StartApplication. getControllerFromStage();
                 controller.initData(selectionFournisseur);
-            }else{
-                System.out.println("c'est null");
-            }
+
         }else if(selectionFournisseur!=null){
             voirLesFournituresAssocie.setDisable(false);
         }
