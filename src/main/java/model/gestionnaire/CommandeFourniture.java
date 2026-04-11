@@ -1,29 +1,38 @@
 package model.gestionnaire;
 
-import java.sql.Date;
 
 public class CommandeFourniture {
-    private int refCommande;
-    private int refFourniture;
+    private Commande refCommande;
+    private Fourniture refFourniture;
+    private int qte;
 
-    public CommandeFourniture( int refCommande, int refFourniture) {
+    public CommandeFourniture( Commande refCommande, Fourniture refFourniture,int qte) {
         this.refCommande = refCommande;
         this.refFourniture = refFourniture;
+        this.qte = qte;
     }
 
-    public int getRefCommande() {
+    public Commande getRefCommande() {
         return refCommande;
     }
 
-    public void setRefCommande(int refCommande) {
+    public void setRefCommande(Commande refCommande) {
         this.refCommande = refCommande;
     }
 
-    public int getRefFourniture() {
+    public Fourniture getRefFourniture() {
         return refFourniture;
     }
 
-    public void setRefFourniture(int refFourniture) {
+    public void setRefFourniture(Fourniture refFourniture) {
         this.refFourniture = refFourniture;
+    }
+
+    public int getQte() {
+        return qte;
+    }
+
+    public void setQte(int qte) {
+        this.qte = qte;
     }
 }

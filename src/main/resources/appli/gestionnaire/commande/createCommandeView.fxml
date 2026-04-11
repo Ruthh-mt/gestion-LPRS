@@ -1,14 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="CONTROLLER_NAME"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.gestionnaire.commande.CreateCommandeController">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane layoutX="178.0" layoutY="32.0" prefHeight="263.0" prefWidth="449.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Raison de la Commande : " GridPane.rowIndex="1" />
+                  <TextArea fx:id="raisonCommandeField" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Nom de La commande : " />
+                  <TextField fx:id="nomCommandeField" GridPane.columnIndex="1" />
+                  <ComboBox fx:id="refFournisseurField" prefHeight="26.0" prefWidth="262.0" promptText="Choisissez un fournisseur" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Fournisseur de la commande : " GridPane.rowIndex="2" />
+                  <Label text="Date de la commande : " GridPane.rowIndex="4" />
+                  <Label text="Status : " GridPane.rowIndex="3" />
+                  <ComboBox fx:id="statusField" prefWidth="150.0" promptText="Choisissez le status " GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Date de livraison prevue : " GridPane.rowIndex="5" />
+                  <TextField fx:id="dateCommandeField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="dateLivraisonField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+               </children>
+            </GridPane>
+            <ToolBar layoutY="400.0" prefHeight="40.0" prefWidth="661.0">
+              <items>
+                <Button mnemonicParsing="false" onAction="#onRetourControlCenter" text="Retour au Control Center" />
+              </items>
+            </ToolBar>
+            <ToolBar layoutX="270.0" layoutY="316.0" prefHeight="27.0" prefWidth="265.0">
+              <items>
+                  <Button mnemonicParsing="false" onAction="#onCreateCommande" text="Créer" textFill="#0d7d0c" />
+                  <Button mnemonicParsing="false" onAction="#onSeeDateLivraison" text="Afficher la date de livraison prevue" />
+              </items>
+            </ToolBar>
+         </children>
+      </AnchorPane>
+   </center>
+   <top>
+      <Label text="Creation d'une commande" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+   </top>
+</BorderPane>
