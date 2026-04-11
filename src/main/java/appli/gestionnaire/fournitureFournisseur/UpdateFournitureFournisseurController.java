@@ -47,6 +47,9 @@ public class UpdateFournitureFournisseurController {
                 System.out.println("La modification du prix est reussi");
                 showAlert(Alert.AlertType.INFORMATION,"Modification FournitureFournisseur","La modification est reussi");
                 StartApplication.changeScene("gestionnaire/fournitureFournisseur/showFournisseurDUneFourniture","Listes des fournisseurs associée a cette fourniture");
+                ShowFournisseurDUneFournitureController controller = (ShowFournisseurDUneFournitureController)
+                        StartApplication.getControllerFromStage();
+                controller.initData(refFournitureField.getValue());
             }else{
                 showAlert(Alert.AlertType.ERROR,"Modification FournitureFournisseur","La modification a echoué");
             }

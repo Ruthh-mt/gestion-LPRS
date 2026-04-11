@@ -60,7 +60,7 @@ public class ShowFournitureDUnFournisseurController implements Initializable {
 
     @FXML
     void onAjouterUneFournitureAFournisseur(ActionEvent event) throws IOException {
-        StartApplication.changeScene("gestionnaire/fournitureFournisseur/addFournisseurPourFourniture","Ajouter un fournisseur");
+        StartApplication.changeScene("gestionnaire/fournitureFournisseur/addFourniturePourFournisseur","Ajouter une fourniture");
         AddFourniturePourFournisseurController controller =(AddFourniturePourFournisseurController)
                 StartApplication.getControllerFromStage();
         controller.initData(fourniseurSel);
@@ -84,8 +84,8 @@ public class ShowFournitureDUnFournisseurController implements Initializable {
     }
 
     @FXML
-    void onRetourControlCenter(ActionEvent event) {
-
+    void onRetourControlCenter() throws IOException {
+        StartApplication.changeScene("gestionnaire/accueilGestionnaire","Control Center");
     }
 
     @FXML
