@@ -1,29 +1,39 @@
 package model.gestionnaire;
 
+import model.Utilisateur;
+
 public class Commande {
     private int idCommande;
     private String raisonCommande;
-    private int refGestionnaire;
-    private int refFournisseur;
+    private Utilisateur refGestionnaire;
+    private Fournisseur refFournisseur;
     private String nomCommande;
     private String dateCommande;
+    private String status;
+    private String dateLivraison;
 
 
-    public Commande(int idCommande, String raisonCommande, int refGestionnaire, int refFournisseur, String nomCommande, String dateCommande) {
+    public Commande(int idCommande, String raisonCommande, Utilisateur refGestionnaire, Fournisseur refFournisseur, String nomCommande, String dateCommande,String status,String dateLivraison) {
         this.idCommande = idCommande;
         this.raisonCommande = raisonCommande;
         this.refGestionnaire = refGestionnaire;
         this.refFournisseur = refFournisseur;
         this.nomCommande = nomCommande;
         this.dateCommande = dateCommande;
+        this.status = status;
+        this.dateLivraison = dateLivraison;
+
+
     }
 
-    public Commande(String raisonCommande, int refGestionnaire, int refFournisseur, String nomCommande, String dateCommande) {
+    public Commande(String raisonCommande, Utilisateur refGestionnaire, Fournisseur refFournisseur, String nomCommande, String dateCommande,String status,String dateLivraison) {
         this.raisonCommande = raisonCommande;
         this.refGestionnaire = refGestionnaire;
         this.refFournisseur = refFournisseur;
         this.nomCommande = nomCommande;
         this.dateCommande = dateCommande;
+        this.status = status;
+        this.dateLivraison = dateLivraison;
 
     }
 
@@ -43,21 +53,17 @@ public class Commande {
         this.raisonCommande = raisonCommande;
     }
 
-    public int getRefGestionnaire() {
+    public Utilisateur getRefGestionnaire() {
         return refGestionnaire;
     }
 
-    public void setRefGestionnaire(int refGestionnaire) {
+    public void setRefGestionnaire(Utilisateur refGestionnaire) {
         this.refGestionnaire = refGestionnaire;
     }
 
-    public int getRefFournisseur() {
-        return refFournisseur;
-    }
+    public Fournisseur getRefFournisseur() {return refFournisseur;}
 
-    public void setRefFournisseur(int refFournisseur) {
-        this.refFournisseur = refFournisseur;
-    }
+    public void setRefFournisseur(Fournisseur refFournisseur) {this.refFournisseur = refFournisseur;}
 
     public String getNomCommande() {
         return nomCommande;
@@ -73,5 +79,26 @@ public class Commande {
 
     public void setDateCommande(String dateCommande) {
         this.dateCommande = dateCommande;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getDateLivraison() {
+        return dateLivraison;
+    }
+
+    public void setDateLivraison(String dateLivraison) {
+        this.dateLivraison = dateLivraison;
+    }
+
+    @Override
+    public String toString() {
+        return nomCommande +" :: "+dateCommande;
     }
 }
