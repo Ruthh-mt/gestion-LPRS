@@ -2,7 +2,6 @@ package appli.gestionnaire.commande;
 
 import appli.StartApplication;
 import appli.gestionnaire.commandeFourniture.AddCommandeFournitureController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.gestionnaire.Commande;
@@ -52,7 +51,7 @@ public class CreateCommandeController {
     }
 
     @FXML
-    void onCreateCommande(ActionEvent event) throws IOException {
+    void onCreateCommande() throws IOException {
         if(refFournisseurField.getValue()!=null && !nomCommandeField.getText().isEmpty()
                 && !raisonCommandeField.getText().isEmpty() && !dateCommandeField.getText().isEmpty() &&
         statusField.getValue()!=null && !dateLivraisonField.getText().isEmpty()) {

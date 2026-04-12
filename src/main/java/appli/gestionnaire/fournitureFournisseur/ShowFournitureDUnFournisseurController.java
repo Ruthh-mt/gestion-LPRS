@@ -3,7 +3,6 @@ package appli.gestionnaire.fournitureFournisseur;
 import appli.StartApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -59,7 +58,7 @@ public class ShowFournitureDUnFournisseurController implements Initializable {
     }
 
     @FXML
-    void onAjouterUneFournitureAFournisseur(ActionEvent event) throws IOException {
+    void onAjouterUneFournitureAFournisseur() throws IOException {
         StartApplication.changeScene("gestionnaire/fournitureFournisseur/addFourniturePourFournisseur","Ajouter une fourniture");
         AddFourniturePourFournisseurController controller =(AddFourniturePourFournisseurController)
                 StartApplication.getControllerFromStage();
@@ -89,7 +88,7 @@ public class ShowFournitureDUnFournisseurController implements Initializable {
     }
 
     @FXML
-    void onSupprimerFournitureDUnFournisseur(ActionEvent event) {
+    void onSupprimerFournitureDUnFournisseur() {
         FournitureFournisseurRepository fournitureFournisseurRepo = new FournitureFournisseurRepository();
         FournitureFournisseur selection = fournitureDeFournisseurTableView.getSelectionModel().getSelectedItem();
         boolean success=fournitureFournisseurRepo.supprimerFournitureFournisseur(selection);
