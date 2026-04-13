@@ -97,11 +97,11 @@ public class CommandeFournitureRepository {
         }
     }
 
-    public boolean supprimerToutesFournituresByCommandeId(CommandeFourniture commandeFourniture){
+    public boolean supprimerToutesFournituresByCommandeId(int idCommande){
         String update="DELETE FROM commande_fourniture WHERE  ref_commande=? ";
         try{
             PreparedStatement ps = cnx.prepareStatement(update);
-            ps.setInt(1,commandeFourniture.getRefCommande().getIdCommande());
+            ps.setInt(1,idCommande);
             ps.executeUpdate();
             return true;
 

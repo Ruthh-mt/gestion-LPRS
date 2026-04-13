@@ -93,6 +93,22 @@ public class DemandeRepository {
             System.out.println( "Erreur lors de la recuperation des Demandes : "+e.getMessage());
             return null;
         }
+    }
 
+    public int getNbDemandeNonValide(){
+        int nbDemande=0;
+        String count = "SELECT COUNT(*) as nb_demande from demande where est_valide=?";
+        try{
+            PreparedStatement ps=cnx.prepareStatement(count);
+            ps.setInt(1,0);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                nbDemande =rs.getInt("nb_demande");
+            }
+            return nbDemande;
+        } catch (SQLException e) {
+            System.out.println( "Erreur lors de la recuperation du nombre de demande non validé : "+e.getMessage());
+            throw new RuntimeException("Erreur lors de la recuperation des demandes non validé",e); // petit test et faut que je me penche sur les exception sa a l'air interressant
+        }
     }
 }

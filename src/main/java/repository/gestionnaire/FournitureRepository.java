@@ -94,7 +94,7 @@ public class FournitureRepository {
     }
 
     public boolean mettreAJourFourniture(Fourniture fourniture) {
-        String update = "UPDATE Fourniture SET libelle= ? ,description=? ,stock_actuelle=? ,stock_minimum=?  WHERE id_fourniture=?";
+        String update = "UPDATE fourniture SET libelle= ? ,description=? ,stock_actuelle=? ,stock_minimum=?  WHERE id_fourniture=?";
         try {
             PreparedStatement ps = this.cnx.prepareStatement(update);
             ps.setString(1,fourniture.getLibelle());
@@ -108,6 +108,39 @@ public class FournitureRepository {
             System.out.println("Erreur lors de la mise a jour du Fourniture : " + '\n' + " >>" + e.getMessage());
             return false;
         }
+    }
+
+    public int getNbFourniture(){
+        int nbFourniture=0;
+        String countFourniture="SELECT COUNT(*) as nb_fourniture FROM fourniture";
+        try{
+            PreparedStatement ps=cnx.prepareStatement(countFourniture);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                nbFourniture =rs.getInt("nb_fourniture");
+            }
+            return nbFourniture;
+        } catch (SQLException e) {
+            System.out.println( "Erreur lors de la recuperation du nombre de fourniture : "+e.getMessage());
+            throw new RuntimeException("Erreur lors de la recuperation des fourniture",e); // petit test et faut que je me penche sur les exception sa a l'air interressant
+        }
+    }
+
+    public int getNbFournitureEnRupture(){
+        int nbEnRupture=0;
+        String count = "SELECT COUNT(*) as nb_fourniture from fourniture WHERE stock_actuelle<=stock_minimum";
+        try{
+            PreparedStatement ps=cnx.prepareStatement(count);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                nbEnRupture =rs.getInt("nb_fourniture");
+            }
+            return nbEnRupture;
+        } catch (SQLException e) {
+            System.out.println( "Erreur lors de la recuperation du nombre de fourniture : "+e.getMessage());
+            throw new RuntimeException("Erreur lors de la recuperation des fourniture",e); // petit test et faut que je me penche sur les exception sa a l'air interressant
+        }
+
     }
 
     public int countQteStock() {
