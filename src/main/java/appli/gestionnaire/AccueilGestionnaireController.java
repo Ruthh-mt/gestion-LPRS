@@ -34,13 +34,7 @@ public class AccueilGestionnaireController  implements Initializable {
     private CommandeRepository commandeRepository;
 
     @FXML
-    private Label commandeEnCours;
-
-    @FXML
     private TableView<Commande> commandeTableView;
-
-    @FXML
-    private Label demandeEnCours;
 
     @FXML
     private TableView<Fournisseur> fournisseurTableView;
@@ -51,13 +45,20 @@ public class AccueilGestionnaireController  implements Initializable {
     private TableView<Demande> demandesTableView;
 
     @FXML
-    private Label nbFournitureVide;
-
-    @FXML
     private Button voirLesFournisseursAssocie;
 
     @FXML
     private Button voirLesFournituresAssocie;
+
+    @FXML
+    private Label commandeEnCours;
+
+    @FXML
+    private Label nbFournitureVide;
+
+    @FXML
+    private Label demandeEnCours;
+
 
     @FXML
     public void initialize() throws IOException {
@@ -74,6 +75,15 @@ public class AccueilGestionnaireController  implements Initializable {
     // partie qui remplie le tableau
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        CommandeRepository commandeRepo=new CommandeRepository();
+        FournitureRepository fournitureRepo=new FournitureRepository();
+        DemandeRepository demandeRepo=new DemandeRepository();
+        int nbDemandeEnCours =demandeRepo.getNbDemandeNonValide();
+        demandeEnCours.setText(nbDemandeEnCours+" Demande non validé");
+        int nbCommandeEnCours = commandeRepo.getNbCommandeEnCours();
+        commandeEnCours.setText(nbCommandeEnCours+" Commandes en cours");
+        int nbFournitureEnRupture = fournitureRepo.getNbFournitureEnRupture();
+        nbFournitureVide.setText(nbFournitureEnRupture + " Fourniture bientot en rupture");
         String [][] colonnes = {
                 {"id Commande","idCommande"},
                 {"Nom","nomCommande"},
@@ -127,7 +137,6 @@ public class AccueilGestionnaireController  implements Initializable {
             fournitureTableView.getColumns().add(maCol);
         }
         commandeTableView.getItems().clear();
-        CommandeRepository commandeRepo = new CommandeRepository();
         ObservableList <Commande>allCommandes= FXCollections.observableList(commandeRepo.getAllCommandes());
         commandeTableView.getItems().setAll(allCommandes);
 
